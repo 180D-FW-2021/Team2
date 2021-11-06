@@ -23,9 +23,14 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController controller;
 
+    public GameObject cylinder;
+    private Vector3 scaleChange, positionChange;
+    private Vector3 cylinderHeight;
+    private bool ducked;
+
     public float speed = 8f;
-    public float gravity = -9.81f;
-    public float jumpHeight = 3f;
+    public float gravity = -19.62f;
+    public float jumpHeight = 1f;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -33,12 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+
+    private float forward;
     
     // Start is called before the first frame update
     void Start()
     {
         //create MqttClient object
-        //client = new MqttClient(IPAddress.Parse("131.179.8.132"), 1883, false, null);
+        // mqtt.eclipseprojects.io ip address
         client = new MqttClient("137.135.83.217");
 
         //When was the message published to the Broker
@@ -54,39 +61,60 @@ public class PlayerMovement : MonoBehaviour
         //connect
         client.Connect(clientId);
 
-        // subscribe to the topic "topic" with QoS 0, can subscribe to any number of topics 
-        //adding red
+        // currently player will move forward if message sent to topic/red
         client.Subscribe(new string[] { "topic/red" },
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-        //adding gesture
-        client.Subscribe(new string[] { "topic/gesture" },
-            new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+
+        // initialize ducking variables
+        cylinderHeight = cylinder.transform.localScale;
+        ducked = false;
+        forward = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        // Checks that player is currently on the ground
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if(isGrounded && velocity.y < 0)
+        // Used to set velocity back to 0 after player has jumped and landed on the ground
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
 
+        // inputs from arrow keys or "WASD"
         float x = -Input.GetAxis("Horizontal");
-        float z = -Input.GetAxis("Vertical");
+        float z = -(Input.GetAxis("Vertical") + forward);
+        forward = 0;
 
+        // move player forward/backward/left/right
         Vector3 move = transform.right * x + transform.forward * z;
-
         controller.Move(move * speed * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        // player jump
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        // player duck
+        if(Input.GetKey("p"))
+        {
+            if (!ducked) {
+                cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);
+            }
+            ducked = true;
+        }
+        else
+        {
+            cylinder.transform.localScale = cylinderHeight;
+            ducked = false;
+        }
     }
     
     void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
@@ -103,8 +131,6 @@ public class PlayerMovement : MonoBehaviour
 
     void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
     {
-        bool red = false;
-        bool gesture = false;
         //this function is called everytime you receive message
         //e.Message is a byte[]
         var str = System.Text.Encoding.UTF8.GetString(e.Message);
@@ -114,27 +140,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (String.Equals(e.Topic, "topic/red"))
         {
-            //you receive message for red color
-            red = true;
             Debug.Log("red is true");
-        }
-        if (String.Equals(e.Topic, "topic/gesture"))
-        {
-            //you receive message for gesture
-            gesture = true;
-            Debug.Log("gesture is true");
+            Debug.Log(str);
+            //Debug.Log(str == "Testing. Does this work?");
+            forward = 1f;
         }
 
-        Debug.Log("entering if statement");
-
-        if (red == true)
-        {
-            Debug.Log("red is true");
-        }
-
-        if (gesture == true)
-        {
-            Debug.Log("gesture_pred is ");
-        }
     }
 }
