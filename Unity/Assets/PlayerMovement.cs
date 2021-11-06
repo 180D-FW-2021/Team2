@@ -17,9 +17,8 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
     //create an instance of MqttClient class 
-    private MqttClient client;
-
-    static string myLog = ""; //intalize a log of messages on topic 
+    //private MqttClient client;
+    public mqtt myMQTT;
 
     public CharacterController controller;
 
@@ -38,37 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
-
-    private float forward;
     
     // Start is called before the first frame update
     void Start()
     {
-        //create MqttClient object
-        // mqtt.eclipseprojects.io ip address
-        client = new MqttClient("137.135.83.217");
-
-        //When was the message published to the Broker
-        client.MqttMsgPublished += client_MqttMsgPublished;
-
-        //to be notified about recieved messages published on the subscribed topic
-        client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
-
-
-        //call the Connect Method to connect to the broker
-        string clientId = Guid.NewGuid().ToString();
-
-        //connect
-        client.Connect(clientId);
-
-        // currently player will move forward if message sent to topic/red
-        client.Subscribe(new string[] { "topic/red" },
-            new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
-
         // initialize ducking variables
         cylinderHeight = cylinder.transform.localScale;
         ducked = false;
-        forward = 0;
     }
 
     // Update is called once per frame
@@ -86,8 +61,8 @@ public class PlayerMovement : MonoBehaviour
 
         // inputs from arrow keys or "WASD"
         float x = -Input.GetAxis("Horizontal");
-        float z = -(Input.GetAxis("Vertical") + forward);
-        forward = 0;
+        float z = -(Input.GetAxis("Vertical") + myMQTT.forward);
+        myMQTT.resetMovementVars();
 
         // move player forward/backward/left/right
         Vector3 move = transform.right * x + transform.forward * z;
@@ -115,36 +90,5 @@ public class PlayerMovement : MonoBehaviour
             cylinder.transform.localScale = cylinderHeight;
             ducked = false;
         }
-    }
-    
-    void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
-    {
-        Debug.Log("Subscribed for id = " + e.MessageId);
-    }
-
-    void client_MqttMsgPublished(object sender, MqttMsgPublishedEventArgs e)
-    {
-        Debug.Log("inside client_MqttMsgPublished");
-        Debug.Log("MessageId = " + e.MessageId + " Published = " + e.IsPublished);
-        Debug.Log("MessageId = " + e.MessageId);
-    }
-
-    void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
-    {
-        //this function is called everytime you receive message
-        //e.Message is a byte[]
-        var str = System.Text.Encoding.UTF8.GetString(e.Message);
-        myLog += str + "\n";
-
-        Debug.Log("received a message");
-
-        if (String.Equals(e.Topic, "topic/red"))
-        {
-            Debug.Log("red is true");
-            Debug.Log(str);
-            //Debug.Log(str == "Testing. Does this work?");
-            forward = 1f;
-        }
-
     }
 }
