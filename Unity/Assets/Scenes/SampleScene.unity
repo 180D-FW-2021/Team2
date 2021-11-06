@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 45461610}
   - component: {fileID: 45461614}
   - component: {fileID: 45461615}
+  - component: {fileID: 45461616}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -402,11 +403,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05bf579fbf1ffec469af2781449b9da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myMQTT: {fileID: 45461616}
   controller: {fileID: 45461615}
   cylinder: {fileID: 45461609}
-  speed: 12
+  speed: 8
   gravity: -19.62
-  jumpHeight: 3
+  jumpHeight: 1
   groundCheck: {fileID: 2095390174}
   groundDistance: 0.4
   groundMask:
@@ -430,6 +432,21 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &45461616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45461609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217cbede4d748ba4f82d224cd69b03fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forward: 0
+  left: 0
+  right: 0
 --- !u!1 &80357075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e936f242ffec66049aca1d642161eef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myMQTT: {fileID: 45461616}
   YSensitivity: 2
   playerBody: {fileID: 45461613}
 --- !u!81 &229131312
@@ -2701,7 +2719,7 @@ GameObject:
   - component: {fileID: 717370002}
   - component: {fileID: 717370001}
   - component: {fileID: 717370000}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
