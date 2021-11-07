@@ -62,14 +62,13 @@ public class PlayerMovement : MonoBehaviour
         // inputs from arrow keys or "WASD"
         float x = -Input.GetAxis("Horizontal");
         float z = -(Input.GetAxis("Vertical") + myMQTT.forward);
-        myMQTT.resetMovementVars();
 
         // move player forward/backward/left/right
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
 
         // player jump
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if ((Input.GetButtonDown("Jump") || myMQTT.jump) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
@@ -78,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         // player duck
-        if(Input.GetKey("p"))
+        if(Input.GetKey("p") || myMQTT.duck)
         {
             if (!ducked) {
                 cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);
@@ -90,5 +89,7 @@ public class PlayerMovement : MonoBehaviour
             cylinder.transform.localScale = cylinderHeight;
             ducked = false;
         }
+
+        myMQTT.resetMovementVars();
     }
 }
