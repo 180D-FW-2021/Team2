@@ -1,0 +1,22 @@
+# Installation
+
+In your conda env with opencv, install the following:
+
+pip install paho-mqtt
+pip install tensorflow
+pip install --upgrade tensorflow-hub
+pip install -q git+https://github.com/tensorflow/docs
+pip install --upgrade tensorflow-estimator==2.6.0
+
+Download movenet thunder and/or lightning model:
+
+https://tfhub.dev/google/movenet/singlepose/thunder/4
+https://tfhub.dev/google/movenet/singlepose/lightning/3
+
+Make sure to add the model to the Movenet/models directory.
+
+# Resources
+
+1. Download movenet thunder model: https://tfhub.dev/google/movenet/singlepose/thunder/4
+2. Download movenet lightning model: https://tfhub.dev/google/movenet/singlepose/lightning/3
+3. Example code: https://github.com/nicknochnack/MoveNetLightning
