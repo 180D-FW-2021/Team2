@@ -10,6 +10,8 @@ public class mqtt : MonoBehaviour
     public float forward;
     public bool left;
     public bool right;
+    public bool jump;
+    public bool duck;
 
     //create an instance of MqttClient class 
     private MqttClient client;
@@ -36,14 +38,22 @@ public class mqtt : MonoBehaviour
         //connect
         client.Connect(clientId);
 
-        // currently player will move forward if message sent to topic/red
+        // currently player will move forward/turn if message sent to topic/movement
+        // strings from Raspberry Pi
         client.Subscribe(new string[] { "topic/movement" },
+            new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+
+        // currently player will jump/duck if message sent to topic/pose
+        // strings from pose detection
+        client.Subscribe(new string[] { "topic/pose" },
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
         // initialize movement variables
         forward = 0;
         left = false;
         right = false;
+        jump = false;
+        duck = false;
 
     }
 
@@ -85,12 +95,27 @@ public class mqtt : MonoBehaviour
                 right = true;
             }
         }
+        if (String.Equals(e.Topic, "topic/pose"))
+        {
+            Debug.Log(str);
+            //Debug.Log(str == "Testing. Does this work?");
+            if (str == "j")
+            {
+                jump = true;
+            }
+            if (str == "d")
+            {
+                duck = true;
+            }
+        }
 
     }
 
     public void resetMovementVars()
     {
         forward = 0;
+        jump = false;
+        duck = false;
     }
 
     public void resetPerspectiveVars()
