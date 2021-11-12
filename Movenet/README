@@ -17,7 +17,15 @@ Make sure to add the model to the Movenet/models directory.
 
 # Files
 
-1. movenet.py
+1. position_tracking.py
+
+Main script for detecting obstacle navigation (duck/jump)
+and sending data to Unity over MQTT.
+
+Usage:
+python3 obstacle_detection.py --no-mqtt -m [thunder|lightning]
+
+2. movenet.py
 
 Movenet class for detecting pose keypoints using tensorflow movenet
 
@@ -26,15 +34,15 @@ python3 movenet.py --model [lightning | thunder]
 Import movenet class:
 from movenet import Movenet
 
-2. publisher.py
+3. publisher.py
 
 MQTT publisher class
 
 Run example: python3 publisher.py
 
-3. collect_data.py
+4. collect_data.py
 
-Collect data for tuning pose recognition model.
+Collect data for tuning position tracking model.
 
 Usage: python3 collect_data.py -m [thunder|lightning] -f file_name.csv
 
