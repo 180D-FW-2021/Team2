@@ -2,6 +2,7 @@ import cv2
 import argparse
 from movenet import Movenet
 from publisher import Publisher
+from movement_recognizer import MovementRecognizer, Position
 
 """
 Script for detecting obstacle navigation (jump/duck)
@@ -14,6 +15,14 @@ References:
 
 # TODO: jump/duck detection code
 
+def print_position(pos):
+    if pos == Position.DUCK:
+        print("DUCK")
+    elif pos == Position.JUMP:
+        print("JUMP")
+    elif pos == Position.OUT_OF_FRAME:
+        print("OUT OF FRAME")
+
 if __name__ == "__main__":
 
     # usage: python3 obstacle_detection.py --no-mqtt -m [thunder|lightning]
@@ -25,13 +34,12 @@ if __name__ == "__main__":
     model = args.model
 
     movenet_obj = Movenet(model)
+    recog_obj = MovementRecognizer()
 
-    # set up client
+    # set up MQTT publisher
     if mqtt_on:
         publisher = Publisher()
         publisher.run()
-        # TODO: send data only during jump/duck detection
-        publisher.publish("ece180d/test/message", "i love 180da", qos=1)
 
     # capture video from webcam
     cap = cv2.VideoCapture(0)
@@ -40,7 +48,13 @@ if __name__ == "__main__":
 
         # predict body keypoints
         keypoints_with_scores = movenet_obj.predict_keypoints(frame)
-        print(keypoints_with_scores)
+        
+        player_pos = recog_obj.add_and_recognize(keypoints_with_scores)
+        print_position(player_pos)
+
+        # send data to Unity
+        if mqtt_on:
+            publisher.send(player_pos)
 
         # render keypoint predictions on frame
         movenet_obj.render_keypoints(frame, keypoints_with_scores)

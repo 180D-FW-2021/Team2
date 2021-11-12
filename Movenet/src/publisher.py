@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+from movement_recognizer import Position
 
 """ References: 
 https://github.com/eclipse/paho.mqtt.python/blob/master/examples/client_sub-class.py
@@ -28,6 +29,15 @@ class Publisher(mqtt.Client):
             "with QoS",
             str(message.qos.decode()),
         )
+
+    # send data to Unity
+    def send(self, player_pos):
+        if player_pos == Position.JUMP:
+            self.publish("ece180d/test/message", "j", qos=1)
+        elif player_pos == Position.DUCK:
+            self.publish("ece180d/test/message", "d", qos=1)
+        elif player_pos == Position.OUT_OF_FRAME:
+            self.publish("ece180d/test/message", "o", qos=1)
 
     # connect/disconnect functions
 

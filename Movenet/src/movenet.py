@@ -115,15 +115,15 @@ class Movenet:
         keypoints_with_scores = self.interpreter.get_tensor(output_details[0]["index"])
         return keypoints_with_scores
 
-    def render_keypoints(self, frame, keypoints_with_scores):
+    def render_keypoints(self, frame, keypoints_with_scores, confidence_threshold=0.1):
         """
         render predicted keypoints (points and connections) on live video
         args:
         - frame: image frame
         - keypoints_with_scores: 
         """
-        self.draw_connections(frame, keypoints_with_scores, EDGES, 0.4)
-        self.draw_keypoints(frame, keypoints_with_scores, 0.4)
+        self.draw_connections(frame, keypoints_with_scores, EDGES, confidence_threshold)
+        self.draw_keypoints(frame, keypoints_with_scores, confidence_threshold)
 
 
 if __name__ == "__main__":
