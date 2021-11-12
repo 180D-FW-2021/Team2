@@ -10,7 +10,7 @@ lab 3 spec code for mqtt
 
 if __name__ == '__main__':
 
-    # usage: python3 obstacle_detection.py --mqtt_on -m [thunder|lightning]
+    # usage: python3 obstacle_detection.py --no-mqtt -m [thunder|lightning]
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--model', type=str, default='lightning')
     parser.add_argument('--no-mqtt', dest='mqtt_on', action='store_false')
@@ -32,16 +32,12 @@ if __name__ == '__main__':
     while cap.isOpened():
         ret, frame = cap.read()
         
-        # Reshape image
-        img = movenet_obj.reshape_image(frame)
-        
-        # Make predictions 
-        keypoints_with_scores = movenet_obj.predict_keypoints(img)
+        # predict body keypoints
+        keypoints_with_scores = movenet_obj.predict_keypoints(frame)
         print(keypoints_with_scores)
         
-        # Rendering 
-        movenet_obj.render_keypoints(frame, keypoints_with_scores)
-        
+        # render keypoint predictions on frame
+        movenet_obj.render_keypoints(frame, keypoints_with_scores) 
         cv2.imshow('frame', frame)
         
         if cv2.waitKey(10) & 0xFF==ord('q'):

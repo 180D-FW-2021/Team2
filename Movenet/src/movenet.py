@@ -1,12 +1,34 @@
 import tensorflow as tf
 import numpy as np
-from matplotlib import pyplot as plt
 import cv2
+import argparse
 
 '''
     code reference: https://github.com/nicknochnack/MoveNetLightning
 '''
 
+# Dictionary that maps from joint names to keypoint indices.
+KEYPOINT_DICT = {
+    'nose': 0,
+    'left_eye': 1,
+    'right_eye': 2,
+    'left_ear': 3,
+    'right_ear': 4,
+    'left_shoulder': 5,
+    'right_shoulder': 6,
+    'left_elbow': 7,
+    'right_elbow': 8,
+    'left_wrist': 9,
+    'right_wrist': 10,
+    'left_hip': 11,
+    'right_hip': 12,
+    'left_knee': 13,
+    'right_knee': 14,
+    'left_ankle': 15,
+    'right_ankle': 16
+}
+
+# connections between keypoints for drawing keypoint estimation
 EDGES = {
     (0, 1): 'm',
     (0, 2): 'c',
@@ -68,12 +90,13 @@ class Movenet:
                 cv2.line(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 2)
 
     def predict_keypoints(self, input_image):
+        reshaped_frame = self.reshape_image(input_image)
         # Setup input and output 
         input_details = self.interpreter.get_input_details()
         output_details = self.interpreter.get_output_details()
         
         # Make predictions 
-        self.interpreter.set_tensor(input_details[0]['index'], np.array(input_image))
+        self.interpreter.set_tensor(input_details[0]['index'], np.array(reshaped_frame))
         self.interpreter.invoke()
         keypoints_with_scores = self.interpreter.get_tensor(output_details[0]['index'])
         return keypoints_with_scores
@@ -83,21 +106,18 @@ class Movenet:
         self.draw_keypoints(frame, keypoints_with_scores, 0.4)
 
 if __name__ == '__main__':
-    movenet = Movenet("thunder")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-m', '--model', type=str, default='lightning')
+    args = parser.parse_args()
+    model = args.model
+    movenet = Movenet(model)
 
-    # capture video
     cap = cv2.VideoCapture(0)
     while cap.isOpened():
         ret, frame = cap.read()
         
-        # Reshape image
-        img = movenet.reshape_image(frame)
+        keypoints_with_scores = movenet.predict_keypoints(frame)
         
-        # Make predictions 
-        keypoints_with_scores = movenet.predict_keypoints(img)
-        print(keypoints_with_scores)
-        
-        # Rendering 
         movenet.render_keypoints(frame, keypoints_with_scores)
         
         cv2.imshow('Movenet', frame)

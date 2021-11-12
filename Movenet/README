@@ -1,6 +1,6 @@
 # Installation
 
-In your conda env with opencv, install the following:
+In your conda env, install the following:
 
 pip install paho-mqtt
 pip install tensorflow
@@ -11,12 +11,36 @@ pip install --upgrade tensorflow-estimator==2.6.0
 Download movenet thunder and/or lightning model:
 
 https://tfhub.dev/google/movenet/singlepose/thunder/4
-https://tfhub.dev/google/movenet/singlepose/lightning/3
+https://tfhub.dev/google/movenet/singlepose/lightning/4
 
 Make sure to add the model to the Movenet/models directory.
+
+# Files
+
+1. movenet.py
+
+Movenet class for detecting pose keypoints using tensorflow movenet
+
+Run example:
+python3 movenet.py --model [lightning | thunder]
+Import movenet class:
+from movenet import Movenet
+
+2. publisher.py
+
+MQTT publisher class
+
+Run example: python3 publisher.py
+
+3. collect_data.py
+
+Collect data for tuning pose recognition model.
+
+Usage: python3 collect_data.py -m [thunder|lightning] -f file_name.csv
 
 # Resources
 
 1. Download movenet thunder model: https://tfhub.dev/google/movenet/singlepose/thunder/4
-2. Download movenet lightning model: https://tfhub.dev/google/movenet/singlepose/lightning/3
+2. Download movenet lightning model: https://tfhub.dev/google/movenet/singlepose/lightning/4
 3. Example code: https://github.com/nicknochnack/MoveNetLightning
+4. Tensorflow-js: https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
