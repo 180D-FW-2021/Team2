@@ -40,7 +40,17 @@ MQTT publisher class
 
 Run example: python3 publisher.py
 
-4. collect_data.py
+4. movement_recognizer.py
+
+Stores previous $max_frames keypoints and outputs whether player is
+jumping, ducking, out of frame, or stationary.
+
+5. keypoints.py
+
+Encapsulates obtaining keypoints for a specific body part and
+extracting the x coordinate, y coordinate, and confidence.
+
+6. collect_data.py
 
 Collect data for tuning position tracking model.
 
@@ -52,3 +62,5 @@ Usage: python3 collect_data.py -m [thunder|lightning] -f file_name.csv
 2. Download movenet lightning model: https://tfhub.dev/google/movenet/singlepose/lightning/4
 3. Example code: https://github.com/nicknochnack/MoveNetLightning
 4. Tensorflow-js: https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
+5. https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/movenet.ipynb
+6. https://github.com/tensorflow/tfjs-models/blob/master/pose-detection/src/movenet/detector.ts
