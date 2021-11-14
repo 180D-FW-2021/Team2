@@ -5,6 +5,9 @@ using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using System;
 
+// Mqtt https://csharp.hotexamples.com/examples/uPLibrary.Networking.M2Mqtt/MqttClient/-/php-mqttclient-class-examples.html
+// and RPi Rhythms
+
 public class mqtt : MonoBehaviour
 {
     public float forward;
@@ -23,7 +26,8 @@ public class mqtt : MonoBehaviour
     {
         //create MqttClient object
         // mqtt.eclipseprojects.io ip address
-        client = new MqttClient("137.135.83.217");
+        // alternate test.mosquitto.org
+        client = new MqttClient("mqtt.eclipseprojects.io");
 
         //When was the message published to the Broker
         client.MqttMsgPublished += client_MqttMsgPublished;

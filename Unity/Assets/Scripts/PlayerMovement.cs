@@ -11,8 +11,6 @@ using uPLibrary.Networking.M2Mqtt.Exceptions;
 using System;
 
 //reference https://www.youtube.com/watch?v=_QajrabyTJc&list=RDCMUCYbK_tjZ2OrIZFBvU6CCMiA&index=17
-// Mqtt https://csharp.hotexamples.com/examples/uPLibrary.Networking.M2Mqtt/MqttClient/-/php-mqttclient-class-examples.html
-// and RPi Rhythms
 
 public class PlayerMovement : MonoBehaviour
 {
