@@ -2,7 +2,8 @@ import cv2
 import argparse
 from movenet import Movenet
 from publisher import Publisher
-from movement_recognizer import MovementRecognizer, Position
+from movement_recognizer import MovementRecognizer
+from keypoints_filter import KeypointsFilter
 
 """
 Script for detecting obstacle navigation (jump/duck)
@@ -12,16 +13,6 @@ References:
 - https://github.com/nicknochnack/MoveNetLightning
 - lab 3 spec code for mqtt
 """
-
-# TODO: jump/duck detection code
-
-def print_position(pos):
-    if pos == Position.DUCK:
-        print("DUCK")
-    elif pos == Position.JUMP:
-        print("JUMP")
-    elif pos == Position.OUT_OF_FRAME:
-        print("OUT OF FRAME")
 
 if __name__ == "__main__":
 
@@ -35,6 +26,7 @@ if __name__ == "__main__":
 
     movenet_obj = Movenet(model)
     recog_obj = MovementRecognizer()
+    filt_obj = KeypointsFilter()
 
     # set up MQTT publisher
     if mqtt_on:
@@ -47,10 +39,15 @@ if __name__ == "__main__":
         ret, frame = cap.read()
 
         # predict body keypoints
-        keypoints_with_scores = movenet_obj.predict_keypoints(frame)
+        keypoints_with_scores = movenet_obj.detect(frame)
+
+        # uncomment to apply filter
+        # keypoints_with_scores = filt_obj.apply_filter(keypoints_with_scores)
         
         player_pos = recog_obj.add_and_recognize(keypoints_with_scores)
-        print_position(player_pos)
+
+        if player_pos.name != "STATIONARY":
+            print(player_pos.name)
 
         # send data to Unity
         if mqtt_on:
@@ -58,7 +55,7 @@ if __name__ == "__main__":
 
         # render keypoint predictions on frame
         movenet_obj.render_keypoints(frame, keypoints_with_scores)
-        cv2.imshow("frame", frame)
+        cv2.imshow("webcam_video", frame)
 
         if cv2.waitKey(10) & 0xFF == ord("q"):
             break

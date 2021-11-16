@@ -1,9 +1,9 @@
 import paho.mqtt.client as mqtt
-from movement_recognizer import Position
+from enums import Position
 
 """ References: 
-https://github.com/eclipse/paho.mqtt.python/blob/master/examples/client_sub-class.py
-lab 3 spec code for mqtt
+- https://github.com/eclipse/paho.mqtt.python/blob/master/examples/client_sub-class.py
+- lab 3 spec code for mqtt
 """
 
 

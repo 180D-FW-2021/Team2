@@ -23,16 +23,11 @@ Main script for detecting obstacle navigation (duck/jump)
 and sending data to Unity over MQTT.
 
 Usage:
-python3 obstacle_detection.py --no-mqtt -m [thunder|lightning]
+python3 position_tracking.py --no-mqtt -m [thunder|lightning]
 
 2. movenet.py
 
 Movenet class for detecting pose keypoints using tensorflow movenet
-
-Run example:
-python3 movenet.py --model [lightning | thunder]
-Import movenet class:
-from movenet import Movenet
 
 3. publisher.py
 
@@ -45,12 +40,19 @@ Run example: python3 publisher.py
 Stores previous $max_frames keypoints and outputs whether player is
 jumping, ducking, out of frame, or stationary.
 
-5. keypoints.py
+5. keypoints_filter.py
 
-Encapsulates obtaining keypoints for a specific body part and
-extracting the x coordinate, y coordinate, and confidence.
+Apply one-euro filter to x and y coords in keypoints.
 
-6. collect_data.py
+6. one_euro_filter.py
+
+One-euro filter class.
+
+7. enums.py
+
+Enums for player position and mapping from body part to keypoint index.
+
+8. collect_data.py
 
 Collect data for tuning position tracking model.
 
@@ -64,3 +66,6 @@ Usage: python3 collect_data.py -m [thunder|lightning] -f file_name.csv
 4. Tensorflow-js: https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
 5. https://colab.research.google.com/github/tensorflow/hub/blob/master/examples/colab/movenet.ipynb
 6. https://github.com/tensorflow/tfjs-models/blob/master/pose-detection/src/movenet/detector.ts
+7. browser movenet demo: https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet
+8. https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/g3doc/tutorials/pose_classification.ipynb
+9. https://github.com/tensorflow/examples/blob/master/lite/examples/pose_estimation/raspberry_pi/ml/movenet.py
