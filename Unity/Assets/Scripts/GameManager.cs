@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /* GameManager object created by adapting the tutorial provided here:
     https://www.youtube.com/watch?v=4I0vonyqMi8
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             case GameState.Resumed:
                 break;
             case GameState.Victory:
+                HandleVictory();
                 break;             
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
@@ -71,6 +73,12 @@ public class GameManager : MonoBehaviour
 
         // If other scripts are suscribed to changes in GameState, inform them
         OnGameStateChanged?.Invoke(newState);
+    }
+
+    private void HandleVictory()
+    {
+        Debug.Log("Change to end screen");
+        SceneManager.LoadScene("EndScreen");
     }
 
 

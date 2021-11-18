@@ -26,4 +26,9 @@ public class Timer : MonoBehaviour
         //timeText.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    void OnDisable()
+    {
+        PlayerPrefs.SetFloat("finalTime", timeVal);
+    }
 }

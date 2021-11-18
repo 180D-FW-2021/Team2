@@ -90,4 +90,13 @@ public class PlayerMovement : MonoBehaviour
 
         myMQTT.resetMovementVars();
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.tag == "EndObject")
+        {
+            Debug.Log("Hit something");
+            GameManager.Instance.UpdateGameState(GameState.Victory);
+        }
+    }
 }
