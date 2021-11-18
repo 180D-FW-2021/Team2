@@ -66,7 +66,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Victory:
                 HandleVictory();
-                break;             
+                break;   
+            case GameState.Quit:
+                break;          
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
@@ -92,5 +94,6 @@ public enum GameState {
     Playing,
     Paused,
     Resumed,
-    Victory
+    Victory,
+    Quit
 }
