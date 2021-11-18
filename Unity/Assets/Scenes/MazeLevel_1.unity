@@ -1113,8 +1113,9 @@ GameObject:
   - component: {fileID: 125052646}
   - component: {fileID: 125052645}
   - component: {fileID: 125052649}
+  - component: {fileID: 125052650}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas-PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1214,6 +1215,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1213612656}
+--- !u!114 &125052650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125052644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9be63a1064815c4a9de7828dbf9ae51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManagerScript: {fileID: 0}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5340,8 +5354,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 125052649}
-        m_MethodName: LoadMenu
+      - m_Target: {fileID: 125052650}
+        m_MethodName: To_MainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

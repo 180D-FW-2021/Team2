@@ -41,23 +41,20 @@ public class VoiceCommands : MonoBehaviour
     }
 
     private void StartCallback() {
-    	Debug.Log("Start called");
-    	// transform.Translate(1, 0, 0);
+    	Debug.Log("Resuming game");
 		GameManagerScript.UpdateGameState(GameState.Resumed);
 		// PauseMenu.Resume();
     }
 
     private void StopCallback() {
-    	Debug.Log("Pause called: back");
-    	// transform.Translate(-1, 0, 0);
+    	Debug.Log("Pausing game");
 		GameManagerScript.UpdateGameState(GameState.Paused);
 		// PauseMenu.Pause();
     }
 
     private void ExitCallback() {
-    	Debug.Log("Exit called: up");
-    	// transform.Translate(0, 1, 0);
-		// TODO: Implement Quit Game
+    	Debug.Log("Exitting game");
+		GameManagerScript.UpdateGameState(GameState.Quitting);
 		// PauseMenu.QuitGame();
     }
 }
