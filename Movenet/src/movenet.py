@@ -63,9 +63,9 @@ class Movenet(object):
 
     def __init__(self, model_name: str) -> None:
         """Initialize a MoveNet pose estimation model.
-    Args:
-      model_name: Name of the TFLite MoveNet model.
-    """
+        Args:
+          model_name: Name of the TFLite MoveNet model.
+        """
         if model_name == "lightning":
             self._interpreter = tf.lite.Interpreter(
                 model_path="../models/lite-model_movenet_singlepose_lightning_3.tflite",

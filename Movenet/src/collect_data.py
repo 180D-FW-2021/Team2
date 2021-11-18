@@ -6,8 +6,12 @@ from movenet import Movenet
 import csv
 import time
 
-# collect keypoint-estimation data from webcam livestream
-# reference: https://github.com/nicknochnack/MoveNetLightning
+""" 
+Collect keypoint-estimation data from webcam livestream
+
+Reference: 
+https://github.com/nicknochnack/MoveNetLightning
+"""
 
 # map keypoint_name -> index
 keypoint_order = [
@@ -77,12 +81,9 @@ if __name__ == "__main__":
 
             keypoints_with_scores = movenet.predict_keypoints(frame)
 
-            # make keypoints prediction tensor 1-dimensional
-            keypoints = np.squeeze(keypoints_with_scores)
-
             write_dict = {}
-            for i in range(len(keypoints)):
-                kp = keypoints[i]
+            for i in range(len(keypoints_with_scores)):
+                kp = keypoints_with_scores[i]
                 # (x_coord, y_coord, confidence)
                 ky, kx, kp_conf = kp
                 # only consider keypoints with confidence > 0.4
