@@ -79,15 +79,15 @@ if __name__ == "__main__":
             start_rt = time.time()
             ret, frame = cap.read()
 
-            keypoints_with_scores = movenet.predict_keypoints(frame)
+            keypoints_with_scores = movenet.detect(frame)
 
             write_dict = {}
             for i in range(len(keypoints_with_scores)):
                 kp = keypoints_with_scores[i]
                 # (x_coord, y_coord, confidence)
                 ky, kx, kp_conf = kp
-                # only consider keypoints with confidence > 0.4
-                if kp_conf > 0.4:
+                # only consider keypoints with confidence > 0.3
+                if kp_conf > 0.3:
                     kp_label = keypoint_order[i]
                     y_label = f"{kp_label}_y"
                     # measure real-time latency per frame (s)

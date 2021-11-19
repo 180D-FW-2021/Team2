@@ -64,7 +64,7 @@ class Movenet(object):
     def __init__(self, model_name: str) -> None:
         """Initialize a MoveNet pose estimation model.
         Args:
-          model_name: Name of the TFLite MoveNet model.
+          model_name(str): Name of the TFLite MoveNet model.
         """
         if model_name == "lightning":
             self._interpreter = tf.lite.Interpreter(
@@ -91,15 +91,15 @@ class Movenet(object):
         self, image_height: int, image_width: int
     ) -> Dict[(str, float)]:
         """Defines the default crop region.
-    The function provides the initial crop region (pads the full image from
-    both sides to make it a square image) when the algorithm cannot reliably
-    determine the crop region from the previous frame.
-    Args:
-      image_height (int): The input image width
-      image_width (int): The input image height
-    Returns:
-      crop_region (dict): The default crop region.
-    """
+        The function provides the initial crop region (pads the full image from
+        both sides to make it a square image) when the algorithm cannot reliably
+        determine the crop region from the previous frame.
+        Args:
+          image_height (int): The input image width
+          image_width (int): The input image height
+        Returns:
+          crop_region (dict): The default crop region.
+        """
         if image_width > image_height:
             x_min = 0.0
             box_width = 1.0
@@ -124,13 +124,13 @@ class Movenet(object):
 
     def _torso_visible(self, keypoints: np.ndarray) -> bool:
         """Checks whether there are enough torso keypoints.
-    This function checks whether the model is confident at predicting one of
-    the shoulders/hips which is required to determine a good crop region.
-    Args:
-      keypoints: Detection result of Movenet model.
-    Returns:
-      True/False
-    """
+        This function checks whether the model is confident at predicting one of
+        the shoulders/hips which is required to determine a good crop region.
+        Args:
+          keypoints: Detection result of Movenet model.
+        Returns:
+          True/False
+        """
         left_hip_score = keypoints[BodyPart.LEFT_HIP.value, 2]
         right_hip_score = keypoints[BodyPart.RIGHT_HIP.value, 2]
         left_shoulder_score = keypoints[BodyPart.LEFT_SHOULDER.value, 2]
@@ -153,18 +153,18 @@ class Movenet(object):
         center_x: float,
     ) -> List[float]:
         """Calculates the maximum distance from each keypoints to the center.
-    The function returns the maximum distances from the two sets of keypoints:
-    full 17 keypoints and 4 torso keypoints. The returned information will
-    be used to determine the crop size. See determine_crop_region for more
-    details.
-    Args:
-      keypoints: Detection result of Movenet model.
-      target_keypoints: The 4 torso keypoints.
-      center_y (float): Vertical coordinate of the body center.
-      center_x (float): Horizontal coordinate of the body center.
-    Returns:
-      The maximum distance from each keypoints to the center location.
-    """
+        The function returns the maximum distances from the two sets of keypoints:
+        full 17 keypoints and 4 torso keypoints. The returned information will
+        be used to determine the crop size. See determine_crop_region for more
+        details.
+        Args:
+          keypoints: Detection result of Movenet model.
+          target_keypoints: The 4 torso keypoints.
+          center_y (float): Vertical coordinate of the body center.
+          center_x (float): Horizontal coordinate of the body center.
+        Returns:
+          The maximum distance from each keypoints to the center location.
+        """
         torso_joints = [
             BodyPart.LEFT_SHOULDER,
             BodyPart.RIGHT_SHOULDER,
@@ -200,20 +200,20 @@ class Movenet(object):
         self, keypoints: np.ndarray, image_height: int, image_width: int
     ) -> Dict[(str, float)]:
         """Determines the region to crop the image for the model to run inference on.
-    The algorithm uses the detected joints from the previous frame to
-    estimate the square region that encloses the full body of the target
-    person and centers at the midpoint of two hip joints. The crop size is
-    determined by the distances between each joints and the center point.
-    When the model is not confident with the four torso joint predictions,
-    the function returns a default crop which is the full image padded to
-    square.
-    Args:
-      keypoints: Detection result of Movenet model.
-      image_height (int): The input image width
-      image_width (int): The input image height
-    Returns:
-      crop_region (dict): The crop region to run inference on.
-    """
+        The algorithm uses the detected joints from the previous frame to
+        estimate the square region that encloses the full body of the target
+        person and centers at the midpoint of two hip joints. The crop size is
+        determined by the distances between each joints and the center point.
+        When the model is not confident with the four torso joint predictions,
+        the function returns a default crop which is the full image padded to
+        square.
+        Args:
+          keypoints: Detection result of Movenet model.
+          image_height (int): The input image width
+          image_width (int): The input image height
+        Returns:
+          crop_region (dict): The crop region to run inference on.
+        """
         # Convert keypoint index to human-readable names.
         target_keypoints = {}
         for idx in range(len(BodyPart)):
@@ -323,16 +323,16 @@ class Movenet(object):
         crop_size: Tuple[int, int],
     ) -> np.ndarray:
         """Runs model inference on the cropped region.
-    The function runs the model inference on the cropped region and updates
-    the model output to the original image coordinate system.
-    Args:
-      image: The input image.
-      crop_region: The region of interest to run inference on.
-      crop_size: The size of the crop region.
-    Returns:
-      An array of shape [17, 3] representing the keypoint absolute coordinates
-      and scores.
-    """
+        The function runs the model inference on the cropped region and updates
+        the model output to the original image coordinate system.
+        Args:
+          image: The input image.
+          crop_region: The region of interest to run inference on.
+          crop_size: The size of the crop region.
+        Returns:
+          An array of shape [17, 3] representing the keypoint absolute coordinates
+          and scores.
+        """
 
         input_image = self._crop_and_resize(image, crop_region, crop_size=crop_size)
         input_image = input_image.astype(dtype=np.float32)
@@ -362,18 +362,18 @@ class Movenet(object):
         self, input_image: np.ndarray, reset_crop_region: bool = True
     ) -> np.ndarray:
         """Run detection on an input image.
-    Args:
-      input_image: A [height, width, 3] RGB image. Note that height and width
-        can be anything since the image will be immediately resized according to
-        the needs of the model within this function.
-      reset_crop_region: Whether to use the crop region inferred from the
-        previous detection result to improve accuracy. Set to True if this is a
-        frame from a video. Set to False if this is a static image. Default
-        value is True.
-    Returns:
-      An array of shape [17, 3] representing the keypoint coordinates and
-      scores.
-    """
+        Args:
+        input_image: A [height, width, 3] RGB image. Note that height and width
+            can be anything since the image will be immediately resized according to
+            the needs of the model within this function.
+        reset_crop_region: Whether to use the crop region inferred from the
+            previous detection result to improve accuracy. Set to True if this is a
+            frame from a video. Set to False if this is a static image. Default
+            value is True.
+        Returns:
+            An array of shape [17, 3] representing the keypoint coordinates and
+            scores.
+        """
         image_height, image_width, _ = input_image.shape
 
         if (self._crop_region is None) or reset_crop_region:
@@ -398,11 +398,11 @@ class Movenet(object):
         self, frame: np.ndarray, keypoints: np.ndarray, confidence_threshold: float
     ) -> None:
         """Draw circles around predicted body keypoints (eyes, knees, etc.)
-    Args:
-      frame: image frame from video
-      keypoints: model-predicted keypoints of shape [17, 3]
-      confidence_threshold: confidence threshold (0-1) for displaying keypoint
-    """
+        Args:
+          frame: image frame from video
+          keypoints: model-predicted keypoints of shape [17, 3]
+          confidence_threshold: confidence threshold (0-1) for displaying keypoint
+        """
         y, x, c = frame.shape
         # scale keypoints to frame dimensions
         shaped = np.squeeze(np.multiply(keypoints, [y, x, 1]))
@@ -421,12 +421,12 @@ class Movenet(object):
         confidence_threshold: float,
     ) -> None:
         """Draw connections between keypoints (i.e. connection between eyes)
-      Args:
-        frame: image frame from video
-        keypoints: model-predicted keypoints of shape [17, 3]
-        edges: list of tuples indicating connected indices in keypoints
-        confidence_threshold: confidence threshold (0-1) for displaying connections
-      """
+        Args:
+          frame: image frame from video
+          keypoints: model-predicted keypoints of shape [17, 3]
+          edges: list of tuples indicating connected indices in keypoints
+          confidence_threshold: confidence threshold (0-1) for displaying connections
+        """
         y, x, c = frame.shape
         # scale keypoints to frame dimensions
         shaped = np.squeeze(np.multiply(keypoints, [y, x, 1]))
@@ -443,10 +443,10 @@ class Movenet(object):
 
     def render_keypoints(self, frame, keypoints_with_scores, confidence_threshold=0.3):
         """Render predicted keypoints (points and connections) on live video
-      Args:
-        frame: image frame
-        keypoints_with_scores: model-predicted keypoints of shape [17, 3]
-      """
+        Args:
+          frame: image frame
+          keypoints_with_scores: model-predicted keypoints of shape [17, 3]
+        """
         self.draw_connections(
             frame, keypoints_with_scores, Movenet.KEYPOINT_EDGES, confidence_threshold
         )
