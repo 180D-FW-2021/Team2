@@ -47,3 +47,5 @@
 - Higher accuracy compared to non-optimized version (keypoint_trials1)
 - Might need state machine of jump/duck to decide whether to send
   data with MQTT
+- Isolated jump/duck data with graphs:
+  https://docs.google.com/spreadsheets/d/11mQONTfApCqtQkOTAuxMjhGCdroXAihDo0AmXSqPGQw/edit?usp=sharing

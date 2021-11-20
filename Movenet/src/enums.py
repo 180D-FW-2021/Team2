@@ -24,8 +24,12 @@ class BodyPart(Enum):
     RIGHT_ANKLE = 16
 
 # detected player position
+# state machine for updating position
 class Position(Enum):
-    JUMP = 1
-    DUCK = 2
-    OUT_OF_FRAME = 3
-    STATIONARY = 4
+    # only send JUMP/DUCK to mqtt during start
+    JUMP_START = 1 
+    JUMPING = 2
+    DUCK_START = 4
+    DUCKING = 5
+    OUT_OF_FRAME = 6
+    STATIONARY = 7

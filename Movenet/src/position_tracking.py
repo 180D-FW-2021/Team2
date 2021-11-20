@@ -46,8 +46,7 @@ if __name__ == "__main__":
         
         player_pos = recog_obj.add_and_recognize(keypoints_with_scores)
 
-        if player_pos.name != "STATIONARY":
-            print(player_pos.name)
+        print(player_pos.name)
 
         # send data to Unity
         if mqtt_on:

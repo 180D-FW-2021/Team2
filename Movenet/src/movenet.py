@@ -360,7 +360,7 @@ class Movenet(object):
 
     def detect(
         self, input_image: np.ndarray, reset_crop_region: bool = True
-    ) -> np.ndarray:
+    ) -> List:
         """Run detection on an input image.
         Args:
         input_image: A [height, width, 3] RGB image. Note that height and width
@@ -371,7 +371,7 @@ class Movenet(object):
             frame from a video. Set to False if this is a static image. Default
             value is True.
         Returns:
-            An array of shape [17, 3] representing the keypoint coordinates and
+            A List of shape [17, 3] representing the keypoint coordinates and
             scores.
         """
         image_height, image_width, _ = input_image.shape
