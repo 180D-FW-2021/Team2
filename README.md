@@ -30,4 +30,4 @@ Set up your local dev env.
 2. [Python3](https://www.python.org/downloads/)
 3. [Raspberry Pi](https://www.raspberrypi.com/products/)
 
-<img src="1.jpg" />
+<img src=..\"1.jpg" />
