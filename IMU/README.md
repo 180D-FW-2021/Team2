@@ -18,4 +18,11 @@ python berryIMY.py
 ## Different orientations 
 ### Face forward (stand still) [1], run forward [2], left [3], right [4] 
 
+#### 1
 ![alt text](https://github.com/180D-FW-2021/Team2/blob/imu-gestures/images/1.jpg)
+#### 2
+![alt text](https://github.com/180D-FW-2021/Team2/blob/imu-gestures/images/2.jpg)
+#### 3 
+![alt text](https://github.com/180D-FW-2021/Team2/blob/imu-gestures/images/3.jpg)
+#### 4
+![alt text](https://github.com/180D-FW-2021/Team2/blob/imu-gestures/images/4.jpg)
