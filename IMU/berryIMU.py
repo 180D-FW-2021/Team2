@@ -408,15 +408,15 @@ with open('data.csv', 'w') as csvfile:
         writer.writerow({"accX": AccXangle, "accY": AccYangle, "gyroX": gyroXangle, "gyroY": gyroYangle, "gyroZ": gyroZangle})
 
         if abs(gyroZangle)>50: # and ((gyroXangle<-50) or (gyroXangle>90)):
-            output = "run"
+            output = "f"
             print('run')
         elif (gyroXangle)<(-50):
-            output = "left"
+            output = "l"
             print("left")
 # if (gyroXangle)>100 and abs(gyroZangle)>50:
 #    print('moving in right direction')
         elif (gyroXangle)>80:
-            output = "right"
+            output = "r"
             print('right')
         else:
             output = "faceforward"
