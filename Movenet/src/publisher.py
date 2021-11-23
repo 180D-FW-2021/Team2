@@ -31,13 +31,13 @@ class Publisher(mqtt.Client):
         )
 
     # send data to Unity
-    def send(self, player_pos):
-        if player_pos == Position.JUMP:
-            self.publish("ece180d/test/message", "j", qos=1)
-        elif player_pos == Position.DUCK:
-            self.publish("ece180d/test/message", "d", qos=1)
+    def send(self, player_pos, topic="topic/pose"):
+        if player_pos == Position.JUMP_START:
+            self.publish(topic, "j", qos=1)
+        elif player_pos == Position.DUCK_START:
+            self.publish(topic, "d", qos=1)
         elif player_pos == Position.OUT_OF_FRAME:
-            self.publish("ece180d/test/message", "o", qos=1)
+            self.publish(topic, "o", qos=1)
 
     # connect/disconnect functions
 

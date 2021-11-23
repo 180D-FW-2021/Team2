@@ -3,13 +3,14 @@
 - Data collection to document pose keypoints for various actions
 - Use to fine-tune thresholding/brainstorm action-estimation model
 
-General conditions
+## General conditions
 
+- before model optimization: no cropping/smoothing
 - model: movenet lightning
 - keypoint confidence threshold: 0.4
 - data collection: python3 collect_data.py -f file_name.csv
 
-# Trials
+## Trials
 
 1. jump.csv
 
@@ -38,13 +39,13 @@ General conditions
 4. back_forward.csv
 
 - walk backwards and then forwards
-- used to test fasle positive
+- used to test false positive
 
 5. walk_back.csv, walk_forward.csv
 
 - model player general movement/migration throughout game
 
-# Latency
+## Latency
 
 1. latency.csv
 
@@ -75,7 +76,7 @@ Ducking
 Walk backwards/forwards
 
 - much lower slope compared to jumping/ducking
-- use slop thresholding to differentiate jump/duck with regular
+- use slope thresholding to differentiate jump/duck with regular
   player movement
 
 Possible model:
