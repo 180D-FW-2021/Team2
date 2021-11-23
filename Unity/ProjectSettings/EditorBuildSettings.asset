@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HelpMenu.unity
     guid: d967be95984eb844585f7678f0ee84a0
+  - enabled: 1
+    path: Assets/Scenes/MazeLevel_0.unity
+    guid: ba9d209d000e4ee43b259a569381e8ce
   m_configObjects: {}
