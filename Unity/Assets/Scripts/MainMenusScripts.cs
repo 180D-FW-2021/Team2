@@ -28,11 +28,14 @@ public class MainMenusScripts : MonoBehaviour
         GameManagerScript.UpdateGameState(GameState.SelectLevel);
     }
 
-    // Load the level and then set the GameState to 'Playing'
-    public void To_Maze(int Level) {
-        GameManagerScript.UpdateGameState(GameState.LoadLevel, Level);
+    // Confirm the Selected Level
+    public void To_ConfirmMaze(int Level) {
+        GameManagerScript.UpdateGameState(GameState.ConfirmLevelSelection, Level);
     }
 
-
+    // Load the level and then set the GameState to 'Playing'
+    public void To_PlayMaze() {
+        GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
+    }
 
 }
