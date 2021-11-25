@@ -419,7 +419,7 @@ with open('data.csv', 'w') as csvfile:
             output = "r"
             print('right')
         else:
-            output = "faceforward"
+            output = "n"
             print("faceforward")
     #  elif (gyroZangle)<(-100) and gyroXangle>-50 and gyroXangle<100:
     #     print('moving forward')
