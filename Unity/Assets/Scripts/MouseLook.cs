@@ -16,7 +16,7 @@ public class MouseLook : MonoBehaviour
         float yRot1 = Input.GetKey("z") ? -YSensitivity : (Input.GetKey("x") ? YSensitivity : 0);
 
         yRot1 += myMQTT.left ? -YSensitivity : (myMQTT.right ? YSensitivity : 0);
-        myMQTT.resetPerspectiveVars();
+        //myMQTT.resetPerspectiveVars();
 
         playerBody.Rotate(Vector3.up * yRot1);
     }

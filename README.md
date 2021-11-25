@@ -9,7 +9,7 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 - Forward/back/left/right: arrow keys/ WASD
 - Rotate camera: 'z' (left) 'x' (right)
 - Jump: space bar
-- Duck: 'p'
+- Duck: Left Shift
 - Pause Menu: Esc
 
 ### Voice Commands
