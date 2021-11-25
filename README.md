@@ -14,9 +14,9 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 
 ### Voice Commands
 
-
 On Start Screen:
-
+- "Enter": Go to Main Menu
+- "Settings": Open Settings menu (not yet implemented)
 
 On Main Menu:
 - "Back": back to Start Screen
@@ -40,6 +40,8 @@ On Pause Menu
 - "Menu": goes to Main Menu
 - "Quit", "Exit": exit game
 
+On End Screen
+- "Menu": goes to Main Menu
 
 
 ### Web Cam
