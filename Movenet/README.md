@@ -14,8 +14,10 @@ pip install --upgrade tensorflow-estimator==2.6.0
 
 2. Download movenet thunder and/or lightning TFLite model:
 
-- [Thunder](https://tfhub.dev/google/movenet/singlepose/thunder/4)
-- [Lightning](https://tfhub.dev/google/movenet/singlepose/lightning/4)
+- [Lightning](https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/3)
+- [Thunder](https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/3)
+
+Lightning prioritizes latency, while thunder prioritizes model accuracy.
 
 3. Add the model to the Movenet/models directory.
 
@@ -24,6 +26,8 @@ pip install --upgrade tensorflow-estimator==2.6.0
 1. Run position tracking for obstacle navigation
 
 `python3 position_tracking.py --no-mqtt -m [thunder|lightning]`
+
+The model (m) argument allows you to select the model (thunder/lightning), and the no-mqtt argument sets up the program so that the player movement data is not sent to Unity with MQTT. By default (no args), the lightning model is used, and player movement is sent to Unity.
 
 2. Run data collection
 
@@ -38,7 +42,7 @@ and sending data to Unity over MQTT.
 
 2. movenet.py
 
-Movenet class for detecting pose keypoints using tensorflow movenet
+Movenet class for detecting pose keypoints using tensorflow movenet.
 
 3. publisher.py
 
@@ -46,22 +50,26 @@ MQTT publisher class.
 
 4. movement_recognizer.py
 
-Stores previous $max_frames keypoints and outputs whether player is
+Stores previous $max_keypoints keypoints and outputs whether player is
 jumping, ducking, out of frame, or stationary.
 
-5. keypoints_filter.py
+5. keypoints.py
+
+Keypoints class to encapsulate logic for extracting body part coords.
+
+6. keypoints_filter.py
 
 Apply one-euro filter to x and y coords in keypoints.
 
-6. one_euro_filter.py
+7. one_euro_filter.py
 
 One-euro filter class.
 
-7. enums.py
+8. enums.py
 
 Enums for player position and mapping from body part to keypoint index.
 
-8. collect_data.py
+9. collect_data.py
 
 Collect data for tuning position tracking model.
 

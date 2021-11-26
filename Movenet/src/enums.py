@@ -33,3 +33,8 @@ class Position(Enum):
     DUCKING = 5
     OUT_OF_FRAME = 6
     STATIONARY = 7
+    # transition from duck to stationary (tell Unity to stop ducking)
+    DUCK_STATIONARY = 8
+    # transition from out-of-frame to stationary
+    # (tell Unity to stop out-of-frame message)
+    OUT_FRAME_STATIONARY = 9
