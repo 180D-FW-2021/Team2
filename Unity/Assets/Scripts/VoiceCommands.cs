@@ -20,8 +20,12 @@ public class VoiceCommands : MonoBehaviour
 		GameManagerScript = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
         
     	keywords.Add("start", StartCallback);
+		keywords.Add("resume", StartCallback);
+		keywords.Add("pause", StopCallback);
     	keywords.Add("stop", StopCallback);
+		keywords.Add("menu", MenuCallback);
     	keywords.Add("exit", ExitCallback);
+		keywords.Add("quit", ExitCallback);
 
 		//string[] array1 = {"start", "stop", "exit", "one", "two", "three", "quit"};
     	
@@ -49,6 +53,12 @@ public class VoiceCommands : MonoBehaviour
     private void StopCallback() {
     	Debug.Log("Pausing game");
 		GameManagerScript.UpdateGameState(GameState.Paused);
+		// PauseMenu.Pause();
+    }
+
+	private void MenuCallback() {
+    	Debug.Log("Loading Main menu");
+		GameManagerScript.UpdateGameState(GameState.MainMenu);
 		// PauseMenu.Pause();
     }
 

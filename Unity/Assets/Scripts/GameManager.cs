@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     // Use this event to have other scripts be alerted when GameState changes
     public static event Action<GameState> OnGameStateChanged;
 
+    private int selectedLevel;
+
     // public GameObject MenuCanvas;
     // public GameObject StartMenuUI;
     // public GameObject MainMenuUI;
@@ -90,8 +92,12 @@ public class GameManager : MonoBehaviour
             case GameState.SelectLevel:
                 SceneManager.LoadScene("LevelSelector");
                 break;
-            case GameState.LoadLevel:
-                SceneManager.LoadScene("MazeLevel_" + level.ToString());
+            case GameState.ConfirmLevelSelection:
+                selectedLevel = level;
+                SceneManager.LoadScene("AreYouReadyScreen");
+                break;
+            case GameState.LoadSelectedLevel:
+                SceneManager.LoadScene("MazeLevel_" + selectedLevel.ToString());
                 Time.timeScale = 1f; // ensure time is moving
                 State = GameState.Playing; 
                 break;
@@ -127,7 +133,8 @@ public enum GameState {
     StartScreen,
     MainMenu,
     SelectLevel,
-    LoadLevel,
+    ConfirmLevelSelection,
+    LoadSelectedLevel,
     Playing,
     Paused,
     Resumed,
