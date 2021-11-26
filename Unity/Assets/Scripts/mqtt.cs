@@ -117,20 +117,25 @@ public class mqtt : MonoBehaviour
             if (str == "j")
             {
                 jump = true;
+                duck = false;
             }
             if (str == "d")
             {
                 duck = true;
+                jump = false;
+            }
+            if (str == "s")
+            {
+                jump = false;
+                duck = false;
             }
         }
 
     }
 
-    public void resetMovementVars()
+    public void resetJumpVar()
     {
-        forward = 0;
         jump = false;
-        duck = false;
     }
 
     public void resetPerspectiveVars()

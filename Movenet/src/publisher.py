@@ -38,6 +38,8 @@ class Publisher(mqtt.Client):
             self.publish(topic, "d", qos=1)
         elif player_pos == Position.OUT_OF_FRAME:
             self.publish(topic, "o", qos=1)
+        elif player_pos == Position.STATIONARY:
+            self.publish(topic, "s", qos=1)
 
     # connect/disconnect functions
 

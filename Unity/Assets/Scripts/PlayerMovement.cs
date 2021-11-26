@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 scaleChange, positionChange;
     private Vector3 cylinderHeight;
     private bool ducked;
-    private float duckTime;
 
     public float speed = 8f;
     public float gravity = -19.62f;
@@ -43,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
         // initialize ducking variables
         cylinderHeight = cylinder.transform.localScale;
         ducked = false;
-        duckTime = 0;
     }
 
     // Update is called once per frame
@@ -76,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        myMQTT.resetJumpVar();
+
         // player duck
         if(Input.GetKey(KeyCode.LeftShift) || myMQTT.duck)
         {
@@ -83,24 +83,13 @@ public class PlayerMovement : MonoBehaviour
                 cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);
             }
             ducked = true;
-            //duckTime = Time.deltaTime;
-            duckTime = 0;
         }
         else
         {
-            //if (ducked && duckTime < .7)
-            //{
-            //    duckTime += Time.deltaTime;
-            //    Debug.Log(duckTime);
-            //}
-            //else
-            //{
-                cylinder.transform.localScale = cylinderHeight;
-                ducked = false;
-            //}
+            cylinder.transform.localScale = cylinderHeight;
+            ducked = false;
         }
 
-        //myMQTT.resetMovementVars();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
