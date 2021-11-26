@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,8 +74,10 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
+        myMQTT.resetJumpVar();
+
         // player duck
-        if(Input.GetKey("p") || myMQTT.duck)
+        if(Input.GetKey(KeyCode.LeftShift) || myMQTT.duck)
         {
             if (!ducked) {
                 cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);
@@ -88,14 +90,13 @@ public class PlayerMovement : MonoBehaviour
             ducked = false;
         }
 
-        myMQTT.resetMovementVars();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.tag == "EndObject")
         {
-            Debug.Log("Hit something");
+            //Debug.Log("Hit something");
             GameManager.Instance.UpdateGameState(GameState.Victory);
         }
     }

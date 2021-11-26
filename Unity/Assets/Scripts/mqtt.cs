@@ -88,15 +88,26 @@ public class mqtt : MonoBehaviour
             //Debug.Log(str == "Testing. Does this work?");
             if (str == "f")
             {
-                forward = 1f;
+                forward = 0.5f;
+                resetPerspectiveVars();
             }
             if (str == "l")
             {
                 left = true;
+                right = false;
+                forward = 0;
             }
             if (str == "r")
             {
                 right = true;
+                left = false;
+                forward = 0;
+
+            }
+            if (str == "n")
+            {
+                forward = 0;
+                resetPerspectiveVars();
             }
         }
         if (String.Equals(e.Topic, "topic/pose"))
@@ -106,20 +117,25 @@ public class mqtt : MonoBehaviour
             if (str == "j")
             {
                 jump = true;
+                duck = false;
             }
             if (str == "d")
             {
                 duck = true;
+                jump = false;
+            }
+            if (str == "s")
+            {
+                jump = false;
+                duck = false;
             }
         }
 
     }
 
-    public void resetMovementVars()
+    public void resetJumpVar()
     {
-        forward = 0;
         jump = false;
-        duck = false;
     }
 
     public void resetPerspectiveVars()
