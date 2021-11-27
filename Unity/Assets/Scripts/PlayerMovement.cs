@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 scaleChange, positionChange;
     private Vector3 cylinderHeight;
     private bool ducked;
+    private int canRun;
 
     public float speed = 8f;
     public float gravity = -19.62f;
@@ -42,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         // initialize ducking variables
         cylinderHeight = cylinder.transform.localScale;
         ducked = false;
+        canRun = 1;
     }
 
     // Update is called once per frame
@@ -62,7 +64,8 @@ public class PlayerMovement : MonoBehaviour
         float z = -(Input.GetAxis("Vertical") + myMQTT.forward);
 
         // move player forward/backward/left/right
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = (transform.right * x + transform.forward * z) * canRun;
+        
         controller.Move(move * speed * Time.deltaTime);
 
         // player jump
@@ -81,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!ducked) {
                 cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);
+                canRun = 0;
             }
             ducked = true;
         }
@@ -88,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
         {
             cylinder.transform.localScale = cylinderHeight;
             ducked = false;
+            canRun = 1;
         }
 
     }
@@ -99,5 +104,6 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Hit something");
             GameManager.Instance.UpdateGameState(GameState.Victory);
         }
+        canRun = 1;
     }
 }
