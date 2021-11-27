@@ -38,7 +38,11 @@ class Publisher(mqtt.Client):
             self.publish(topic, "d", qos=1)
         elif player_pos == Position.OUT_OF_FRAME:
             self.publish(topic, "o", qos=1)
-        elif player_pos == Position.STATIONARY:
+        # transition from duck/or out-of-frame to stationary
+        elif (
+            player_pos == Position.DUCK_STATIONARY
+            or player_pos == Position.OUT_FRAME_STATIONARY
+        ):
             self.publish(topic, "s", qos=1)
 
     # connect/disconnect functions
