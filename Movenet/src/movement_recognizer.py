@@ -28,6 +28,11 @@ Future plans:
 
 
 class MovementRecognizer:
+    KEYPOINT_CONF_THRES = 0.3
+    JUMP_RATE_THRES = 0.2
+    DUCK_RATE_THRES = 0.2
+    STATIONARY_THRES = 0.015
+
     def __init__(self, max_keypoints: int = 150) -> None:
         """
         Props:
@@ -67,22 +72,11 @@ class MovementRecognizer:
             Used to determine if player has returned to stationary position
         """
         if len(self.keypoints_data) > 15:
+            # ignore last 5 samples (begin jumping/ducking samples)
             samples = self.keypoints_data[-15:-5]
         else:
             samples = self.keypoints_data
         self.prev_coords = Keypoints(np.mean([s.keypoints() for s in samples], axis=0))
-
-    def _stationary_recognized(self, threshold=0.015):
-        """Determine if player has returned to stationary after jump/duck
-          Current Condition:
-            Shoulder keypoints are within $threshold of keypoints before jump/duck
-            (averaged over 10 samples in _set_prev_coords function)
-        """
-        ls_prev = self.prev_coords.get_y(BP.LEFT_SHOULDER)
-        rs_prev = self.prev_coords.get_y(BP.RIGHT_SHOULDER)
-        ls_curr = self.keypoints_data[-1].get_y(BP.LEFT_SHOULDER)
-        rs_curr = self.keypoints_data[-1].get_y(BP.RIGHT_SHOULDER)
-        return abs(ls_prev - ls_curr) < threshold and abs(rs_prev - rs_curr) < threshold
 
     def _recognize(self) -> Pos:
         """ Recognize player position
@@ -156,9 +150,11 @@ class MovementRecognizer:
         fifth_last_sample = self.keypoints_data[-5]
         y1, _, c1 = last_sample.get(BP.LEFT_SHOULDER)
         y2, _, c2 = fifth_last_sample.get(BP.LEFT_SHOULDER)
-        if c1 < 0.3 or c2 < 0.3:
+        y3, _, c3 = last_sample.get(BP.LEFT_SHOULDER)
+        y4, _, c4 = fifth_last_sample.get(BP.LEFT_SHOULDER)
+        if any(conf < self.KEYPOINT_CONF_THRES for conf in [c1, c2, c3, c4]):
             return False
-        return y2 - y1 >= 0.3
+        return y2 - y1 >= self.JUMP_RATE_THRES and y4 - y3 >= self.JUMP_RATE_THRES
 
     def _duck_recognized(self) -> bool:
         """ Determine if player is ducking
@@ -172,11 +168,30 @@ class MovementRecognizer:
             return False
         last_sample = self.keypoints_data[-1]
         tenth_last_sample = self.keypoints_data[-10]
+        # left shoulder
         y1, _, c1 = last_sample.get(BP.LEFT_SHOULDER)
         y2, _, c2 = tenth_last_sample.get(BP.LEFT_SHOULDER)
-        if c1 < 0.3 or c2 < 0.3:
+        # right shoulder
+        y3, _, c3 = last_sample.get(BP.RIGHT_SHOULDER)
+        y4, _, c4 = tenth_last_sample.get(BP.RIGHT_SHOULDER)
+        if any(conf < self.KEYPOINT_CONF_THRES for conf in [c1, c2, c3, c4]):
             return False
-        return y1 - y2 >= 0.2
+        return y1 - y2 >= self.DUCK_RATE_THRES and y3 - y4 >= self.DUCK_RATE_THRES
+
+    def _stationary_recognized(self):
+        """Determine if player has returned to stationary after jump/duck
+          Current Condition:
+            Shoulder keypoints are within $threshold of keypoints before jump/duck
+            (averaged over 10 samples in _set_prev_coords function)
+        """
+        ls_prev = self.prev_coords.get_y(BP.LEFT_SHOULDER)
+        rs_prev = self.prev_coords.get_y(BP.RIGHT_SHOULDER)
+        ls_curr = self.keypoints_data[-1].get_y(BP.LEFT_SHOULDER)
+        rs_curr = self.keypoints_data[-1].get_y(BP.RIGHT_SHOULDER)
+        return (
+            abs(ls_prev - ls_curr) < self.STATIONARY_THRES
+            and abs(rs_prev - rs_curr) < self.STATIONARY_THRES
+        )
 
     def _player_out_of_frame(self) -> bool:
         """ Determine if player is out of frame
@@ -185,7 +200,7 @@ class MovementRecognizer:
         Returns:
           True if player is out-of-frame; False o.w.
         """
-        if len(self.keypoints_data) < 10:
+        if len(self.keypoints_data) < 5:
             return False
         last_5_samples = self.keypoints_data[-5:]
         for sample in last_5_samples:
