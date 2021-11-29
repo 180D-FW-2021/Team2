@@ -82,7 +82,7 @@ Collect data for tuning position tracking model.
 
 ### MoveNet Examples
 
-- Lightening example: https://github.com/nicknochnack/MoveNetLightning
+- Lightning example: https://github.com/nicknochnack/MoveNetLightning
 - Tensorflow-js: https://github.com/tensorflow/tfjs-models/tree/master/pose-detection
 - Python MoveNet TFLite example: https://github.com/tensorflow/examples/blob/master/lite/examples/pose_estimation/raspberry_pi/ml/movenet.py
 - Browser demo: https://storage.googleapis.com/tfjs-models/demos/pose-detection/index.html?model=movenet
