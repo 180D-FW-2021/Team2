@@ -23,6 +23,11 @@ public class MainMenusScripts : MonoBehaviour
         GameManagerScript.UpdateGameState(GameState.MainMenu);
     }
 
+    // Set the GameState to HelpMenu and Load Help Screen/Instructions
+    public void To_HelpMenu() {
+        GameManagerScript.UpdateGameState(GameState.HelpMenu);
+    }
+
     // Set the GameState to SelectLevel and Load Level Selector Menu
     public void To_LevelSelector() {
         GameManagerScript.UpdateGameState(GameState.SelectLevel);

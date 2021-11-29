@@ -89,6 +89,9 @@ public class GameManager : MonoBehaviour
             case GameState.MainMenu:
                 SceneManager.LoadScene("MainMenu");
                 break;
+            case GameState.HelpMenu:
+                SceneManager.LoadScene("HelpMenu");
+                break;
             case GameState.SelectLevel:
                 SceneManager.LoadScene("LevelSelector");
                 break;
@@ -133,6 +136,7 @@ public enum GameState {
     StartScreen,
     MainMenu,
     SelectLevel,
+    HelpMenu,
     ConfirmLevelSelection,
     LoadSelectedLevel,
     Playing,
