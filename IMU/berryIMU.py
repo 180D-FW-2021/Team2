@@ -195,6 +195,19 @@ if(IMU.BerryIMUversion == 99):
 IMU.initIMU()       #Initialise the accelerometer, gyroscope and compass
 
 fields = ["accX", "accY", "gyroX", "gyroY", "gyroZ"]
+def on_connect(client, userdata, flags, rc):
+    print("Connection returned result: "+str(rc))
+        
+def on_disconnect(client, userdata, rc):
+    if rc != 0:
+        print("Unexpected Disconnect")
+    else:
+        print("Expected Disconnect")
+def on_message(client, userdata, message):
+    print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_disconnect = on_disconnect
 with open('data.csv', 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fields)
     writer.writeheader()
@@ -424,19 +437,19 @@ with open('data.csv', 'w') as csvfile:
     #  elif (gyroZangle)<(-100) and gyroXangle>-50 and gyroXangle<100:
     #     print('moving forward')
 
-        def on_connect(client, userdata, flags, rc):
-            print("Connection returned result: "+str(rc))
+    #    def on_connect(client, userdata, flags, rc):
+     #       print("Connection returned result: "+str(rc))
         
-        def on_disconnect(client, userdata, rc):
-            if rc != 0:
-                print("Unexpected Disconnect")
-            else:
-                print("Expected Disconnect")
-        def on_message(client, userdata, message):
-            print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
-        client = mqtt.Client()
-        client.on_connect = on_connect
-        client.on_disconnect = on_disconnect
+    #    def on_disconnect(client, userdata, rc):
+     #       if rc != 0:
+      #          print("Unexpected Disconnect")
+       #     else:
+       #         print("Expected Disconnect")
+       # def on_message(client, userdata, message):
+       #     print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
+       # client = mqtt.Client()
+       # client.on_connect = on_connect
+       # client.on_disconnect = on_disconnect
         client.on_message = on_message
         
         client.connect_async("mqtt.eclipseprojects.io")
@@ -444,7 +457,7 @@ with open('data.csv', 'w') as csvfile:
         client.loop_start()
         
         for i in range(10):
-            client.publish("topic/movement", output, qos=1)
+             client.publish("topic/movement", output, qos=1)
         
         client.loop_stop()
         client.disconnect()
