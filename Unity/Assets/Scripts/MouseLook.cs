@@ -12,12 +12,15 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        // rotate player left with "z" and right with "x"
-        float yRot1 = Input.GetKey("z") ? -YSensitivity : (Input.GetKey("x") ? YSensitivity : 0);
+        Debug.Log(GameManager.Instance.State);
+        if (GameManager.Instance.State != GameState.Paused) {
+            // rotate player left with "z" and right with "x"
+            float yRot1 = Input.GetKey("z") ? -YSensitivity : (Input.GetKey("x") ? YSensitivity : 0);
 
-        yRot1 += myMQTT.left ? -(YSensitivity * 0.3f) : (myMQTT.right ? (YSensitivity * 0.3f) : 0);
+            yRot1 += myMQTT.left ? -(YSensitivity * 0.3f) : (myMQTT.right ? (YSensitivity * 0.3f) : 0);
 
-        playerBody.Rotate(Vector3.up * yRot1);
+            playerBody.Rotate(Vector3.up * yRot1);
+        }
     }
 
 }
