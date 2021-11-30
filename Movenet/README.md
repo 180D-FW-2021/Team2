@@ -69,9 +69,19 @@ One-euro filter class.
 
 Enums for player position and mapping from body part to keypoint index.
 
-9. collect_data.py
+## Test
+
+1. collect_data.py
 
 Collect data for tuning position tracking model.
+
+2. integration_test.py
+
+```
+pip install scikit-video
+```
+
+Test accuracy of movenet/movement_recognizer using pre-recorded videos in data/test_video_data.
 
 ## Resources
 
@@ -91,3 +101,9 @@ Collect data for tuning position tracking model.
 
 - Filter: https://github.com/jaantollander/OneEuroFilter/blob/master/python/one_euro_filter.py
 - Applying filter to keypoints: https://github.com/tensorflow/tfjs-models/blob/e7f6e120aa05c24bdbf9663358e44f082f76f345/shared/filters/keypoints_one_euro_filter.ts#L31
+
+### Debug cv2 video capture
+
+- https://stackoverflow.com/questions/42210880/python-cv2-videocapture-does-not-work-cap-isopened-returns-false
+- https://stackoverflow.com/questions/47112642/permanent-fix-for-opencv-videocapture
+- https://stackoverflow.com/questions/43176029/videocapture-always-returns-false-in-python-opencv-linux

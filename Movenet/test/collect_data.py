@@ -1,10 +1,11 @@
-import tensorflow as tf
-import numpy as np
 import cv2
 import argparse
-from movenet import Movenet
 import csv
 import time
+import sys
+
+sys.path.append("../src")
+from movenet import Movenet
 
 """ 
 Collect keypoint-estimation data from webcam livestream
