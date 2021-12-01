@@ -207,7 +207,8 @@ def on_message(client, userdata, message):
     print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
 client = mqtt.Client()
 client.on_connect = on_connect
-client.on_disconnect = on_disconnect
+#client.on_disconnect = on_disconnect
+i = 0 
 with open('data.csv', 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fields)
     writer.writeheader()
@@ -216,6 +217,8 @@ with open('data.csv', 'w') as csvfile:
         
         #Read the accelerometer,gyroscope and magnetometer values
         ACCx = IMU.readACCx()
+        x = IMU.readACCx()
+        y = IMU.readACCy()
         ACCy = IMU.readACCy()
         ACCz = IMU.readACCz()
         GYRx = IMU.readGYRx()
@@ -420,50 +423,67 @@ with open('data.csv', 'w') as csvfile:
     #   print(outputString)
         writer.writerow({"accX": AccXangle, "accY": AccYangle, "gyroX": gyroXangle, "gyroY": gyroYangle, "gyroZ": gyroZangle})
 
-        if abs(gyroZangle)>50: # and ((gyroXangle<-50) or (gyroXangle>90)):
-            output = "f"
-            print('run')
-        elif (gyroXangle)<(-50):
-            output = "l"
-            print("left")
-# if (gyroXangle)>100 and abs(gyroZangle)>50:
-#    print('moving in right direction')
-        elif (gyroXangle)>80:
-            output = "r"
-            print('right')
+       # if abs(gyroZangle)>50: # and ((gyroXangle<-50) or (gyroXangle>90)):
+        #    output = "f"
+           # print('run')
+       # elif (gyroXangle)<(-50):
+        #    output = "l"
+           # print("left")
+       # elif (gyroXangle)>80:
+        #    output = "r"
+           # print('right')
+    #    if i == 0:
+   
+       # print(AccYangle)
+        '''
+        if (kalmanY) < 0: # or (CFangleX)< 0: 
+            print('f')
+            output = 'f'
+        else: 
+            print('n')
+            output = 'n'
+        '''
+        if tiltCompensatedHeading > 299 and AccYangle>-140:
+            print('f')
+            output = 'f' 
+        #else: 
+         #   print('n')
+          #  output = 'n'
+        #elif kalmanX>140:
+        elif (AccYangle)<3 and AccYangle>-140:
+            print('l') 
+            output = 'l'
+        #elif kalmanX<0 and kalmanX>-100:
+        elif (AccYangle)<-140:
+            print('r')
+            output = 'r'
         else:
-            output = "n"
-            print("faceforward")
-    #  elif (gyroZangle)<(-100) and gyroXangle>-50 and gyroXangle<100:
-    #     print('moving forward')
-
-    #    def on_connect(client, userdata, flags, rc):
-     #       print("Connection returned result: "+str(rc))
+            print('n')
+            output = 'n' 
+       # print (ACCy)
+       # if x > 
+       # else:
+       #     output = "n"
+           # print("faceforward")
+       # print(output)
         
-    #    def on_disconnect(client, userdata, rc):
-     #       if rc != 0:
-      #          print("Unexpected Disconnect")
-       #     else:
-       #         print("Expected Disconnect")
-       # def on_message(client, userdata, message):
-       #     print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
-       # client = mqtt.Client()
-       # client.on_connect = on_connect
-       # client.on_disconnect = on_disconnect
+        
         client.on_message = on_message
         
         client.connect_async("mqtt.eclipseprojects.io")
         
         client.loop_start()
         
-        for i in range(10):
+        for i in range(5):
              client.publish("topic/movement", output, qos=1)
         
         client.loop_stop()
-        client.disconnect()
+        #client.disconnect()
         
 #slow program down a bit, makes the output more readable
         time.sleep(0.03)
+        i += 1 
 
-
-
+client.on_disconnect = on_disconnect
+#client.loop_stop()
+client.disconnect()
