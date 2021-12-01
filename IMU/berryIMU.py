@@ -458,21 +458,21 @@ with open('data.csv', 'w') as csvfile:
             output = 'n'
         '''
         if tiltCompensatedHeading > 299 and AccYangle>-140:
-            print('f')
+            #print('f')
             output = 'f' 
         #else: 
          #   print('n')
           #  output = 'n'
         #elif kalmanX>140:
         elif (AccYangle)<3 and AccYangle>-140:
-            print('l') 
+           # print('l') 
             output = 'l'
         #elif kalmanX<0 and kalmanX>-100:
         elif (AccYangle)<-140:
-            print('r')
+           # print('r')
             output = 'r'
         else:
-            print('n')
+           # print('n')
             output = 'n' 
        # print (ACCy)
        # if x > 
@@ -491,6 +491,7 @@ with open('data.csv', 'w') as csvfile:
         if lastmove != output:
             #for i in range(10):
             client.publish("topic/movement", output, qos=1)
+            print(output)
             lastmove = output 
         
         #client.loop_stop()
