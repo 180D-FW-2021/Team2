@@ -26,6 +26,7 @@ import os
 import csv
 import paho.mqtt.client as mqtt
 import numpy as np
+import signal 
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -205,8 +206,19 @@ def on_disconnect(client, userdata, rc):
         print("Expected Disconnect")
 def on_message(client, userdata, message):
     print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
+def signal_handler(sig, frame):
+    print('You pressed Ctrl+C!')
+    client.loop_stop()
+    client.disconnect()
+    sys.exit(0)
+
 client = mqtt.Client()
 client.on_connect = on_connect
+client.on_disconnect = on_disconnect 
+client.on_message = on_message 
+client.connect_async("mqtt.eclipseprojects.io")
+client.loop_start()
+signal.signal(signal.SIGINT, signal_handler)
 #client.on_disconnect = on_disconnect
 i = 0 
 with open('data.csv', 'w') as csvfile:
@@ -467,23 +479,24 @@ with open('data.csv', 'w') as csvfile:
            # print("faceforward")
        # print(output)
         
-        
+        '''
         client.on_message = on_message
         
         client.connect_async("mqtt.eclipseprojects.io")
         
         client.loop_start()
-        
-        for i in range(5):
+        '''
+        for i in range(10):
              client.publish("topic/movement", output, qos=1)
         
-        client.loop_stop()
+        #client.loop_stop()
         #client.disconnect()
         
 #slow program down a bit, makes the output more readable
         time.sleep(0.03)
         i += 1 
 
-client.on_disconnect = on_disconnect
-#client.loop_stop()
+#client.on_disconnect = on_disconnect
+client.loop_stop()
 client.disconnect()
+
