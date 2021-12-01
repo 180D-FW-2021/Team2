@@ -16,7 +16,7 @@ Test movenet and movenet_recognizer code together
 
 movenet_obj = Movenet("lightning")
 recog_obj = MovementRecognizer()
-filt_obj = KeypointsFilter()
+
 
 def get_time_sec(frame_num: int) -> float:
     """Convert frame number to time in video (seconds)
@@ -26,6 +26,7 @@ def get_time_sec(frame_num: int) -> float:
     # determined through data collection
     sec_per_frame = 0.044992862
     return sec_per_frame * frame_num
+
 
 def get_predictions(file_name: str) -> List[str]:
     """ output jump/duck predictions from video
@@ -45,13 +46,13 @@ def get_predictions(file_name: str) -> List[str]:
         # only consider jump/duck for testing
         if player_pos == Pos.JUMP_START or player_pos == Pos.DUCK_START:
             pos_lst.append(player_pos.name)
-        
+
     return pos_lst
+
 
 if __name__ == "__main__":
     total_passed = 0
     for test_file in expected_results.keys():
-        relative_file = f"data/"
         actual_result = get_predictions(test_file)
         if actual_result != expected_results[test_file]:
             print(f"{test_file} FAILED")
@@ -64,6 +65,3 @@ if __name__ == "__main__":
             total_passed += 1
     accuracy = float(total_passed) / len(expected_results)
     print(f"TOTAL ACCURACY: {accuracy}")
-        
-
-    

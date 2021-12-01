@@ -93,7 +93,7 @@ if __name__ == "__main__":
                     y_label = f"{kp_label}_y"
                     # measure real-time latency per frame (s)
                     time_elapsed = time.time() - start_rt
-                    '''
+                    """
                     uncomment to write (x, conf) data
                     x_label = f"{kp_label}_x"
                     conf_label = f"{kp_label}_cfd"
@@ -105,7 +105,7 @@ if __name__ == "__main__":
                             "real_time": time_elapsed,
                         }
                     )
-                    '''
+                    """
                     write_dict.update({y_label: ky, "real_time": time_elapsed})
 
             if write_dict != {}:
