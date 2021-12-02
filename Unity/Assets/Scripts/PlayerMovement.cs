@@ -59,10 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isGrounded)
         {
-            float angle = cylinder.transform.rotation.eulerAngles.y;
-            Debug.Log(angle);
-
-            Vector3 jumpMove = (transform.forward * -.8f);
+            Vector3 jumpMove = (transform.forward * -.4f);
             controller.Move(jumpMove * speed * Time.deltaTime * canRun);
             blockRunInput = 0;
         }
