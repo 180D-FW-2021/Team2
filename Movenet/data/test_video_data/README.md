@@ -6,6 +6,22 @@ Recorded videos for testing movenet and movement_recognizer code.
 
 Test files uploaded to privately-shared team google drive folder.
 
+1. jump[num].mov
+
+Single jump test cases (10 files)
+
+2. duck[num].mov
+
+Single duck test cases (10 files)
+
+3. jump_duck[num].mov
+
+Mixed duck/jump combinations (10 files)
+
+4. walk_backward.mov, walk_forward.mov, lift_shoulders.mov, ...
+
+Test false positives (i.e. walk forwards/backwards) (10 files)
+
 ### Single Jump Test Files
 
 #### 1-2 ft from camera
@@ -134,3 +150,5 @@ Test files uploaded to privately-shared team google drive folder.
 2. walk_forward.mov
 3. raise_shoulders.mov
 4. player_drift.mov
+5. move_jump.mov
+6. move_duck.mov

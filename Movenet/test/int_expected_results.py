@@ -1,8 +1,11 @@
 """expected results for integration test"""
+expected_results = {
+    "forward_backward.mov": [],
+}
 
 # items: (file_name (str), predicted_positions (List[Position.name]))
-expected_results = {
-    # SINGLE JUMP: 0.8 accuracy
+expected_results2 = {
+    # SINGLE JUMP:
     ## 1-2 ft from camera with shoulders in frame
     "jump1.mov": ["JUMP_START"],
     "jump2.mov": ["JUMP_START"],
@@ -37,11 +40,22 @@ expected_results = {
     "jump_duck6.mov": ["DUCK_START", "DUCK_START", "DUCK_START"],
     "jump_duck7.mov": ["JUMP_START", "DUCK_START", "DUCK_START"],
     "jump_duck8.mov": ["DUCK_START", "DUCK_START", "JUMP_START"],
+    "jump_duck9.mov": ["JUMP_START", "JUMP_START", "JUMP_START"],
+    "jump_duck10.mov": ["DUCK_START", "DUCK_START", "DUCK_START"],
     # Movements to test false positives
     "walk_forward1.mov": [],
     "walk_forward2.mov": [],
     "walk_backward1.mov": [],
     "walk_backward2.mov": [],
     "lift_shoulders.mov": [],
+    # slow drift in different directions
     "player_drift.mov": [],
+    ## slow forwards/backwards
+    "forward_backward.mov": [],
+    ## fast forwards/backwards
+    "forward_backward2.mov": [],
+    # move and then jump
+    "move_jump.mov": ["JUMP_START"],
+    # move and then duck
+    "move_duck.mov": ["DUCK_START"],
 }

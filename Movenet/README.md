@@ -77,11 +77,11 @@ Collect data for tuning position tracking model.
 
 2. integration_test.py
 
-```
-pip install scikit-video
-```
-
 Test accuracy of movenet/movement_recognizer using pre-recorded videos in data/test_video_data.
+
+Note that the reported accuracy differs by FPS, which differs depending on your computer's real-time latency. I tried using a set FPS with opencv, but this is unreliable. As a result, some test cases towards the end will fail that typically would pass if ran individually or with the original position_tracking code.
+
+Current accuracy over 40 samples if 0.675 on my computer without accounting for FPS difference for the last test cases. Accuracy is 0.75 accounting for this difference.
 
 ## Resources
 

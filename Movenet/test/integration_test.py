@@ -1,8 +1,6 @@
 from typing import List
 import sys
 import cv2
-import time
-import numpy as np
 from int_expected_results import expected_results
 
 sys.path.append("../src")
@@ -18,15 +16,6 @@ Test movenet and movenet_recognizer code together
 movenet_obj = Movenet("lightning")
 recog_obj = MovementRecognizer()
 
-def get_time_sec(frame_num: int) -> float:
-    """Convert frame number to time in video (seconds)
-       Future use to make testing more robust by checking
-       jump/duck time
-    """
-    # determined through data collection
-    sec_per_frame = 0.044992862
-    return sec_per_frame * frame_num
-
 
 def get_predictions(file_name: str) -> List[str]:
     """ output jump/duck predictions from video
@@ -36,7 +25,7 @@ def get_predictions(file_name: str) -> List[str]:
     file_name = f"../data/test_video_data/{file_name}"
     cap = cv2.VideoCapture(file_name)
     while cap.isOpened():
-        ret, frame=cap.read()
+        ret, frame = cap.read()
         if not ret:
             break
 
@@ -49,7 +38,7 @@ def get_predictions(file_name: str) -> List[str]:
         # only consider jump/duck for testing
         if player_pos == Pos.JUMP_START or player_pos == Pos.DUCK_START:
             pos_lst.append(player_pos.name)
-        
+
     cap.release()
     return pos_lst
 
