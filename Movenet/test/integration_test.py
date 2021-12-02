@@ -1,12 +1,13 @@
 from typing import List
 import sys
-import skvideo.io
+import cv2
+import time
+import numpy as np
 from int_expected_results import expected_results
 
 sys.path.append("../src")
 from movenet import Movenet
 from movement_recognizer import MovementRecognizer
-from keypoints_filter import KeypointsFilter
 from enums import Position as Pos
 
 """
@@ -16,7 +17,6 @@ Test movenet and movenet_recognizer code together
 
 movenet_obj = Movenet("lightning")
 recog_obj = MovementRecognizer()
-
 
 def get_time_sec(frame_num: int) -> float:
     """Convert frame number to time in video (seconds)
@@ -34,19 +34,23 @@ def get_predictions(file_name: str) -> List[str]:
     pos_lst = []
     # append relative path to video data direc
     file_name = f"../data/test_video_data/{file_name}"
-    videodata = skvideo.io.vread(file_name)
-
-    for frame in videodata:
+    cap = cv2.VideoCapture(file_name)
+    while cap.isOpened():
+        ret, frame=cap.read()
+        if not ret:
+            break
 
         # predict body keypoints
         keypoints_with_scores = movenet_obj.detect(frame)
 
         player_pos = recog_obj.add_and_recognize(keypoints_with_scores)
 
+        # print(player_pos.name)
         # only consider jump/duck for testing
         if player_pos == Pos.JUMP_START or player_pos == Pos.DUCK_START:
             pos_lst.append(player_pos.name)
-
+        
+    cap.release()
     return pos_lst
 
 
