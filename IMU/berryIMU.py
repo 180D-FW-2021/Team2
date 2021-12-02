@@ -221,6 +221,8 @@ client.loop_start()
 signal.signal(signal.SIGINT, signal_handler)
 #client.on_disconnect = on_disconnect
 i = 0 
+lastmove = 'z'
+
 with open('data.csv', 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fields)
     writer.writeheader()
@@ -486,8 +488,10 @@ with open('data.csv', 'w') as csvfile:
         
         client.loop_start()
         '''
-        for i in range(10):
-             client.publish("topic/movement", output, qos=1)
+        if lastmove != output:
+            #for i in range(10):
+            client.publish("topic/movement", output, qos=1)
+            lastmove = output 
         
         #client.loop_stop()
         #client.disconnect()
