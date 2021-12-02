@@ -3,7 +3,7 @@
 __pycache__
 
 # direc with Movenet models (lightning/thunder)
-models/
+# models/
 
 # video test data
 *.mov
