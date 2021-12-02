@@ -2,7 +2,12 @@
 
 A-maze, an interactive indoor game designed to test a user’s memory and dexterity, was designed to entertain children and young adults indoors, while involving some physical movement and stimulating the brain.
 
-## Controls
+## Running the Game
+
+For Windows, a LaunchGame.bat file is provided. The first two variables, ANACONDA_DIR and ENV_NAME may have to be updated for custom Anaconda installation directories and custom Conda environment names (the default is 'yourenvname'). To use this script, launch a command prompt from the base Team2 directory and run:
+>> LaunchGame.bat
+
+## Game Controls
 
 ### Keyboard Controls
 
