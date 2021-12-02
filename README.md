@@ -26,6 +26,7 @@ On Main Menu:
 
 On Level Selection Screen:
 - "Back": back to Main Menu
+- "Zero", "Tutorial": Start Tutorial Level
 - "One": Start Level 1
 
 On 'Are You Ready' Screen:
