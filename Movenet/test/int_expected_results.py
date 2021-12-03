@@ -1,10 +1,7 @@
 """expected results for integration test"""
-expected_results = {
-    "forward_backward.mov": [],
-}
 
 # items: (file_name (str), predicted_positions (List[Position.name]))
-expected_results2 = {
+expected_results = {
     # SINGLE JUMP:
     ## 1-2 ft from camera with shoulders in frame
     "jump1.mov": ["JUMP_START"],

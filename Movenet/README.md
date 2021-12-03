@@ -87,6 +87,19 @@ Note that the reported accuracy differs by FPS, which differs depending on your 
 
 Current accuracy over 40 samples if 0.675 on my computer without accounting for FPS difference for the last test cases. Accuracy is 0.75 accounting for this difference.
 
+3. Real-time Latency: position_tracking.py
+
+You can measure the real-time latency in secs/frame for your machine by running the position_tracking script with the latency flag set:
+
+`python3 position_tracking --latency`
+
+The average real-time latency per frame will be outputted once the program exits.
+
+Current MacOS latencies:
+
+- Without Unity: ~0.0653 secs/frame (15.3 FPS)
+- With Unity: ~0.0715 sec/frame (13.986 FPS)
+
 ## Resources
 
 ### Download MoveNet TFLite
