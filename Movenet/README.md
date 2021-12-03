@@ -5,7 +5,11 @@
 1. Install python dependencies
 
 ```
+# opencv for visualizing movenet keypoint predictions
+pip install opencv-python
+# mqtt to send data to Unity
 pip install paho-mqtt
+# tensorflow for movenet model
 pip install tensorflow
 pip install --upgrade tensorflow-hub
 pip install -q git+https://github.com/tensorflow/docs
@@ -101,9 +105,3 @@ Current accuracy over 40 samples if 0.675 on my computer without accounting for 
 
 - Filter: https://github.com/jaantollander/OneEuroFilter/blob/master/python/one_euro_filter.py
 - Applying filter to keypoints: https://github.com/tensorflow/tfjs-models/blob/e7f6e120aa05c24bdbf9663358e44f082f76f345/shared/filters/keypoints_one_euro_filter.ts#L31
-
-### Debug cv2 video capture
-
-- https://stackoverflow.com/questions/42210880/python-cv2-videocapture-does-not-work-cap-isopened-returns-false
-- https://stackoverflow.com/questions/47112642/permanent-fix-for-opencv-videocapture
-- https://stackoverflow.com/questions/43176029/videocapture-always-returns-false-in-python-opencv-linux
