@@ -449,6 +449,8 @@ with open('data.csv', 'w') as csvfile:
     #    if i == 0:
    
        # print(AccYangle)
+       # print(tiltCompensatedHeading)
+        
         '''
         if (kalmanY) < 0: # or (CFangleX)< 0: 
             print('f')
@@ -457,18 +459,18 @@ with open('data.csv', 'w') as csvfile:
             print('n')
             output = 'n'
         '''
-        if tiltCompensatedHeading > 299 and AccYangle>-140:
+        if tiltCompensatedHeading > 290 and tiltCompensatedHeading < 320 and AccYangle>-140:
             #print('f')
             output = 'f' 
         #else: 
          #   print('n')
           #  output = 'n'
         #elif kalmanX>140:
-        elif (AccYangle)<3 and AccYangle>-140:
+        elif tiltCompensatedHeading> 320 and (AccYangle)<0 and AccYangle>-50:
            # print('l') 
             output = 'l'
         #elif kalmanX<0 and kalmanX>-100:
-        elif (AccYangle)<-140:
+        elif (AccYangle)<-140 and tiltCompensatedHeading > 320:
            # print('r')
             output = 'r'
         else:
