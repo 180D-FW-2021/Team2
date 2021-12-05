@@ -92,7 +92,7 @@ class MovementRecognizer:
             next_pos = Pos.OUT_FRAME_STATIONARY
 
         if self.position == Pos.STATIONARY:
-            # avoid quick state update (< 0.3 seconds)
+            # avoid quick state update (< 0.5 seconds)
             # prevents jump registered after duck
             if time.time() - self.last_pos_update < 0.5:
                 return self.position
@@ -119,9 +119,9 @@ class MovementRecognizer:
         elif self.position == Pos.DUCKING:
             if self._stationary_recognized():
                 next_pos = Pos.DUCK_STATIONARY
-            # duck unlikely to last longer than 5 s
+            # duck unlikely to last longer than 2 s
             # prevent false position never returning to stationary
-            if time.time() - self.last_pos_update >= 5:
+            if time.time() - self.last_pos_update >= 2:
                 next_pos = Pos.DUCK_STATIONARY
 
         if (

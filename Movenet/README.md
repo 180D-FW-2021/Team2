@@ -5,7 +5,11 @@
 1. Install python dependencies
 
 ```
+# opencv for visualizing movenet keypoint predictions
+pip install opencv-python
+# mqtt to send data to Unity
 pip install paho-mqtt
+# tensorflow for movenet model
 pip install tensorflow
 pip install --upgrade tensorflow-hub
 pip install -q git+https://github.com/tensorflow/docs
@@ -69,9 +73,32 @@ One-euro filter class.
 
 Enums for player position and mapping from body part to keypoint index.
 
-9. collect_data.py
+## Test
+
+1. collect_data.py
 
 Collect data for tuning position tracking model.
+
+2. integration_test.py
+
+Test accuracy of movenet/movement_recognizer using pre-recorded videos in data/test_video_data.
+
+Note that the reported accuracy differs by FPS, which differs depending on your computer's real-time latency. I tried using a set FPS with opencv, but this is unreliable. As a result, some test cases towards the end will fail that typically would pass if ran individually or with the original position_tracking code.
+
+Current accuracy over 40 samples if 0.675 on my computer without accounting for FPS difference for the last test cases. Accuracy is 0.75 accounting for this difference.
+
+3. Real-time Latency: position_tracking.py
+
+You can measure the real-time latency in secs/frame for your machine by running the position_tracking script with the latency flag set:
+
+`python3 position_tracking --latency`
+
+The average real-time latency per frame will be outputted once the program exits.
+
+Current MacOS latencies:
+
+- Without Unity: ~0.0653 secs/frame (15.3 FPS)
+- With Unity: ~0.0715 sec/frame (13.986 FPS)
 
 ## Resources
 

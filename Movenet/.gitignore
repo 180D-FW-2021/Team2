@@ -1,6 +1,14 @@
-models/*
-__pycache__
-subscriber.py
+# general
 .DS_store
-movenet2.py
-movenet_example.py
+__pycache__
+
+# direc with Movenet models (lightning/thunder)
+# models/
+
+# video test data
+*.mov
+*.mp4
+*.avi
+
+# personal
+subscriber.py
