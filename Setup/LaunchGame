@@ -14,10 +14,6 @@ POS_TRACKING_DIR=../Movenet/src
 $EXECUTABLE_PATH &
 
 # run movement tracking script
-# https://stackoverflow.com/questions/52779016/conda-command-working-in-command-prompt-but-not-in-bash-script/52813960#52813960
-source /opt/anaconda3/etc/profile.d/conda.sh
-conda activate $ENV_NAME
 # must run file from src direc bc of relative model paths
 cd $POS_TRACKING_DIR
 python3 position_tracking.py
-conda deactivate
