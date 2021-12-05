@@ -6,8 +6,6 @@
 # replace with Unity executable file name
 PROJECT_NAME="MazeProject"
 EXECUTABLE_PATH="../Unity/$PROJECT_NAME.app/Contents/MacOS/$PROJECT_NAME"
-# replace with your conda virtual env name
-ENV_NAME=devenv
 POS_TRACKING_DIR=../Movenet/src
 
 # start game
