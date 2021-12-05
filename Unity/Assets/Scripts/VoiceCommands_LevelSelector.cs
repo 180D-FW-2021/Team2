@@ -16,7 +16,9 @@ public class VoiceCommands_LevelSelector : MonoBehaviour
 
     void Start() {
 		GameManagerScript = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
-        
+
+        keywords.Add("zero", ZeroCallback);
+        keywords.Add("tutorial", ZeroCallback);
     	keywords.Add("one", OneCallback);
     	keywords.Add("back", BackCallback);
 
@@ -30,6 +32,11 @@ public class VoiceCommands_LevelSelector : MonoBehaviour
 
     private void RecognizedSpeech(PhraseRecognizedEventArgs speech) {
     	keywords[speech.text].Invoke();
+    }
+
+    private void ZeroCallback() {
+    	Debug.Log("confirming level 0 ");
+		GameManagerScript.UpdateGameState(GameState.ConfirmLevelSelection, 0);
     }
 
     private void OneCallback() {
