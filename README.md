@@ -12,6 +12,17 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 - Duck: Left Shift
 - Pause Menu: Esc
 
+###IMU Controls 
+- Neutral
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/1.jpg)
+- Forward 
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/2.jpg)
+- Left
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/3.jpg)
+- Right
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/4.jpg)
+
+
 ### Voice Commands
 
 On Start Screen:
@@ -118,16 +129,15 @@ cd IMU
 python berryIMU.py
 ```
 
-## Different orientations 
-### Face forward (stand still) [1], run forward [2], left [3], right [4] 
+## Different orientations  
 
-#### 1
+#### Neutral
 ![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/1.jpg)
-#### 2
+#### Forward
 ![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/2.jpg)
-#### 3 
+#### Left
 ![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/3.jpg)
-#### 4
+#### Right
 ![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/4.jpg)
 
 
