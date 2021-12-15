@@ -101,6 +101,36 @@ $ python3 position_tracking.py
 You can also follow installation instructions in **Movenet/README.md** if this does not work for you.
 
 #### Raspberry Pi
+## SSH into raspberry pi 
+```
+ssh pi@raspberrypi.local
+```
+
+## Install all dependencies on raspberry pi 
+```
+pip install paho-mqtt
+pip install numpy
+```
+
+## Run program 
+```
+cd IMU
+python berryIMU.py
+```
+
+## Different orientations 
+### Face forward (stand still) [1], run forward [2], left [3], right [4] 
+
+#### 1
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/1.jpg)
+#### 2
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/2.jpg)
+#### 3 
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/3.jpg)
+#### 4
+![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/4.jpg)
+
+
 
 ### Run the Game
 
