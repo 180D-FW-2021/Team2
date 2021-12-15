@@ -12,16 +12,23 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 - Duck: Left Shift
 - Pause Menu: Esc
 
-### IMU Controls 
-- Neutral
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/1.jpg)
-- Forward 
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/2.jpg)
-- Left
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/3.jpg)
-- Right
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/4.jpg)
+### IMU Controls
 
+- Neutral
+
+<img src="./images/1.jpg" alt="imu_neutral" width="200"/>
+
+- Forward
+
+<img src="./images/2.jpg" alt="imu_forward" width="200"/>
+
+- Left
+
+<img src="./images/3.jpg" alt="imu_left" width="200"/>
+
+- Right
+
+<img src="./images/4.jpg" alt="imu_right" width="200"/>
 
 ### Voice Commands
 
@@ -66,11 +73,13 @@ On End Screen
 
 Ensure your arms are in frame, even when jumping. Best performance is when you are 1-3 ft from your webcam.
 
-1. Jump
+<img src="./images/movenet_position.png" alt="movenet_position" width="200"/>
+
+- Jump
 
 Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump.
 
-2. Duck
+- Duck
 
 Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks.
 
@@ -80,7 +89,7 @@ Set up your development environment.
 
 ### Installation
 
-First, download our tech stack:
+First, download our tech stack and obtain our hardware:
 
 1. [Unity](https://unity3d.com/get-unity/download)
 2. [Python3](https://www.python.org/downloads/)
@@ -112,35 +121,34 @@ $ python3 position_tracking.py
 You can also follow installation instructions in **Movenet/README.md** if this does not work for you.
 
 #### Raspberry Pi
-## SSH into raspberry pi 
+
+##### SSH into raspberry pi
+
 ```
 ssh pi@raspberrypi.local
 ```
 
-## Install all dependencies on raspberry pi 
+##### Install all dependencies on raspberry pi
+
 ```
 pip install paho-mqtt
 pip install numpy
 ```
 
-## Run program 
+##### Run program
+
 ```
 cd IMU
 python berryIMU.py
 ```
 
-## Different orientations  
+#### Unity
 
-#### Neutral
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/1.jpg)
-#### Forward
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/2.jpg)
-#### Left
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/3.jpg)
-#### Right
-![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/4.jpg)
+1. As stated above, download [Unity Hub](https://unity3d.com/get-unity/download).
 
+2. Within Unity Hub, install Unity Editor version 2018.4.36f1. We recommend you use this version to ensure cross-compatability.
 
+3. Within Unity Hub, open the Unity subdirectory. From here, you should be able to open the project from Unity Hub for development.
 
 ### Run the Game
 
@@ -148,7 +156,7 @@ We have provided scripts to automatically open the game and Movenet position tra
 
 Prior to running the scripts, make sure you have properly installed python3 and have set up your virtual conda environment.
 
-Also, ensure you [build your game executable](https://docs.unity3d.com/Manual/PublishingBuilds.html).
+Also, ensure you [build your game executable](https://docs.unity3d.com/2018.4/Documentation/Manual/PublishingBuilds.html).
 
 #### Windows
 
