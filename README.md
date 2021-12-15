@@ -12,7 +12,7 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 - Duck: Left Shift
 - Pause Menu: Esc
 
-###IMU Controls 
+### IMU Controls 
 - Neutral
 ![alt text](https://github.com/180D-FW-2021/Team2/blob/development/images/1.jpg)
 - Forward 
