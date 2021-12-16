@@ -146,17 +146,23 @@ Also, ensure you [build your game executable](https://docs.unity3d.com/2018.4/Do
 
 For Windows, a **LaunchGame.bat** file is provided. The first two variables, ANACONDA_DIR and ENV_NAME may have to be updated for custom Anaconda installation directories and custom Conda environment names (the default is 'yourenvname'). To use this script, launch a command prompt from the Setup_Scripts directory and run:
 
-`$ LaunchGame.bat`
+```
+$ LaunchGame.bat
+```
 
 #### MacOS
 
 1. Initialize your conda environment.
 
-`$ conda activate $your_env_name`
+```
+$ conda activate $your_env_name
+```
 
 2. Edit Unity executable name in **LaunchGame** script.
 
-`PROJECT_NAME="MazeProject"`
+```
+PROJECT_NAME="MazeProject"
+```
 
 3. Run the script.
 
@@ -167,4 +173,6 @@ $ ./LaunchGame
 
 4. Deactivate your environment.
 
-`$ conda deactivate`
+```
+$ conda deactivate
+```
