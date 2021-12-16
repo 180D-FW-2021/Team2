@@ -14,21 +14,13 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 
 ### IMU Controls
 
-- Neutral
+| Neutral | Forward |
+|:---:|:---:|
+|<img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/> |
 
-<img src="./images/1.jpg" alt="imu_neutral" width="200"/>
-
-- Forward
-
-<img src="./images/2.jpg" alt="imu_forward" width="200"/>
-
-- Left
-
-<img src="./images/3.jpg" alt="imu_left" width="200"/>
-
-- Right
-
-<img src="./images/4.jpg" alt="imu_right" width="200"/>
+| Left | Right |
+|:---:|:---:|
+| <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> |
 
 ### Voice Commands
 
