@@ -63,13 +63,9 @@ Ensure your arms are in frame, even when jumping. Best performance is when you a
 
 <img src="./images/movenet_position.png" alt="movenet_position" width="200"/>
 
-- Jump
-
-Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump.
-
-- Duck
-
-Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks.
+| Jump | Duck |
+|:---:|:---:|
+| Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump.| Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks. |
 
 ## Development
 
