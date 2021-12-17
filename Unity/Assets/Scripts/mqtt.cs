@@ -90,6 +90,9 @@ public class mqtt : MonoBehaviour
             {
                 forward = 0.5f;
                 resetPerspectiveVars();
+
+                // Statement used for testing latency, echoes back received message
+                //client.Publish("topic/red", e.Message);
             }
             if (str == "l")
             {
