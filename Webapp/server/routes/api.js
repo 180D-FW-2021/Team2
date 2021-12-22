@@ -81,11 +81,21 @@ router.get("/history", async (req, res) => {
   }
   let user_history = user_data.history;
   // sort by inverse chronological order (latest games first)
+  // this is not working
   user_history.sort((a, b) => {
-    return b.date < a.date;
+    // neg: a < b; pos o.w.
+    if (a.date > b.date) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  // add id field
+  user_history.map((elem, index) => {
+    elem.id = index;
   });
   res.status(200);
-  res.json(user_data.history);
+  res.json(user_history);
 });
 
 router.post("/insert", async (req, res) => {

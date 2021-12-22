@@ -18,12 +18,8 @@ export async function getLeaderboard(params) {
 
 export async function getHistory(username) {
   return [
-    { level: "level0", date: 213435436, score: 23413525 },
-    { level: "level1", date: 213435436, score: 23413525 },
-    { level: "level1", date: 1640049643531, score: 1234 },
-    { level: "level1", date: 1640049661267, score: 1234 },
-    { level: "level1", date: 1640049713164, score: 1234 },
-    { level: "level1", date: 1640049739574, score: 1234 },
-    { level: "level1", date: 1640049758826, score: 1234 },
+    { level: "level0", date: 318274813745827, score: 2341857384, id: 0 },
+    { level: "level0", date: 213435436, score: 23413525, id: 1 },
+    { level: "level1", date: 21, score: 2341323145, id: 2 },
   ];
 }
