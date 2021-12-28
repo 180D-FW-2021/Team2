@@ -116,6 +116,6 @@ $ brew services stop mongodb-community@5.0
 
 ## References
 
-1. https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
-
-2. https://railsautoscale.com/heroku-free-dynos/
+1. [Install Mongodb (MacOS)](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
+2. [Heroku free dynos](https://railsautoscale.com/heroku-free-dynos/)
+3. [Deployment (Heroku/MongoDB Atlas)](https://www.youtube.com/watch?v=2AIL1c-cJM0)

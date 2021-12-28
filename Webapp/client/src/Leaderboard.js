@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getLeaderboard } from "./backend/FakeBackend";
-// import { getLeaderboard } from "./backend/RealBackend";
+// import { getLeaderboard } from "./backend/FakeBackend";
+import { getLeaderboard } from "./backend/RealBackend";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import "bootstrap/dist/css/bootstrap.css";
