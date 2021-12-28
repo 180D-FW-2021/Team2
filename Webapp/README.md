@@ -1,9 +1,15 @@
+## References
+
 1. https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
 
 ```
 brew services start mongodb-community@5.0
 brew services stop mongodb-community@5.0
 ```
+
+2. https://www.youtube.com/watch?v=Z_D4w6HmT8k&t=137s
+
+3. https://railsautoscale.com/heroku-free-dynos/
 
 ```
 [
@@ -39,3 +45,5 @@ brew services stop mongodb-community@5.0
     },
 ]
 ```
+
+`heroku git:remote -a amaze-webapp`

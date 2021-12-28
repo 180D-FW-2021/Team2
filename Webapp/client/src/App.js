@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Leaderboard from "./Leaderboard";
 import History from "./History";
+import "./App.css";
 
 function App() {
   return (

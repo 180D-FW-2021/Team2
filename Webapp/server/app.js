@@ -13,9 +13,14 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api", apiRouter);
+
+app.use("/", express.static(path.join(__dirname, "./public")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public", "index.html"));
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -33,12 +38,15 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-client.connect("mongodb://localhost:27017/", (err) => {
-  if (err) {
-    console.log(err.message);
-  } else {
-    console.log("successful connection!");
+client.connect(
+  process.env.MONGODB_URI || "mongodb://localhost:27017/",
+  (err) => {
+    if (err) {
+      console.log(err.message);
+    } else {
+      console.log("successful connection!");
+    }
   }
-});
+);
 
 module.exports = app;
