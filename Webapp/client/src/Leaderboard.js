@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-// import { getLeaderboard } from "./backend/FakeBackend";
-import { getLeaderboard } from "./backend/RealBackend";
+import { getLeaderboard } from "./utils/FakeBackend";
+// import { getLeaderboard } from "./utils/RealBackend";
+import ToolkitProvider, {
+  Search,
+} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
 
+const { SearchBar } = Search;
 const columns = [
   {
     dataField: "username",
@@ -15,10 +20,20 @@ const columns = [
       return <a href={hyperlink}>{cellContent}</a>;
     },
   },
-  { dataField: "total_score", text: "Total Score" },
-  { dataField: "level0", text: "Level 0" },
-  { dataField: "level1", text: "Level 1" },
+  { dataField: "level1", text: "Level 1", sort: true, searchable: false },
+  { dataField: "level2", text: "Level 2", sort: true, searchable: false },
+  { dataField: "level3", text: "Level 3", sort: true, searchable: false },
+  { dataField: "level4", text: "Level 4", sort: true, searchable: false },
 ];
+
+/*
+const defaultSorted = [
+  {
+    dataField: "level1",
+    order: "asc",
+  },
+];
+*/
 
 function Leaderboard() {
   const [data, setData] = useState([]);
@@ -26,16 +41,27 @@ function Leaderboard() {
     getLeaderboard().then((data) => setData(data));
   }, []);
   return (
+    // bug: pagination/styling is not showing
     <div>
       <h1>A-Maze Leaderboard</h1>
-      <BootstrapTable
+      <ToolkitProvider
         keyField="username"
         data={data}
         columns={columns}
         pagination={paginationFactory()}
+        defaultSortDirection="asc"
         hover
         condensed
-      />
+        search
+      >
+        {(props) => (
+          <div>
+            <SearchBar {...props.searchProps} />
+            <hr />
+            <BootstrapTable {...props.baseProps} />
+          </div>
+        )}
+      </ToolkitProvider>
     </div>
   );
 }

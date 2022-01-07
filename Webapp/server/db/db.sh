@@ -6,7 +6,7 @@ db.Leaderboard.insertMany([
         "username": "user1",
         "history": [
             {
-                "level": "level0",
+                "level": "level2",
                 "date": 213435436,
                 "score": 23413525,
             },
@@ -21,7 +21,7 @@ db.Leaderboard.insertMany([
         "username": "user2",
         "history": [
             {
-                "level": "level0",
+                "level": "level2",
                 "date": 213435436,
                 "score": 23413525,
             },

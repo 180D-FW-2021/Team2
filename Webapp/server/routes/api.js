@@ -24,45 +24,40 @@ router.get("/leaderboard", async (req, res) => {
       },
     },
     {
-      $project: {
+      $group: {
         _id: "$_id.username",
-        level: "$_id.level",
-        score: 1,
+        array: {
+          $push: {
+            k: "$_id.level",
+            v: "$score",
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        username: "$_id",
+        level_scores: { $arrayToObject: "$array" },
+      },
+    },
+    {
+      $project: {
+        username: 1,
+        level1: "$level_scores.level1",
+        level2: "$level_scores.level2",
+        level3: "$level_scores.level3",
+        level4: "$level_scores.level4",
       },
     },
   ];
   const agg_cursor = coll.aggregate(pipeline);
   // accumulate total score
-  let leaderboard_data = {};
+  let leaderboard_data = [];
   for await (const doc of agg_cursor) {
-    let username = doc._id;
-    if (!leaderboard_data.hasOwnProperty(username)) {
-      leaderboard_data[username] = {};
-    }
-    if (!leaderboard_data[username].hasOwnProperty("total_score")) {
-      leaderboard_data[username].total_score = 0;
-    }
-    if (doc.hasOwnProperty("level") && doc.hasOwnProperty("score")) {
-      // update total score
-      // for now just accumulate total score
-      let new_score = leaderboard_data[username].total_score;
-      new_score += doc.score;
-      leaderboard_data[username].total_score = new_score;
-      // update highest level score
-      leaderboard_data[username][doc.level] = doc.score;
-    }
+    leaderboard_data.push(doc);
   }
-  // rearrange into return data format
-  let return_data = [];
-  for (let key in leaderboard_data) {
-    let val = leaderboard_data[key];
-    val.username = key;
-    return_data.push(val);
-  }
-  return_data.sort((a, b) => {
-    return b.total_score > a.total_score;
-  });
-  res.json(return_data);
+  res.json(leaderboard_data);
 });
 
 router.get("/history", async (req, res) => {
@@ -81,7 +76,6 @@ router.get("/history", async (req, res) => {
   }
   let user_history = user_data.history;
   // sort by inverse chronological order (latest games first)
-  // this is not working
   user_history.sort((a, b) => {
     // neg: a < b; pos o.w.
     if (a.date > b.date) {

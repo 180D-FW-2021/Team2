@@ -35,13 +35,10 @@ Return data format:
 
 ```
 [
-  { level: "level0", date: 1640671029064, score: 2341857384, id: 0 },
-  { level: "level0", date: 1640671029065, score: 23413525, id: 1 },
-  { level: "level1", date: 1640671029066, score: 2341323145, id: 2 },
+    { username: "user1", level0: 23413525, level1: 2341323145 },
+    { username: "user2", level0: 23413525, level1: 23413525 },
 ]
 ```
-
-Output is sorted from highest to lowest score.
 
 2. `/api/history?username=${username}`
 
@@ -52,13 +49,13 @@ Return data format:
     {
       total_score: 4683180529,
       level1: 2341323145,
-      level0: 2341857384,
+      level2: 2341857384,
       username: "user1",
     },
     {
       total_score: 46827050,
       level1: 23413525,
-      level0: 23413525,
+      level2: 23413525,
       username: "user2",
     },
     { total_score: 2341857384, level0: 2341857384, username: "user3" },
