@@ -24,9 +24,12 @@ import IMU
 import datetime
 import os
 import csv
-import paho.mqtt.client as mqtt
 import numpy as np
 import signal 
+import socket
+
+# Need to manually update ip address for now
+ip_addr = '169.254.145.245'
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -196,30 +199,15 @@ if(IMU.BerryIMUversion == 99):
 IMU.initIMU()       #Initialise the accelerometer, gyroscope and compass
 
 fields = ["accX", "accY", "gyroX", "gyroY", "gyroZ"]
-def on_connect(client, userdata, flags, rc):
-    print("Connection returned result: "+str(rc))
-        
-def on_disconnect(client, userdata, rc):
-    if rc != 0:
-        print("Unexpected Disconnect")
-    else:
-        print("Expected Disconnect")
-def on_message(client, userdata, message):
-    print('Received message: "' + str(message.payload) + '" on topic "' +message.topic + '" with QoS ' + str(message.qos))
+
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C!')
     client.loop_stop()
     client.disconnect()
     sys.exit(0)
 
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_disconnect = on_disconnect 
-client.on_message = on_message 
-client.connect_async("mqtt.eclipseprojects.io")
-client.loop_start()
 signal.signal(signal.SIGINT, signal_handler)
-#client.on_disconnect = on_disconnect
+
 i = 0 
 lastmove = 'z'
 
@@ -481,27 +469,21 @@ with open('data.csv', 'w') as csvfile:
            # print("faceforward")
        # print(output)
         
-        '''
-        client.on_message = on_message
         
-        client.connect_async("mqtt.eclipseprojects.io")
-        
-        client.loop_start()
-        '''
         if lastmove != output:
-            #for i in range(10):
-            client.publish("topic/movement", output, qos=1)
+            client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # Need to manually change 
+            client.connect((ip_addr, 8081))
+            client.send(output.encode())
+            client.close()
+
             print(output)
             lastmove = output 
         
-        #client.loop_stop()
-        #client.disconnect()
         
 #slow program down a bit, makes the output more readable
         time.sleep(0.03)
         i += 1 
 
-#client.on_disconnect = on_disconnect
-client.loop_stop()
-client.disconnect()
+
 
