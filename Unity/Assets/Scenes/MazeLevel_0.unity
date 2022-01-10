@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,8 +249,8 @@ GameObject:
   - component: {fileID: 45461610}
   - component: {fileID: 45461614}
   - component: {fileID: 45461615}
-  - component: {fileID: 45461616}
   - component: {fileID: 45461617}
+  - component: {fileID: 45461616}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05bf579fbf1ffec469af2781449b9da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMQTT: {fileID: 45461616}
+  myServer: {fileID: 45461616}
   controller: {fileID: 45461615}
   cylinder: {fileID: 45461609}
   speed: 8
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 45461609}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217cbede4d748ba4f82d224cd69b03fb, type: 3}
+  m_Script: {fileID: 11500000, guid: a0f959b4896fb80498b7c8df076b03d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   forward: 0
@@ -866,7 +866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e936f242ffec66049aca1d642161eef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMQTT: {fileID: 45461616}
+  myServer: {fileID: 45461616}
   YSensitivity: 2
   playerBody: {fileID: 45461613}
 --- !u!81 &229131312

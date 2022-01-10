@@ -3,29 +3,29 @@ import numpy as np
 import time
 import argparse
 from movenet import Movenet
-from publisher import Publisher
+from client import Client
 from movement_recognizer import MovementRecognizer
 from keypoints_filter import KeypointsFilter
 
 """
 Script for detecting obstacle navigation (jump/duck)
-and sending data to Unity through MQTT
+and sending data to Unity through socket
 
 References: 
 - https://github.com/nicknochnack/MoveNetLightning
-- lab 3 spec code for mqtt
+- lab 3 spec code for socket communication
 """
 
 if __name__ == "__main__":
 
-    # usage: python3 obstacle_detection.py --no-mqtt --latency -m [thunder|lightning]
+    # usage: python3 obstacle_detection.py --no-comms --latency -m [thunder|lightning]
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--model", type=str, default="lightning")
-    parser.add_argument("--no-mqtt", dest="mqtt_on", action="store_false")
+    parser.add_argument("--no-comms", dest="comms_on", action="store_false")
     # output avg real-time latency in secs/frame
     parser.add_argument("--latency", dest="latency", action="store_true")
     args = parser.parse_args()
-    mqtt_on = args.mqtt_on
+    comms_on = args.comms_on
     model = args.model
     measure_latency = args.latency
 
@@ -34,10 +34,9 @@ if __name__ == "__main__":
     filt_obj = KeypointsFilter()
     latencies = []
 
-    # set up MQTT publisher
-    if mqtt_on:
-        publisher = Publisher()
-        publisher.run()
+    # set up client socket
+    if comms_on:
+        client = Client()
 
     prev_time = time.time()
     # capture video from webcam
@@ -56,8 +55,8 @@ if __name__ == "__main__":
             print(player_pos.name)
 
             # send data to Unity
-            if mqtt_on:
-                publisher.send(player_pos)
+            if comms_on:
+                client.send(player_pos)
 
             # render keypoint predictions on frame
             movenet_obj.render_keypoints(frame, keypoints_with_scores)
@@ -77,9 +76,6 @@ if __name__ == "__main__":
 
     cap.release()
     cv2.destroyAllWindows()
-
-    if mqtt_on:
-        publisher.stop()
 
     if measure_latency:
         print(f"AVG LATENCY (secs/frame): {np.mean(latencies)}")

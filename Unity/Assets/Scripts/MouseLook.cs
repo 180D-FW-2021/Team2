@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public mqtt myMQTT;
+    public Server myServer;
 
     public float YSensitivity = 1f;
 
@@ -17,7 +17,7 @@ public class MouseLook : MonoBehaviour
             // rotate player left with "z" and right with "x"
             float yRot1 = Input.GetKey("z") ? -YSensitivity : (Input.GetKey("x") ? YSensitivity : 0);
 
-            yRot1 += myMQTT.left ? -(YSensitivity * 0.3f) : (myMQTT.right ? (YSensitivity * 0.3f) : 0);
+            yRot1 += myServer.left ? -(YSensitivity * 0.3f) : (myServer.right ? (YSensitivity * 0.3f) : 0);
 
             playerBody.Rotate(Vector3.up * yRot1);
         }
