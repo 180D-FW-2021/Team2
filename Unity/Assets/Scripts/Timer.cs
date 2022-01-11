@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class Timer : MonoBehaviour
 
     void OnDisable()
     {
+        Scene scene = SceneManager.GetActiveScene();
+        PlayerPrefs.SetString("PrevScene", scene.name);
         PlayerPrefs.SetFloat("finalTime", timeVal);
     }
 }
