@@ -20,6 +20,8 @@ public class VoiceCommands_LevelSelector : MonoBehaviour
         keywords.Add("zero", ZeroCallback);
         keywords.Add("tutorial", ZeroCallback);
     	keywords.Add("one", OneCallback);
+	keywords.Add("two", TwoCallback);
+	keywords.Add("three", ThreeCallback);
     	keywords.Add("back", BackCallback);
 
 		// Create the keyword recognizer and tell it what to recognize
@@ -42,6 +44,16 @@ public class VoiceCommands_LevelSelector : MonoBehaviour
     private void OneCallback() {
     	Debug.Log("confirming level 1 ");
 		GameManagerScript.UpdateGameState(GameState.ConfirmLevelSelection, 1);
+    }
+
+    private void TwoCallback() {
+    	Debug.Log("confirming level 2 ");
+		GameManagerScript.UpdateGameState(GameState.ConfirmLevelSelection, 2);
+    }
+
+    private void ThreeCallback() {
+    	Debug.Log("confirming level 3 ");
+		GameManagerScript.UpdateGameState(GameState.ConfirmLevelSelection, 3);
     }
 
     private void BackCallback() {
