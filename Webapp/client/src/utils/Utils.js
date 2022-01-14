@@ -1,14 +1,11 @@
-// ref: https://stackoverflow.com/questions/19700283/how-to-convert-time-in-milliseconds-to-hours-min-sec-format-in-javascript
-
-export function msToTime(duration) {
-  var milliseconds = Math.floor((duration % 1000) / 100),
-    seconds = Math.floor((duration / 1000) % 60),
-    minutes = Math.floor((duration / (1000 * 60)) % 60),
-    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-  hours = hours < 10 ? "0" + hours : hours;
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+// ref: https://stackoverflow.com/questions/1322732/convert-seconds-to-hh-mm-ss-with-javascript
+// convert time completed (s) to hh-mm-ss
+export function secToDate(seconds) {
+  // remove decimals
+  // let seconds_rounded = seconds.toFixed();
+  if (seconds < 3600) {
+    return new Date(seconds * 1000).toISOString().substr(14, 5);
+  } else {
+    return new Date(seconds * 1000).toISOString().substr(11, 8);
+  }
 }

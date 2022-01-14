@@ -33,3 +33,15 @@ db.Leaderboard.insertMany([
         ]
     },
 ]);
+
+db.createCollection("Users");
+db.Users.insertMany([
+    {
+        "username": "user1",
+        "password": "hashed_password",
+    },
+    {
+        "username": "user2",
+        "password": "hashed_password",
+    }
+]);

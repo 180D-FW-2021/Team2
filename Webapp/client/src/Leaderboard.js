@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getLeaderboard } from "./utils/FakeBackend";
-// import { getLeaderboard } from "./utils/RealBackend";
+import { secToDate } from "./utils/Utils";
+// import { getLeaderboard } from "./utils/FakeBackend";
+import { getLeaderboard } from "./utils/RealBackend";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
@@ -20,10 +21,54 @@ const columns = [
       return <a href={hyperlink}>{cellContent}</a>;
     },
   },
-  { dataField: "level1", text: "Level 1", sort: true, searchable: false },
-  { dataField: "level2", text: "Level 2", sort: true, searchable: false },
-  { dataField: "level3", text: "Level 3", sort: true, searchable: false },
-  { dataField: "level4", text: "Level 4", sort: true, searchable: false },
+  {
+    dataField: "level1",
+    text: "Level 1",
+    formatter: (cellContent) => {
+      if (cellContent == null) {
+        return "-";
+      }
+      return secToDate(parseInt(cellContent));
+    },
+    sort: true,
+    searchable: false,
+  },
+  {
+    dataField: "level2",
+    text: "Level 2",
+    formatter: (cellContent) => {
+      if (cellContent == null) {
+        return "-";
+      }
+      return secToDate(parseInt(cellContent));
+    },
+    sort: true,
+    searchable: false,
+  },
+  {
+    dataField: "level3",
+    text: "Level 3",
+    formatter: (cellContent) => {
+      if (cellContent == null) {
+        return "-";
+      }
+      return secToDate(parseInt(cellContent));
+    },
+    sort: true,
+    searchable: false,
+  },
+  {
+    dataField: "level4",
+    text: "Level 4",
+    formatter: (cellContent) => {
+      if (cellContent == null) {
+        return "-";
+      }
+      return secToDate(parseInt(cellContent));
+    },
+    sort: true,
+    searchable: false,
+  },
 ];
 
 /*

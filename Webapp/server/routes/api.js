@@ -19,7 +19,7 @@ router.get("/leaderboard", async (req, res) => {
           level: "$history.level",
         },
         score: {
-          $max: "$history.score",
+          $min: "$history.score",
         },
       },
     },
@@ -44,10 +44,10 @@ router.get("/leaderboard", async (req, res) => {
     {
       $project: {
         username: 1,
-        level1: "$level_scores.level1",
-        level2: "$level_scores.level2",
-        level3: "$level_scores.level3",
-        level4: "$level_scores.level4",
+        level1: "$level_scores.MazeLevel_0",
+        level2: "$level_scores.MazeLevel_1",
+        level3: "$level_scores.MazeLevel_2",
+        level4: "$level_scores.MazeLevel_3",
       },
     },
   ];

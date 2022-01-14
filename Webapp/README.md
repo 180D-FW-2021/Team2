@@ -28,6 +28,8 @@
 |         /api/leaderboard          |  GET   |       Retrieve leaderboard data        |
 | /api/history?username=${username} |  GET   | Retrieve $username player history data |
 |            /api/insert            |  POST  |   Insert game records into database    |
+|            /api/signup            |  POST  |            create new user             |
+|            /api/login             |  POST  |       Validate user credentials        |
 
 1. `/api/leaderboard`
 
@@ -47,18 +49,20 @@ Return data format:
 ```
 [
     {
-      total_score: 4683180529,
+      // accumulated best score by level
       level1: 2341323145,
       level2: 2341857384,
       username: "user1",
     },
     {
-      total_score: 46827050,
       level1: 23413525,
       level2: 23413525,
       username: "user2",
     },
-    { total_score: 2341857384, level0: 2341857384, username: "user3" },
+    {
+      username: "user3",
+      level1: 2341857384
+    },
 ]
 ```
 
@@ -76,9 +80,64 @@ Input JSON data format:
 
 If the user does not exist, a new document for the new user will be created. Otherwise, the record will be added to the existing user's game history.
 
+4. `/api/signup`
+
+Input JSON data format:
+
+```
+{
+    username: "user1",
+    password: "some_password"
+}
+```
+
+Responses:
+
+|     Response Code     |          Description          |
+| :-------------------: | :---------------------------: |
+|       200 (OK)        |            Success            |
+| 400 (Invalid Request) | invalid param format/username |
+
+For a 400 response, the error message will indicate whether the general parameter format was incorrect or if a username is already taken.
+
+5. `api/login`
+
+Input JSON data format:
+
+```
+{
+    username: "user1",
+    password: "some_password"
+}
+```
+
+Responses:
+
+|   Response Code    |        Description        |
+| :----------------: | :-----------------------: |
+|      200 (OK)      |          Success          |
+| 401 (Unauthorized) | invalid user/passwd combo |
+
 ### Database
 
-MongoDB database schema:
+The database schemas for the `Users` and `Leaderboard` collections are shown below.
+
+#### Users
+
+```
+[
+    {
+        "username": "user1",
+        "password": "hashed_password1",
+    },
+    {
+        "username": "user2",
+        "password": "hashed_password2",
+    }
+]
+```
+
+#### Leaderboard
 
 ```
 [
@@ -88,7 +147,7 @@ MongoDB database schema:
             {
                 "level": "level0",
                 "date": 213435436, // ms since epoch
-                "score": 23413525,
+                "score": 23413525, // maze completion time (s)
             }
             {
                 "level": "level1",
