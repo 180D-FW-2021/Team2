@@ -6,12 +6,12 @@ db.Leaderboard.insertMany([
         "username": "user1",
         "history": [
             {
-                "level": "level2",
+                "level": "MazeLevel_2",
                 "date": 213435436,
                 "score": 23413525,
             },
             {
-                "level": "level1",
+                "level": "MazeLevel_1",
                 "date": 21,
                 "score": 2341323145,
             }
@@ -21,19 +21,19 @@ db.Leaderboard.insertMany([
         "username": "user2",
         "history": [
             {
-                "level": "level2",
+                "level": "MazeLevel_2",
                 "date": 213435436,
                 "score": 23413525,
             },
             {
-                "level": "level1",
+                "level": "MazeLevel_0",
                 "date": 213435436,
                 "score": 23413525,
             }
         ]
     },
 ]);
-
+db.Users.drop();
 db.createCollection("Users");
 db.Users.insertMany([
     {

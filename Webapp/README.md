@@ -170,6 +170,12 @@ $ brew services start mongodb-community@5.0
 $ brew services stop mongodb-community@5.0
 ```
 
+### Curl
+
+```
+curl --request POST --header "Content-Type: application/json" --data '{"username": "test_user", "password": "some_password"}' http://localhost:3000/api/signup
+```
+
 ## References
 
 1. [Install Mongodb (MacOS)](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/)
