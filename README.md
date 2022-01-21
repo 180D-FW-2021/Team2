@@ -22,21 +22,22 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 
 On Start Screen:
 
-- "Enter": Go to Main Menu
-- "Settings": Open Settings menu (not yet implemented)
+- "Quit": Quit game
 
 On Main Menu:
 
-- "Back": back to Start Screen
+- "Back", "Log Out": log out and return to Start Screen
 - "Levels": Open Level Selection Screen
 - "Help": Open Help menu (not yet implemented)
-- "Settings": Open Settings menu (not yet implemented)
+- "Quit": Quit game
 
 On Level Selection Screen:
 
-- "Back": back to Main Menu
+- "Back": Return back to Main Menu
 - "Zero", "Tutorial": Start Tutorial Level
-- "One": Start Level 1
+- "One": Load Level 1
+- "Two": Load Level 2
+- "Three": Load Level 2
 
 On 'Are You Ready' Screen:
 
