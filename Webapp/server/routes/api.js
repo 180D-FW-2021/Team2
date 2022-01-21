@@ -96,15 +96,17 @@ router.get("/history", async (req, res) => {
 router.post("/insert", async (req, res) => {
   let coll = client.db("AMaze").collection("Leaderboard");
   let username = req.body.username;
+  let level = req.body.level;
+  let score = req.body.score;
   if (!username || !level || !score) {
     res.status(400);
     res.send("username, level, score fields are required");
     return res.end();
   }
   let history_elem = {
-    level: req.body.level,
+    level: level,
     date: Date.now(),
-    score: req.body.score,
+    score: score,
   };
   let rc = await coll.updateOne(
     { username: username },
