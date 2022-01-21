@@ -43,4 +43,10 @@ public class MainMenusScripts : MonoBehaviour
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
     }
 
+    public void QuitGame()
+    {
+        Debug.Log("Quitting Game");
+        Application.Quit();
+    }
+
 }
