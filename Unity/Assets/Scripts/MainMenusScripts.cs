@@ -15,6 +15,9 @@ public class MainMenusScripts : MonoBehaviour
 
     // Set the GameState to StartScreen and Load Start Screen
     public void To_StartScreen() {
+        // Clear stored username
+        PlayerPrefs.SetString("Username", "");
+        Debug.Log(PlayerPrefs.GetString("Username"));
         GameManagerScript.UpdateGameState(GameState.StartScreen);
     }
 
