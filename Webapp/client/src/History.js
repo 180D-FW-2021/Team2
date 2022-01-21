@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getHistory } from "./utils/FakeBackend";
-// import { getHistory } from "./utils/RealBackend";
+import { secToDate } from "./utils/Utils";
+// import { getHistory } from "./utils/FakeBackend";
+import { getHistory } from "./utils/RealBackend";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import "bootstrap/dist/css/bootstrap.css";
@@ -18,7 +19,16 @@ const columns = [
     },
   },
   { dataField: "level", text: "Level" },
-  { dataField: "score", text: "Score" },
+  {
+    dataField: "score",
+    text: "Score",
+    formatter: (cellContent) => {
+      if (cellContent == null) {
+        return "-";
+      }
+      return secToDate(parseInt(cellContent));
+    },
+  },
 ];
 
 function History() {

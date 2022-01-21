@@ -1,6 +1,7 @@
 let express = require("express");
 let router = express.Router();
 let client = require("../db/db");
+let bcrypt = require("bcryptjs");
 
 router.get("/leaderboard", async (req, res) => {
   let coll = client.db("AMaze").collection("Leaderboard");
@@ -19,7 +20,7 @@ router.get("/leaderboard", async (req, res) => {
           level: "$history.level",
         },
         score: {
-          $max: "$history.score",
+          $min: "$history.score",
         },
       },
     },
@@ -44,10 +45,10 @@ router.get("/leaderboard", async (req, res) => {
     {
       $project: {
         username: 1,
-        level1: "$level_scores.level1",
-        level2: "$level_scores.level2",
-        level3: "$level_scores.level3",
-        level4: "$level_scores.level4",
+        level1: "$level_scores.MazeLevel_0",
+        level2: "$level_scores.MazeLevel_1",
+        level3: "$level_scores.MazeLevel_2",
+        level4: "$level_scores.MazeLevel_3",
       },
     },
   ];
@@ -95,10 +96,17 @@ router.get("/history", async (req, res) => {
 router.post("/insert", async (req, res) => {
   let coll = client.db("AMaze").collection("Leaderboard");
   let username = req.body.username;
+  let level = req.body.level;
+  let score = req.body.score;
+  if (!username || !level || !score) {
+    res.status(400);
+    res.send("username, level, score fields are required");
+    return res.end();
+  }
   let history_elem = {
-    level: req.body.level,
+    level: level,
     date: Date.now(),
-    score: req.body.score,
+    score: score,
   };
   let rc = await coll.updateOne(
     { username: username },
@@ -118,6 +126,59 @@ router.post("/insert", async (req, res) => {
   res.status(500);
   console.dir(rc);
   return res.send("Update failed");
+});
+
+router.post("/signup", async (req, res) => {
+  let username = req.body.username;
+  let passwd = req.body.password;
+  // check required parameters
+  // TODO: add conditions to username (length, characters, etc.)
+  if (!username || !passwd) {
+    res.status(400);
+    res.send("Username and password are required fields");
+    return res.end();
+  }
+  let coll = client.db("AMaze").collection("Users");
+  // check if user already exists
+  const existing_user = await coll.findOne({ username: username });
+  if (existing_user != null) {
+    res.status(400);
+    res.send(`Username ${username} already exists`);
+    return res.end();
+  }
+  // hash password before inserting
+  let hash = await bcrypt.hash(passwd, 10);
+  const result = await coll.insertOne({
+    username: username,
+    password: hash,
+  });
+  console.log(`username created with _id: ${result.insertedID}`);
+  res.status(200);
+  res.send(`username ${username} successfully created!`);
+  return res.end();
+});
+
+router.post("/login", async (req, res) => {
+  let coll = client.db("AMaze").collection("Users");
+  let username = req.body.username;
+  let expected_passwd = req.body.password;
+  let userdata = await coll.findOne({ username: username });
+  if (userdata == null || userdata.password == null) {
+    res.status(401);
+    res.send("Invalid credentials");
+    return res.end();
+  }
+  let actual_passwd = userdata.password;
+  let valid = await bcrypt.compare(expected_passwd, actual_passwd);
+  if (valid) {
+    res.status(200);
+    res.send("Successful login!");
+    return res.end();
+  } else {
+    res.status(401);
+    res.send("Invalid credentials");
+    return res.end();
+  }
 });
 
 module.exports = router;
