@@ -7,22 +7,24 @@ using UnityEngine.Networking;
 
 public class SubmitScoreScript : MonoBehaviour
 {
-    public InputField inputUser;
     string level;
     float score;
     string username;
+
     void Start()
     {
-        // get player level/score
+        // get player username/level/score
+        username = PlayerPrefs.GetString("Username");
         level = PlayerPrefs.GetString("PrevScene");
         score = PlayerPrefs.GetFloat("finalTime");
+
+        SubmitScore();
     }
 
     // ref: https://www.mongodb.com/developer/how-to/sending-requesting-data-mongodb-unity-game/
     public void SubmitScore() 
     {
-        username = inputUser.text;
-        Debug.Log(username);
+        Debug.Log("submitting score for " + username);
         string url = "https://amaze-webapp.herokuapp.com/api/insert";
         PlayerScore scoreObj = new PlayerScore();
         scoreObj.username = username;
@@ -47,7 +49,7 @@ public class SubmitScoreScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("success!");
+                Debug.Log("score submitted!");
             }
         }
     }
