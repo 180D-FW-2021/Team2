@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+// using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
 public class Authentication : MonoBehaviour
@@ -10,8 +11,11 @@ public class Authentication : MonoBehaviour
     public GameManager GameManagerScript;
     public InputField inputUsername;
     public InputField inputPassword;
+    public GameObject invalidCredentialsUI;
+
     string username;
     string password;
+    bool invalidCredentialsProvided = false;
 
     public void Authenticate(string uri) 
     {
@@ -45,6 +49,7 @@ public class Authentication : MonoBehaviour
             if (request.isNetworkError || request.isHttpError)
             {
                 Debug.Log(request.error);
+                invalidCredentialsProvidedEvent();
             }
             else
             {
@@ -55,6 +60,14 @@ public class Authentication : MonoBehaviour
         }
     }
 
+    void invalidCredentialsProvidedEvent() {
+        invalidCredentialsProvided = true;
+        invalidCredentialsUI.SetActive(true);
+    }
 
+    public void invalidCredentialsProvidedCloseEvent() {
+        invalidCredentialsProvided = false;
+        invalidCredentialsUI.SetActive(false);
+    }
 
 }
