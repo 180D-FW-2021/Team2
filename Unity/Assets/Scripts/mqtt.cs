@@ -24,6 +24,11 @@ public class mqtt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        // Obtain user information
+        string username = PlayerPrefs.GetString("Username");
+        Debug.Log("mqtt " + username);
+
         //create MqttClient object
         // mqtt.eclipseprojects.io ip address
         // alternate test.mosquitto.org
