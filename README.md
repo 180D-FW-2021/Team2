@@ -33,10 +33,11 @@ On Main Menu:
 
 On Level Selection Screen:
 
-- "Back": back to Main Menu
+- "Back": Return back to Main Menu
 - "Zero", "Tutorial": Start Tutorial Level
-- "One": Start Level 1
-- "Two": Start Level 2
+- "One": Load Level 1
+- "Two": Load Level 2
+- "Three": Load Level 2
 
 On 'Are You Ready' Screen:
 
