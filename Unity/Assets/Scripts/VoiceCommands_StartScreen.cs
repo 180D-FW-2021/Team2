@@ -17,9 +17,9 @@ public class VoiceCommands_StartScreen : MonoBehaviour
     void Start() {
 		GameManagerScript = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
         
-    	keywords.Add("enter", EnterCallback);
-		keywords.Add("game", EnterCallback);
-		keywords.Add("settings", SettingsCallback);
+    	// keywords.Add("enter", EnterCallback);
+		// keywords.Add("game", EnterCallback);
+		keywords.Add("quit", QuitCallback);
 
 		// Create the keyword recognizer and tell it what to recognize
 		keywordRecognizer = new KeywordRecognizer(keywords.Keys.ToArray());
@@ -33,14 +33,15 @@ public class VoiceCommands_StartScreen : MonoBehaviour
     	keywords[speech.text].Invoke();
     }
 
-    private void EnterCallback() {
-    	Debug.Log("to Main Menu");
-		// MainMenuScripts.To_LevelSelector();
-		GameManagerScript.UpdateGameState(GameState.MainMenu);
-    }
+    // private void EnterCallback() {
+    // 	Debug.Log("to Main Menu");
+	// 	// MainMenuScripts.To_LevelSelector();
+	// 	GameManagerScript.UpdateGameState(GameState.MainMenu);
+    // }
 
-	private void SettingsCallback() {
-    	Debug.Log("Settings Menu");
+	private void QuitCallback() {
+    	Debug.Log("Quitting");
+		GameManagerScript.UpdateGameState(GameState.Quitting);
     }
 
 }

@@ -15,7 +15,7 @@ public class Authentication : MonoBehaviour
 
     string username;
     string password;
-    bool invalidCredentialsProvided = false;
+    //bool invalidCredentialsProvided = false;
 
     public void Authenticate(string uri) 
     {
@@ -61,12 +61,12 @@ public class Authentication : MonoBehaviour
     }
 
     void invalidCredentialsProvidedEvent() {
-        invalidCredentialsProvided = true;
+        // invalidCredentialsProvided = true;
         invalidCredentialsUI.SetActive(true);
     }
 
     public void invalidCredentialsProvidedCloseEvent() {
-        invalidCredentialsProvided = false;
+        // invalidCredentialsProvided = false;
         invalidCredentialsUI.SetActive(false);
     }
 
