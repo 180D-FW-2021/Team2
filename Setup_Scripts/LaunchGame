@@ -4,14 +4,14 @@
 # Start Game executable and Movenet position-tracking script
 
 # replace with Unity executable file name
-PROJECT_NAME="MazeProject"
-EXECUTABLE_PATH="../Unity/$PROJECT_NAME.app/Contents/MacOS/$PROJECT_NAME"
+# PROJECT_NAME="MazeProject"
+# EXECUTABLE_PATH="../Unity/$PROJECT_NAME.app/Contents/MacOS/$PROJECT_NAME"
 POS_TRACKING_DIR=../Movenet/src
 
 # start game
-$EXECUTABLE_PATH &
+# $EXECUTABLE_PATH &
 
 # run movement tracking script
 # must run file from src direc bc of relative model paths
 cd $POS_TRACKING_DIR
-python3 position_tracking.py
+python3 position_tracking.py --username $1

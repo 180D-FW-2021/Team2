@@ -31,7 +31,8 @@ class Publisher(mqtt.Client):
         )
 
     # send data to Unity
-    def send(self, player_pos, topic="topic/pose"):
+    def send(self, player_pos):
+        topic = "topic/pose/"+self.username
         if player_pos == Position.JUMP_START:
             self.publish(topic, "j", qos=1)
         elif player_pos == Position.DUCK_START:
@@ -47,13 +48,17 @@ class Publisher(mqtt.Client):
 
     # connect/disconnect functions
 
-    def run(self):
-        self.connect_async("mqtt.eclipseprojects.io")
+    def run(self, username):
+        self.connect_async("test.mosquitto.org")
         self.loop_start()
+        self.username = username
+
 
     def stop(self):
         self.loop_stop()
         self.disconnect()
+
+    username = "demo"
 
 
 if __name__ == "__main__":

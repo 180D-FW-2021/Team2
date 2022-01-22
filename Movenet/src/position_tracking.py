@@ -20,11 +20,13 @@ if __name__ == "__main__":
 
     # usage: python3 obstacle_detection.py --no-mqtt --latency -m [thunder|lightning]
     parser = argparse.ArgumentParser()
+    parser.add_argument("-u", "--username", type=str, default="demo")
     parser.add_argument("-m", "--model", type=str, default="lightning")
     parser.add_argument("--no-mqtt", dest="mqtt_on", action="store_false")
     # output avg real-time latency in secs/frame
     parser.add_argument("--latency", dest="latency", action="store_true")
     args = parser.parse_args()
+    username = args.username
     mqtt_on = args.mqtt_on
     model = args.model
     measure_latency = args.latency
@@ -37,7 +39,7 @@ if __name__ == "__main__":
     # set up MQTT publisher
     if mqtt_on:
         publisher = Publisher()
-        publisher.run()
+        publisher.run(username)
 
     prev_time = time.time()
     # capture video from webcam
