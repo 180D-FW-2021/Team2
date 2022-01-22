@@ -1,4 +1,5 @@
 # build react app into static files
+rm -r ../public
 cd ../../client
 npm install
 npm run build
