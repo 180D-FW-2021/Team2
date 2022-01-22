@@ -54,7 +54,7 @@ router.get("/leaderboard", async (req, res) => {
         level3: {
           $ifNull: ["$level_scores.MazeLevel_2", 0],
         },
-        level3: {
+        level4: {
           $ifNull: ["$level_scores.MazeLevel_3", 0],
         },
       },
