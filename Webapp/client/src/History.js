@@ -47,8 +47,8 @@ function History() {
   }, [username]);
   return (
     <div>
-      <h1>
-        <b>{username}</b>'s Player History
+      <h1 className="page-header">
+        <b className="player-name">{username}</b>'s Player History
       </h1>
       <BootstrapTable
         keyField="id"

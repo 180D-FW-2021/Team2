@@ -7,6 +7,16 @@ body {
 
 h1 {
   padding: 15px;
+  font-family: "Lora", serif;
+}
+
+.player-name {
+  color: #1a54a5;
+}
+
+.amaze-txt {
+  font-family: "Monoton", cursive;
+  margin-right: 15px;
 }
 
 .react-bootstrap-table-page-btns-ul {
