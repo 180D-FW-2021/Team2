@@ -33,23 +33,26 @@ public class RunPython : MonoBehaviour
                 // Uses LaunchGame.bat on WIndows machines only
                 #if UNITY_STANDALONE_WIN
                 UnityEngine.Debug.Log("Using Windows Script");
-                psi.FileName = "..\\Setup_Scripts\\LaunchGame.bat";
-                psi.UseShellExecute = false;
-                psi.RedirectStandardOutput = true;
+                psi.FileName = "..\\Movenet\\src\\position_tracking";
                 #endif
                 // Uses LaunchGame on Mac only
                 #if UNITY_STANDALONE_OSX
                 UnityEngine.Debug.Log("Using Mac Script");
-                psi.FileName = "../Setup_Scripts/LaunchGame";
-                psi.UseShellExecute = true;
+                psi.FileName = "../Movenet/src/position_tracking";
                 #endif
-                
-                psi.Arguments = username;
+
+                psi.UseShellExecute = false;
+                psi.RedirectStandardOutput = true;
+                psi.RedirectStandardError = true;
                 psi.CreateNoWindow = true;
+                psi.Arguments = "--username " + username;
 
                 Process p = Process.Start(psi);
-                string strOutput = p.StandardOutput.ReadToEnd();
-                
+                p.ErrorDataReceived += onError;
+                // printing pose output overloads console
+                // p.OutputDataReceived += onOutput;
+                p.BeginErrorReadLine();
+                p.BeginOutputReadLine();
 
             }
             catch (Exception e)
@@ -58,5 +61,13 @@ public class RunPython : MonoBehaviour
             }
         }
         );
+    }
+    // log stdout/stderr for debugging purposes
+     private void onOutput(object sender, DataReceivedEventArgs e) {
+        UnityEngine.Debug.Log(e.Data);
+    }
+
+    private void onError(object sender, DataReceivedEventArgs e) {
+        UnityEngine.Debug.Log(e.Data);
     }
 }

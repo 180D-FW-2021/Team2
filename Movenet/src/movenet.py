@@ -67,16 +67,16 @@ class Movenet(object):
           model_name(str): Name of the TFLite MoveNet model.
         """
         if model_name == "lightning":
-            self._interpreter = tf.lite.Interpreter(
-                model_path="../models/lite-model_movenet_singlepose_lightning_3.tflite",
-                num_threads=4,
-            )
+            # model_path = "../models/lite-model_movenet_singlepose_lightning_3.tflite"
+            model_path = "../Movenet/models/lite-model_movenet_singlepose_lightning_3.tflite"
         else:
-            self._interpreter = tf.lite.Interpreter(
-                "../models/lite-model_movenet_singlepose_thunder_3.tflite",
+            # model_path = "../models/lite-model_movenet_singlepose_thunder_3.tflite"
+            model_path = "../Movenet/models/lite-model_movenet_singlepose_thunder_3.tflite"
+        
+        self._interpreter = tf.lite.Interpreter(
+                model_path=model_path,
                 num_threads=4,
             )
-
         self._interpreter.allocate_tensors()
 
         self._input_index = self._interpreter.get_input_details()[0]["index"]
