@@ -20,10 +20,10 @@ public class RunPython : MonoBehaviour
     void Start()
     {
         string username = PlayerPrefs.GetString("Username");
-        RunMovenet(username);
+        RunMovenet(username, Application.dataPath);
     }
 
-    async public void RunMovenet(string username)
+    async public void RunMovenet(string username, string path)
     {
         await Task.Run(() =>
         {
@@ -33,7 +33,7 @@ public class RunPython : MonoBehaviour
                 // Uses LaunchGame.bat on WIndows machines only
                 #if UNITY_STANDALONE_WIN
                 UnityEngine.Debug.Log("Using Windows Script");
-                psi.FileName = "..\\Movenet\\src\\position_tracking";
+                psi.FileName =  path + "\\..\\..\\Movenet\\src\\position_tracking.exe";
                 #endif
                 // Uses LaunchGame on Mac only
                 #if UNITY_STANDALONE_OSX
