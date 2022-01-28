@@ -9,4 +9,4 @@ pyinstaller -F --onefile position_tracking.py
 :: executable must be in directory Movenet/src
 :: due to relative model paths
 cd dist
-move position_tracking ..
+move position_tracking.exe ..
