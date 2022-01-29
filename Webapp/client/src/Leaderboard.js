@@ -7,11 +7,38 @@ import ToolkitProvider, {
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-// import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
 
 const { SearchBar } = Search;
+const elemsPerPage = 10;
+
+function formatLevelCol(cell, row) {
+  // return "-" for unplayed levels
+  if (!cell) {
+    return "-";
+  }
+  return secToDate(parseInt(cell));
+}
+
+function sortScores(a, b, order) {
+  // always sort unplayed levels last
+  if (a === 0) {
+    return 1;
+  }
+  if (b === 0) {
+    return -1;
+  }
+  // neg -> a before b
+  // pos -> b before a
+  if (order === "asc") {
+    return b - a;
+  } else {
+    return a - b;
+  }
+}
+
 const columns = [
   {
     dataField: "username",
@@ -24,61 +51,36 @@ const columns = [
   {
     dataField: "level1",
     text: "Level 1",
-    formatter: (cellContent) => {
-      if (cellContent == null) {
-        return "-";
-      }
-      return secToDate(parseInt(cellContent));
-    },
+    formatter: formatLevelCol,
     sort: true,
+    sortFunc: sortScores,
     searchable: false,
   },
   {
     dataField: "level2",
     text: "Level 2",
-    formatter: (cellContent) => {
-      if (cellContent == null) {
-        return "-";
-      }
-      return secToDate(parseInt(cellContent));
-    },
+    formatter: formatLevelCol,
     sort: true,
+    sortFunc: sortScores,
     searchable: false,
   },
   {
     dataField: "level3",
     text: "Level 3",
-    formatter: (cellContent) => {
-      if (cellContent == null) {
-        return "-";
-      }
-      return secToDate(parseInt(cellContent));
-    },
+    formatter: formatLevelCol,
     sort: true,
+    sortFunc: sortScores,
     searchable: false,
   },
   {
     dataField: "level4",
     text: "Level 4",
-    formatter: (cellContent) => {
-      if (cellContent == null) {
-        return "-";
-      }
-      return secToDate(parseInt(cellContent));
-    },
+    formatter: formatLevelCol,
     sort: true,
+    sortFunc: sortScores,
     searchable: false,
   },
 ];
-
-/*
-const defaultSorted = [
-  {
-    dataField: "level1",
-    order: "asc",
-  },
-];
-*/
 
 function Leaderboard() {
   const [data, setData] = useState([]);
@@ -86,26 +88,34 @@ function Leaderboard() {
     getLeaderboard().then((data) => setData(data));
   }, []);
   return (
-    // bug: pagination/styling is not showing
     <div>
-      <h1>A-Maze Leaderboard</h1>
-      <ToolkitProvider
-        keyField="username"
-        data={data}
-        columns={columns}
-        pagination={paginationFactory()}
-        defaultSortDirection="asc"
-        hover
-        condensed
-        search
-      >
-        {(props) => (
-          <div>
-            <SearchBar {...props.searchProps} />
-            <hr />
-            <BootstrapTable {...props.baseProps} />
-          </div>
-        )}
+      <h1>
+        <span className="amaze-txt">A-Maze</span>
+        <b>Leaderboard</b>
+      </h1>
+      <ToolkitProvider keyField="username" data={data} columns={columns} search>
+        {(props) => {
+          return (
+            <div>
+              <SearchBar
+                srText=""
+                placeholder="Search username"
+                {...props.searchProps}
+              />
+              <hr />
+              <BootstrapTable
+                {...props.baseProps}
+                pagination={paginationFactory({
+                  sizePerPage: elemsPerPage,
+                  alwaysShowAllBtns: false,
+                  hideSizePerPage: true,
+                })}
+                hover
+                condensed
+              />
+            </div>
+          );
+        }}
       </ToolkitProvider>
     </div>
   );

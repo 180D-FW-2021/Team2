@@ -45,10 +45,18 @@ router.get("/leaderboard", async (req, res) => {
     {
       $project: {
         username: 1,
-        level1: "$level_scores.MazeLevel_0",
-        level2: "$level_scores.MazeLevel_1",
-        level3: "$level_scores.MazeLevel_2",
-        level4: "$level_scores.MazeLevel_3",
+        level1: {
+          $ifNull: ["$level_scores.MazeLevel_0", 0],
+        },
+        level2: {
+          $ifNull: ["$level_scores.MazeLevel_1", 0],
+        },
+        level3: {
+          $ifNull: ["$level_scores.MazeLevel_2", 0],
+        },
+        level4: {
+          $ifNull: ["$level_scores.MazeLevel_3", 0],
+        },
       },
     },
   ];
