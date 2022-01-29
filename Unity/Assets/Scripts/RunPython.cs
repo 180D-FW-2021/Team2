@@ -30,16 +30,25 @@ public class RunPython : MonoBehaviour
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
-                // Uses LaunchGame.bat on WIndows machines only
+                // Executable path for Windows machines only
                 #if UNITY_STANDALONE_WIN
                 UnityEngine.Debug.Log("Using Windows Script");
-                psi.FileName =  path + "\\..\\..\\Movenet\\src\\position_tracking.exe";
+                psi.FileName =  path + "\\..\\..\\..\\Movenet\\src\\position_tracking.exe";
                 #endif
-                // Uses LaunchGame on Mac only
+                // Executable path for Mac only
                 #if UNITY_STANDALONE_OSX
                 UnityEngine.Debug.Log("Using Mac Script");
                 psi.FileName = "../Movenet/src/position_tracking";
                 #endif
+
+                // Paths for development
+                #if UNITY_EDITOR_WIN
+                psi.FileName =  path + "\\..\\..\\Movenet\\src\\position_tracking.exe";
+                #endif
+                #if UNITY_EDITOR_OSX
+                psi.FileName = "../Movenet/src/position_tracking";
+                #endif
+
 
                 psi.UseShellExecute = false;
                 psi.RedirectStandardOutput = true;
