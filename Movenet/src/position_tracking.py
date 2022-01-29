@@ -77,5 +77,8 @@ if __name__ == "__main__":
     cap.release()
     cv2.destroyAllWindows()
 
+    if comms_on:
+        client.close()
+
     if measure_latency:
         print(f"AVG LATENCY (secs/frame): {np.mean(latencies)}")

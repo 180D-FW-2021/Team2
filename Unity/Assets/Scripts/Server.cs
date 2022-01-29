@@ -46,26 +46,6 @@ public class Server : MonoBehaviour
         SocketThread.Start();
     }
 
-
-
-    private string getIPAddress()
-    {
-        IPHostEntry host;
-        string localIP = "";
-        host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (IPAddress ip in host.AddressList)
-        {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
-            {
-                localIP = ip.ToString();
-                break;
-            }
-
-        }
-        return localIP;
-    }
-
-
     Socket listener;
     Socket handler;
 
@@ -77,8 +57,8 @@ public class Server : MonoBehaviour
         byte[] bytes = new Byte[1024];
 
         // host running the application.
-        Debug.Log("Ip " + getIPAddress().ToString());
-        IPAddress[] ipArray = Dns.GetHostAddresses(getIPAddress());
+        // Debug.Log("Ip " + getIPAddress().ToString());
+        IPAddress[] ipArray = Dns.GetHostAddresses("127.0.0.1");
 
         // IP address server is connected to will be printed in the console
         // the port is the second argument so currently 8081
@@ -111,9 +91,10 @@ public class Server : MonoBehaviour
                 // An incoming connection needs to be processed.
                 while (keepReading)
                 {
-                    bytes = new byte[1024];
+                    bytes = new byte[64];
                     int bytesRec = handler.Receive(bytes);
-                    Debug.Log("Received from Server");
+                    Debug.Log(bytesRec);
+                    // Debug.Log("Received from Server");
 
                     if (bytesRec <= 0)
                     {
@@ -121,53 +102,18 @@ public class Server : MonoBehaviour
                         break;
                     }
 
-                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                     if (data.IndexOf("<EOF>") > -1)
                     {
                         break;
                     }
+
+                    if(bytesRec > 0) {
+                        onDataReceived(data);
+                    }
                     Debug.Log(data);
 
                     System.Threading.Thread.Sleep(1);
-                }
-
-                if (data == "f")
-                {
-                    forward = 0.5f;
-                    resetPerspectiveVars();
-                }
-                if (data == "l")
-                {
-                    left = true;
-                    right = false;
-                    forward = 0;
-                }
-                if (data == "r")
-                {
-                    right = true;
-                    left = false;
-                    forward = 0;
-
-                }
-                if (data == "n")
-                {
-                    forward = 0;
-                    resetPerspectiveVars();
-                }
-                if (data == "j")
-                {
-                    jump = true;
-                    duck = false;
-                }
-                if (data == "d")
-                {
-                    duck = true;
-                    jump = false;
-                }
-                if (data == "s")
-                {
-                    jump = false;
-                    duck = false;
                 }
 
                 byte[] msg = Encoding.ASCII.GetBytes("Hello from server");
@@ -216,5 +162,45 @@ public class Server : MonoBehaviour
         right = false;
     }
 
+    void onDataReceived(String data) {
+        if (data == "f")
+        {
+            forward = 0.5f;
+            resetPerspectiveVars();
+        }
+        if (data == "l")
+        {
+            left = true;
+            right = false;
+            forward = 0;
+        }
+        if (data == "r")
+        {
+            right = true;
+            left = false;
+            forward = 0;
+
+        }
+        if (data == "n")
+        {
+            forward = 0;
+            resetPerspectiveVars();
+        }
+        if (data == "j")
+        {
+            jump = true;
+            duck = false;
+        }
+        if (data == "d")
+        {
+            duck = true;
+            jump = false;
+        }
+        if (data == "s")
+        {
+            jump = false;
+            duck = false;
+        }
+    }
 
 }
