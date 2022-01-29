@@ -460,6 +460,9 @@ with open('data.csv', 'w') as csvfile:
         if tiltCompensatedHeading > 299 and AccYangle>-140:
             #print('f')
             output = 'f' 
+        elif tiltCompensatedHeading<100:
+            output = 'b'
+            
         #else: 
          #   print('n')
           #  output = 'n'
@@ -474,7 +477,7 @@ with open('data.csv', 'w') as csvfile:
         else:
            # print('n')
             output = 'n' 
-       # print (ACCy)
+       # print (tiltCompensatedHeading)
        # if x > 
        # else:
        #     output = "n"
