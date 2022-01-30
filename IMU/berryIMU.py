@@ -27,6 +27,14 @@ import csv
 import paho.mqtt.client as mqtt
 import numpy as np
 import signal 
+import configparser
+
+# https://stackoverflow.com/questions/6107149/how-can-i-set-default-values-for-safeconfigparser
+config = configparser.SafeConfigParser()
+config.read("default.ini")
+config.read("config.ini")
+USERNAME = config.get("UserConfig", "Username")
+print("Hello " + USERNAME)
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -216,7 +224,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect 
 client.on_message = on_message 
-client.connect_async("mqtt.eclipseprojects.io")
+client.connect_async("test.mosquitto.org")
 client.loop_start()
 signal.signal(signal.SIGINT, signal_handler)
 #client.on_disconnect = on_disconnect
@@ -493,7 +501,7 @@ with open('data.csv', 'w') as csvfile:
         '''
         if lastmove != output:
             #for i in range(10):
-            client.publish("topic/movement", output, qos=1)
+            client.publish("topic/movement/" + USERNAME, output, qos=1)
             print(output)
             lastmove = output 
         
@@ -507,4 +515,3 @@ with open('data.csv', 'w') as csvfile:
 #client.on_disconnect = on_disconnect
 client.loop_stop()
 client.disconnect()
-
