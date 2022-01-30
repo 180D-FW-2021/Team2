@@ -80,6 +80,14 @@ const columns = [
     sortFunc: sortScores,
     searchable: false,
   },
+  {
+    dataField: "level5",
+    text: "Level 5",
+    formatter: formatLevelCol,
+    sort: true,
+    sortFunc: sortScores,
+    searchable: false,
+  },
 ];
 
 function Leaderboard() {

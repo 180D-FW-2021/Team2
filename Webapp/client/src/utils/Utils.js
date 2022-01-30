@@ -29,6 +29,10 @@ export function getLevelText(text) {
     case "MazeLevel_3":
       level = "Level 4";
       break;
+    case "level5":
+    case "MazeLevel_4":
+      level = "Level 5";
+      break;
     default:
       break;
   }
