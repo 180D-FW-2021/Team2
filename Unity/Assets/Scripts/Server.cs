@@ -31,12 +31,12 @@ public class Server : MonoBehaviour
     {
         if (serverObj == null)
         {
-            DontDestroyOnLoad(transform.gameObject);
+            DontDestroyOnLoad(gameObject);
             serverObj = this;
         }
         else
         {
-            Destroy(transform.gameObject);
+            Destroy(gameObject);
         }
         
     }
