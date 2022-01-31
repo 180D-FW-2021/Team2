@@ -2,6 +2,10 @@
 
 A-maze, an interactive indoor game designed to test a user’s memory and dexterity, was designed to entertain children and young adults indoors, while involving some physical movement and stimulating the brain.
 
+## Web Application
+
+The web application is located at https://amaze-webapp.herokuapp.com/! The web app shows a player leaderboard, sortable by level, and player history for each individual user.
+
 ## Game Controls
 
 ### Keyboard Controls
@@ -14,9 +18,9 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 
 ### IMU Controls
 
-| Neutral | Forward | Left | Right|
-|:---:|:---:|:---:|:---:|
-|<img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/>  | <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> |
+|                          Neutral                          |                          Forward                          |                          Left                          |                          Right                          |
+| :-------------------------------------------------------: | :-------------------------------------------------------: | :----------------------------------------------------: | :-----------------------------------------------------: |
+| <img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/> | <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> |
 
 ### Voice Commands
 
@@ -64,9 +68,9 @@ Ensure your arms are in frame, even when jumping. Best performance is when you a
 
 <img src="./images/movenet_position.png" alt="movenet_position" width="200"/>
 
-| Jump | Duck |
-|:---:|:---:|
-| Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump.| Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks. |
+|                                                                           Jump                                                                            |                                                           Duck                                                            |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: |
+| Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump. | Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks. |
 
 ## Development
 
