@@ -14,8 +14,7 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //create an instance of MqttClient class 
-    //private MqttClient client;
+    private Server myServer;
     public mqtt myMQTT;
 
     public CharacterController controller;
@@ -38,7 +37,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
-    
+
+    private void Awake()
+    {
+        myServer = Server.serverObj;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         // Checks that player is currently on the ground
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -72,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // player jump
-        if ((Input.GetButtonDown("Jump") || myMQTT.jump) && isGrounded)
+        if ((Input.GetButtonDown("Jump") || myServer.jump) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
@@ -80,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        myMQTT.resetJumpVar();
+        myServer.resetJumpVar();
 
         // inputs from arrow keys or "WASD"
         float x = -Input.GetAxis("Horizontal");
@@ -88,14 +92,15 @@ public class PlayerMovement : MonoBehaviour
 
         // move player forward/backward/left/right
         Vector3 move = (transform.right * x + transform.forward * z) * canRun * blockRunInput;
-        
+
         controller.Move(move * speed * Time.deltaTime);
 
         // player duck
-        if(Input.GetKey(KeyCode.LeftShift) || myMQTT.duck)
+        if (Input.GetKey(KeyCode.LeftShift) || myServer.duck)
         {
-            if (!ducked) {
-                cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);                
+            if (!ducked)
+            {
+                cylinder.transform.localScale -= new Vector3(0, 0.6f, 0);
                 canRun = 0;
                 duckTime = 0;
             }

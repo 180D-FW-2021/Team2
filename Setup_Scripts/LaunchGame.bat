@@ -3,7 +3,7 @@
 set ANACONDA_DIR=F:\Users\Admin\anaconda3
 set ENV_NAME=yourenvname 
 
-set GAME_EXECUTABLE=../Unity/Build/MazeProject.exe
+set GAME_EXECUTABLE=../Unity/Builds/MazeProject.exe
 echo %ANACONDA_DIR%
 
 set ANACONDA_PROMPT=%ANACONDA_DIR%\Scripts\activate.bat
@@ -21,5 +21,5 @@ call cd %POSITION_TRACKING_DIR%
 call python %POSITION_TRACKING_SCRIPT%
 
 :: When Python script exits, clean up and close conda/cmd prompt
-call conda deactivate
-exit
+::call conda deactivate
+::exit
