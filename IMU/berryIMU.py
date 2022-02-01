@@ -455,8 +455,8 @@ with open('data.csv', 'w') as csvfile:
         #    output = "r"
            # print('right')
     #    if i == 0:
-   
-       # print(AccYangle)
+         
+        #print(tiltCompensatedHeading)
         '''
         if (kalmanY) < 0: # or (CFangleX)< 0: 
             print('f')
@@ -465,6 +465,24 @@ with open('data.csv', 'w') as csvfile:
             print('n')
             output = 'n'
         '''
+
+
+
+        if tiltCompensatedHeading<340 and tiltCompensatedHeading >298:
+            if AccYangle> -20:
+                output = "l" 
+            elif AccYangle<-50: 
+                output = "r" 
+        elif AccYangle<0: 
+            if CFangleX<0:
+                output = "f" 
+            elif CFangleX>0: 
+                output = "b" 
+        else:
+            output = "n"
+
+
+        '''old 
         if tiltCompensatedHeading > 299 and AccYangle>-140:
             #print('f')
             output = 'f' 
@@ -491,7 +509,14 @@ with open('data.csv', 'w') as csvfile:
        #     output = "n"
            # print("faceforward")
        # print(output)
-        
+        '''
+
+
+
+
+
+
+
         '''
         client.on_message = on_message
         
