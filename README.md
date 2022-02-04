@@ -24,10 +24,6 @@ The web application is located at https://amaze-webapp.herokuapp.com/! The web a
 
 ### Voice Commands
 
-On Start Screen:
-
-- "Quit": Quit game
-
 On Main Menu:
 
 - "Back", "Log Out": log out and return to Start Screen
@@ -41,7 +37,8 @@ On Level Selection Screen:
 - "Zero", "Tutorial": Start Tutorial Level
 - "One": Load Level 1
 - "Two": Load Level 2
-- "Three": Load Level 2
+- "Three": Load Level 3
+- "Four": Load Level 4
 
 On 'Are You Ready' Screen:
 
@@ -181,3 +178,16 @@ $ ./LaunchGame
 ```
 $ conda deactivate
 ```
+
+
+## Resources
+We would like to give attribution to the following Resources.
+
+By level, the following audio sources were used:
+- Maze Level 0: "Riviera" by Maarten Schellekens
+- Maze Level 1: "04 Night-Shadows" by Ketsa
+- Maze Level 2 and 4: "Flowers Don't Say Anything, They Just Think" by One Man Book
+- Maze Level 3: "Nocturn" by M33 Project
+
+The background used in the Unity in-game menus are credited to user3802032 on freepik.com
+
