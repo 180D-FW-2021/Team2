@@ -121,6 +121,12 @@ pip install paho-mqtt
 pip install numpy
 ```
 
+##### Replace your_username with the username you sign into Unity with
+
+```
+echo -e "[UserConfig]\nUsername=your_username" > config.ini
+```
+
 ##### Startup Script for Raspberry Pi 
 
 ```
