@@ -13,21 +13,31 @@ public class mqtt : MonoBehaviour
     public float forward;
     public bool left;
     public bool right;
-    public bool jump;
-    public bool duck;
+    public static mqtt mqttObj;
 
     //create an instance of MqttClient class 
     private MqttClient client;
 
-    static string myLog = ""; //intalize a log of messages on topic 
+    private string username;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+        mqttObj = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+
+        // Obtain user information
+        username = PlayerPrefs.GetString("Username");
+        Debug.Log("mqtt " + username);
+
         //create MqttClient object
         // mqtt.eclipseprojects.io ip address
         // alternate test.mosquitto.org
-        client = new MqttClient("mqtt.eclipseprojects.io");
+        client = new MqttClient("test.mosquitto.org");
 
         //When was the message published to the Broker
         client.MqttMsgPublished += client_MqttMsgPublished;
@@ -44,20 +54,18 @@ public class mqtt : MonoBehaviour
 
         // currently player will move forward/turn if message sent to topic/movement
         // strings from Raspberry Pi
-        client.Subscribe(new string[] { "topic/movement" },
+        client.Subscribe(new string[] { "topic/movement/" + username },
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
         // currently player will jump/duck if message sent to topic/pose
         // strings from pose detection
-        client.Subscribe(new string[] { "topic/pose" },
+        client.Subscribe(new string[] { "topic/pose/" + username },
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
         // initialize movement variables
         forward = 0;
         left = false;
         right = false;
-        jump = false;
-        duck = false;
 
     }
 
@@ -78,11 +86,10 @@ public class mqtt : MonoBehaviour
         //this function is called everytime you receive message
         //e.Message is a byte[]
         var str = System.Text.Encoding.UTF8.GetString(e.Message);
-        myLog += str + "\n";
 
         Debug.Log("received a message");
 
-        if (String.Equals(e.Topic, "topic/movement"))
+        if (String.Equals(e.Topic, "topic/movement/" + username))
         {
             Debug.Log(str);
             //Debug.Log(str == "Testing. Does this work?");
@@ -113,32 +120,7 @@ public class mqtt : MonoBehaviour
                 resetPerspectiveVars();
             }
         }
-        if (String.Equals(e.Topic, "topic/pose"))
-        {
-            Debug.Log(str);
-            //Debug.Log(str == "Testing. Does this work?");
-            if (str == "j")
-            {
-                jump = true;
-                duck = false;
-            }
-            if (str == "d")
-            {
-                duck = true;
-                jump = false;
-            }
-            if (str == "s")
-            {
-                jump = false;
-                duck = false;
-            }
-        }
 
-    }
-
-    public void resetJumpVar()
-    {
-        jump = false;
     }
 
     public void resetPerspectiveVars()

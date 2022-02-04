@@ -27,6 +27,14 @@ import csv
 import paho.mqtt.client as mqtt
 import numpy as np
 import signal 
+import configparser
+
+# https://stackoverflow.com/questions/6107149/how-can-i-set-default-values-for-safeconfigparser
+config = configparser.SafeConfigParser()
+config.read("default.ini")
+config.read("config.ini")
+USERNAME = config.get("UserConfig", "Username")
+print("Hello " + USERNAME)
 
 RAD_TO_DEG = 57.29578
 M_PI = 3.14159265358979323846
@@ -216,7 +224,7 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect 
 client.on_message = on_message 
-client.connect_async("mqtt.eclipseprojects.io")
+client.connect_async("test.mosquitto.org")
 client.loop_start()
 signal.signal(signal.SIGINT, signal_handler)
 #client.on_disconnect = on_disconnect
@@ -447,8 +455,8 @@ with open('data.csv', 'w') as csvfile:
         #    output = "r"
            # print('right')
     #    if i == 0:
-   
-       # print(AccYangle)
+         
+        #print(tiltCompensatedHeading)
         '''
         if (kalmanY) < 0: # or (CFangleX)< 0: 
             print('f')
@@ -457,9 +465,30 @@ with open('data.csv', 'w') as csvfile:
             print('n')
             output = 'n'
         '''
+
+
+
+        if tiltCompensatedHeading<340 and tiltCompensatedHeading >298:
+            if AccYangle> -20:
+                output = "l" 
+            elif AccYangle<-50: 
+                output = "r" 
+        elif AccYangle<0: 
+            if CFangleX<0:
+                output = "f" 
+            elif CFangleX>0: 
+                output = "b" 
+        else:
+            output = "n"
+
+
+        '''old 
         if tiltCompensatedHeading > 299 and AccYangle>-140:
             #print('f')
             output = 'f' 
+        elif tiltCompensatedHeading<100:
+            output = 'b'
+            
         #else: 
          #   print('n')
           #  output = 'n'
@@ -474,13 +503,20 @@ with open('data.csv', 'w') as csvfile:
         else:
            # print('n')
             output = 'n' 
-       # print (ACCy)
+       # print (tiltCompensatedHeading)
        # if x > 
        # else:
        #     output = "n"
            # print("faceforward")
        # print(output)
-        
+        '''
+
+
+
+
+
+
+
         '''
         client.on_message = on_message
         
@@ -490,7 +526,7 @@ with open('data.csv', 'w') as csvfile:
         '''
         if lastmove != output:
             #for i in range(10):
-            client.publish("topic/movement", output, qos=1)
+            client.publish("topic/movement/" + USERNAME, output, qos=1)
             print(output)
             lastmove = output 
         
@@ -504,4 +540,3 @@ with open('data.csv', 'w') as csvfile:
 #client.on_disconnect = on_disconnect
 client.loop_stop()
 client.disconnect()
-

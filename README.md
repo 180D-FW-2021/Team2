@@ -2,6 +2,10 @@
 
 A-maze, an interactive indoor game designed to test a user’s memory and dexterity, was designed to entertain children and young adults indoors, while involving some physical movement and stimulating the brain.
 
+## Web Application
+
+The web application is located at https://amaze-webapp.herokuapp.com/! The web app shows a player leaderboard, sortable by level, and player history for each individual user.
+
 ## Game Controls
 
 ### Keyboard Controls
@@ -14,29 +18,27 @@ A-maze, an interactive indoor game designed to test a user’s memory and dexter
 
 ### IMU Controls
 
-| Neutral | Forward | Left | Right|
-|:---:|:---:|:---:|:---:|
-|<img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/>  | <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> |
+|                          Neutral                          |                          Forward                          |                          Left                          |                          Right                          |
+| :-------------------------------------------------------: | :-------------------------------------------------------: | :----------------------------------------------------: | :-----------------------------------------------------: |
+| <img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/> | <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> |
 
 ### Voice Commands
 
-On Start Screen:
-
-- "Enter": Go to Main Menu
-- "Settings": Open Settings menu (not yet implemented)
-
 On Main Menu:
 
-- "Back": back to Start Screen
+- "Back", "Log Out": log out and return to Start Screen
 - "Levels": Open Level Selection Screen
 - "Help": Open Help menu (not yet implemented)
-- "Settings": Open Settings menu (not yet implemented)
+- "Quit": Quit game
 
 On Level Selection Screen:
 
-- "Back": back to Main Menu
+- "Back": Return back to Main Menu
 - "Zero", "Tutorial": Start Tutorial Level
-- "One": Start Level 1
+- "One": Load Level 1
+- "Two": Load Level 2
+- "Three": Load Level 3
+- "Four": Load Level 4
 
 On 'Are You Ready' Screen:
 
@@ -63,9 +65,9 @@ Ensure your arms are in frame, even when jumping. Best performance is when you a
 
 <img src="./images/movenet_position.png" alt="movenet_position" width="200"/>
 
-| Jump | Duck |
-|:---:|:---:|
-| Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump.| Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks. |
+|                                                                           Jump                                                                            |                                                           Duck                                                            |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: |
+| Light jumps are acceptable when 1-3 ft from the camera. Ensure to not duck too much before jumping, as this will be recognized as a duck instead of jump. | Small ducks are also acceptable, given you are 1-3 ft from the camera. Quick ducks are more recognizable than slow ducks. |
 
 ## Development
 
@@ -119,12 +121,33 @@ pip install paho-mqtt
 pip install numpy
 ```
 
-##### Run program
+##### Replace your_username with the username you sign into Unity with
 
 ```
-cd IMU
-python berryIMU.py
+echo -e "[UserConfig]\nUsername=your_username" > config.ini
 ```
+
+##### Startup Script for Raspberry Pi 
+
+```
+vim .bashrc
+```
+At the bottom of the file, add the following:
+```
+sudo python IMU/berryIMU.py
+```
+Note: If you have the repository in a different directory, please update the path above. 
+To save in vim, press the following:
+1. escape button 
+2. : 
+3. w 
+4. q
+
+##### Reboot Raspberry Pi 
+```
+sudo shutdown -r now
+```
+After you SSH into the raspberry pi again, the startup script will run. 
 
 #### Unity
 
@@ -176,3 +199,16 @@ $ ./LaunchGame
 ```
 $ conda deactivate
 ```
+
+
+## Resources
+We would like to give attribution to the following Resources.
+
+By level, the following audio sources were used:
+- Maze Level 0: "Riviera" by Maarten Schellekens
+- Maze Level 1: "04 Night-Shadows" by Ketsa
+- Maze Level 2 and 4: "Flowers Don't Say Anything, They Just Think" by One Man Book
+- Maze Level 3: "Nocturn" by M33 Project
+
+The background used in the Unity in-game menus are credited to user3802032 on freepik.com
+

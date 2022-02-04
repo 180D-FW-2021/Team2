@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
                 HandleVictory();
                 break;   
             case GameState.Quitting:
+                Application.Quit();
                 break;          
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);

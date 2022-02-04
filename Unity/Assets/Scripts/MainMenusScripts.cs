@@ -15,6 +15,9 @@ public class MainMenusScripts : MonoBehaviour
 
     // Set the GameState to StartScreen and Load Start Screen
     public void To_StartScreen() {
+        // Clear stored username
+        PlayerPrefs.SetString("Username", "");
+        Debug.Log(PlayerPrefs.GetString("Username"));
         GameManagerScript.UpdateGameState(GameState.StartScreen);
     }
 
@@ -41,6 +44,12 @@ public class MainMenusScripts : MonoBehaviour
     // Load the level and then set the GameState to 'Playing'
     public void To_PlayMaze() {
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting Game");
+        Application.Quit();
     }
 
 }

@@ -1,0 +1,48 @@
+body {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+h1 {
+  padding: 15px;
+  font-family: "Capriola", sans-serif;
+}
+
+.player-name {
+  color: #1a54a5;
+}
+
+.amaze-txt {
+  font-family: "Monoton", cursive;
+  margin-right: 15px;
+}
+
+.react-bootstrap-table-page-btns-ul {
+  float: right;
+}
+
+/* carret styling ref: 
+  https://github.com/react-bootstrap-table/react-bootstrap-table2/issues/215
+*/
+
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px dashed;
+  border-top: 4px solid \9;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+  border-top: 0;
+  border-bottom: 4px dashed;
+  border-bottom: 4px solid \9;
+  content: "";
+}
