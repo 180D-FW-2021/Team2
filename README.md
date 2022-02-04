@@ -121,12 +121,27 @@ pip install paho-mqtt
 pip install numpy
 ```
 
-##### Run program
+##### Startup Script for Raspberry Pi 
 
 ```
-cd IMU
-python berryIMU.py
+vim .bashrc
 ```
+At the bottom of the file, add the following:
+```
+sudo python IMU/berryIMU.py
+```
+Note: If you have the repository in a different directory, please update the path above. 
+To save in vim, press the following:
+1. escape button 
+2. : 
+3. w 
+4. q
+
+##### Reboot Raspberry Pi 
+```
+sudo shutdown -r now
+```
+After you SSH into the raspberry pi again, the startup script will run. 
 
 #### Unity
 
