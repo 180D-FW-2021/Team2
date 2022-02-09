@@ -33,20 +33,20 @@ public class RunPython : MonoBehaviour
                 // Executable path for Windows machines only
                 #if UNITY_STANDALONE_WIN
                 UnityEngine.Debug.Log("Using Windows Script");
-                psi.FileName =  path + "\\..\\..\\..\\Movenet\\src\\position_tracking.exe";
+                psi.FileName =  path + "\\..\\..\\..\\Movenet\\src\\dist\\position_tracking\\position_tracking.exe";
                 #endif
                 // Executable path for Mac only
                 #if UNITY_STANDALONE_OSX
                 UnityEngine.Debug.Log("Using Mac Script");
-                psi.FileName = "../Movenet/src/position_tracking";
+                psi.FileName = "../Movenet/src/dist/position_tracking/position_tracking";
                 #endif
 
                 // Paths for development
                 #if UNITY_EDITOR_WIN
-                psi.FileName =  path + "\\..\\..\\Movenet\\src\\position_tracking.exe";
+                psi.FileName =  path + "\\..\\..\\Movenet\\src\\dist\\position_tracking\\position_tracking.exe";
                 #endif
                 #if UNITY_EDITOR_OSX
-                psi.FileName = "../Movenet/src/position_tracking";
+                psi.FileName = "../Movenet/src/dist/position_tracking/position_tracking";
                 #endif
 
 
