@@ -13,18 +13,13 @@ public class mqtt : MonoBehaviour
     public float forward;
     public bool left;
     public bool right;
-    public static mqtt mqttObj;
+    public bool jump;
+    public bool duck;
 
     //create an instance of MqttClient class 
     private MqttClient client;
 
     private string username;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-        mqttObj = this;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +61,8 @@ public class mqtt : MonoBehaviour
         forward = 0;
         left = false;
         right = false;
+        jump = false;
+        duck = false;
 
     }
 
@@ -120,7 +117,32 @@ public class mqtt : MonoBehaviour
                 resetPerspectiveVars();
             }
         }
+        if (String.Equals(e.Topic, "topic/pose/" + username))
+        {
+            Debug.Log(str);
+            //Debug.Log(str == "Testing. Does this work?");
+            if (str == "j")
+            {
+                jump = true;
+                duck = false;
+            }
+            if (str == "d")
+            {
+                duck = true;
+                jump = false;
+            }
+            if (str == "s")
+            {
+                jump = false;
+                duck = false;
+            }
+        }
 
+    }
+
+    public void resetJumpVar()
+    {
+        jump = false;
     }
 
     public void resetPerspectiveVars()
