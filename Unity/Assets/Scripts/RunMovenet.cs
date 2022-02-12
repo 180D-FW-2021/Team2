@@ -33,20 +33,22 @@ public class RunMovenet : MonoBehaviour
                 // Executable path for Windows machines only
                 #if UNITY_STANDALONE_WIN
                 UnityEngine.Debug.Log("Using Windows Script");
+                // TODO: fix path for Windows
                 psi.FileName = path + "\\..\\..\\..\\Movenet\\src\\dist\\position_tracking\\position_tracking.exe";
                 #endif
                 // Executable path for Mac only
                 #if UNITY_STANDALONE_OSX
                 UnityEngine.Debug.Log("Using Mac Script");
-                psi.FileName = "../Movenet/src/dist/position_tracking/position_tracking";
+                psi.FileName = "../Movenet/dist/position_tracking/position_tracking";
                 #endif
 
                 // Paths for development
                 #if UNITY_EDITOR_WIN
+                // TODO: fix path for Windows
                 psi.FileName = path + "\\..\\..\\Movenet\\src\\dist\\position_tracking\\position_tracking.exe";
                 #endif
                 #if UNITY_EDITOR_OSX
-                psi.FileName = "../Movenet/src/dist/position_tracking/position_tracking";
+                psi.FileName = "../Build/Movenet/dist/position_tracking/position_tracking";
                 #endif
 
 
@@ -54,7 +56,7 @@ public class RunMovenet : MonoBehaviour
                 psi.RedirectStandardOutput = true;
                 psi.RedirectStandardError = true;
                 psi.CreateNoWindow = true;
-                psi.Arguments = "--username " + username;
+                psi.Arguments = "--unity --username " + username;
 
                 Process p = Process.Start(psi);
                 p.ErrorDataReceived += onError;

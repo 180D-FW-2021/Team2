@@ -60,17 +60,16 @@ class Movenet(object):
         (14, 16),
     ]
 
-    def __init__(self, model_name: str) -> None:
+    def __init__(self, unity: bool) -> None:
         """Initialize a MoveNet pose estimation model.
         Args:
-          model_name(str): Name of the TFLite MoveNet model.
+          unity(bool): True if movenet is being executed from Unity (editor/build)
+                       False if being executed from Movenet/src
         """
-        if model_name == "lightning":
-            # model_path = "../models/lite-model_movenet_singlepose_lightning_3.tflite"
+        if unity:
             model_path = "../Movenet/models/lite-model_movenet_singlepose_lightning_3.tflite"
         else:
-            # model_path = "../models/lite-model_movenet_singlepose_thunder_3.tflite"
-            model_path = "../Movenet/models/lite-model_movenet_singlepose_thunder_3.tflite"
+            model_path = "../models/lite-model_movenet_singlepose_lightning_3.tflite"
         
         self._interpreter = tf.lite.Interpreter(
                 model_path=model_path,

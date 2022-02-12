@@ -6,5 +6,14 @@
 MOVENET_DIR=../Movenet/src
 cd $MOVENET_DIR
 
-# build single executable with all dependencies installed
-pyinstaller -D position_tracking.py 
+# build executable
+pyinstaller -D position_tracking.py
+
+# remove previous build
+rm -r ../../Build/Movenet/build
+rm -r ../../Build/Movenet/dist
+# move to Build subdir for packaging
+mv build ../../Build/Movenet
+mv dist ../../Build/Movenet
+# Note: ensure Unity executable is in Build/Unity
+# this is important for proper relative paths

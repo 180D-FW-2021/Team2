@@ -5,4 +5,5 @@ set MOVENET_DIR=..\Movenet\src
 cd %MOVENET_DIR%
 
 :: build single executable with all dependencies installed
-pyinstaller -D position_tracking.p
+pyinstaller -D position_tracking.py
+:: TODO: move files to proper directories
