@@ -20,6 +20,7 @@ public class RunMovenet : MonoBehaviour
     void Start()
     {
         string username = PlayerPrefs.GetString("Username");
+	UnityEngine.Debug.Log(Application.dataPath);
         RunMoveNet(username, Application.dataPath);
     }
 
@@ -34,7 +35,7 @@ public class RunMovenet : MonoBehaviour
                 #if UNITY_STANDALONE_WIN
                 UnityEngine.Debug.Log("Using Windows Script");
                 // TODO: fix path for Windows
-                psi.FileName = path + "\\..\\Movenet\\dist\\position_tracking\\position_tracking.exe";
+                psi.FileName = path + "\\..\\..\\Movenet\\dist\\position_tracking\\position_tracking.exe";
                 #endif
                 // Executable path for Mac only
                 #if UNITY_STANDALONE_OSX
