@@ -7,3 +7,7 @@ cd %MOVENET_DIR%
 :: build single executable with all dependencies installed
 pyinstaller -D position_tracking.py
 :: TODO: move files to proper directories
+:: TODO: maybe need to add remove statements like Mac version
+move build ..\..\Build\Movenet
+move dist ..\..\Build\Movenet
+copy ..\models ..\..\Build\Movenet
