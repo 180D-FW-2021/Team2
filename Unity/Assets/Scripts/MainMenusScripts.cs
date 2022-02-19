@@ -20,6 +20,10 @@ public class MainMenusScripts : MonoBehaviour
         // Clear stored username
         PlayerPrefs.SetString("Username", "");
         UnityEngine.Debug.Log(PlayerPrefs.GetString("Username"));
+        foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        {
+            p.CloseMainWindow();
+        }
         GameManagerScript.UpdateGameState(GameState.StartScreen);
     }
 

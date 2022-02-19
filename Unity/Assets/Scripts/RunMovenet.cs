@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 public class RunMovenet : MonoBehaviour
 {
-    void Start()
+    public void StartMovenet()
     {
         string username = PlayerPrefs.GetString("Username");
 	UnityEngine.Debug.Log(Application.dataPath);
