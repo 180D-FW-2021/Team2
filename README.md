@@ -61,7 +61,7 @@ On End Screen
 
 ### Web Cam
 
-Ensure your arms are in frame, even when jumping. Best performance is when you are 1-3 ft from your webcam. Also, make sure you are not swapping too quickly between movemenets. After a failed attempt, wait around a 1-2 seconds before re-attempting the movement.
+Ensure your arms are in frame, even when jumping. Best performance is when you are 1-3 ft from your webcam. Also, make sure you are not swapping too quickly between movements. After a failed attempt, wait around a 1-2 seconds before re-attempting the movement.
 
 <img src="./images/movenet_position.png" alt="movenet_position" width="200"/>
 
@@ -111,8 +111,8 @@ To set up the Rpi controller, follow the raspberry pi instructions.
    $ sudo python IMU/berryIMU.py
    ```
 
-Note: If you have the repository in a different directory, please update the path above.
-To save in vim, press the following: ESC-:wq.
+   Note: If you have the repository in a different directory, please update the path above.
+   To save in vim, press the following: ESC-:wq.
 
 5. Reboot Raspberry Pi
 
@@ -120,15 +120,27 @@ To save in vim, press the following: ESC-:wq.
    sudo shutdown -r now
    ```
 
-After you SSH into the raspberry pi again, the startup script will run.
+   After you SSH into the raspberry pi again, the startup script will run.
 
 ## Compilation
 
 If you cannot download our executables, you can clone our source code and compile it yourself.
 
-## Create Build Directory Structure
+### Create Build Directory Structure
 
 To use our automated scripts and ensure proper relative paths, you will need to make sure you have created the proper directory structure at the root of the project repo. The structure is as follows:
+
+```
+Team2
+--| Build
+----| Movenet
+------ models/*
+------ dist/*
+----| Unity
+------ MazeProject.exe
+```
+
+Make the directory at the root of the project, and copy the models from `Movenet/models` to `Build/Movenet/models`.
 
 ### Unity
 
