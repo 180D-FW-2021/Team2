@@ -34,7 +34,7 @@ public class VoiceCommands_LevelSelectorConfirmation : MonoBehaviour
 
     private void YesCallback() {
     	Debug.Log("Loading level");
-		GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
+		GameManagerScript.UpdateGameState(GameState.WaitForMovenet);
     }
 
     private void NoCallback() {

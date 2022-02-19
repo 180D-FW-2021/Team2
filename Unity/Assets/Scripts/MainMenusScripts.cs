@@ -42,6 +42,11 @@ public class MainMenusScripts : MonoBehaviour
     }
 
     // Load the level and then set the GameState to 'Playing'
+    public void To_WaitForMovenet() {
+        GameManagerScript.UpdateGameState(GameState.WaitForMovenet);
+    }
+
+    // Load the level and then set the GameState to 'Playing'
     public void To_PlayMaze() {
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
     }
