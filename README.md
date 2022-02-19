@@ -71,7 +71,7 @@ Ensure your arms are in frame, even when jumping. Best performance is when you a
 
 ## Download the Game
 
-The Unity and Movenet executables are downloadable [here](https://drive.google.com/drive/folders/1vBoH45YPad5u9VueUC_M-a9Gt_FOG-vU?usp=sharing). Currently supported platforms are **MacOS 64-bit** and **Windows 10 64-bit** 64-bit. If these do not work for you, you can compile the code from source using the "Compilation" instructions in the next section.
+The Unity and Movenet executables are downloadable [here](https://drive.google.com/drive/folders/1vBoH45YPad5u9VueUC_M-a9Gt_FOG-vU?usp=sharing). Currently supported platforms are MacOS 64-bit and Windows 10 64-bit. If these do not work for you, you can compile the code from source using the "Compilation" instructions in the next section.
 
 Note: when running the executable, you may have to disable some security permissions. For Mac, see [this](https://forum.unity.com/threads/the-application-cannot-be-opened.404388/) for debugging help.
 
@@ -105,11 +105,11 @@ To set up the Rpi controller, follow the raspberry pi instructions.
    $ vim .bashrc
    ```
 
-At the bottom of the file, add the following:
+   At the bottom of the file, add the following:
 
-    ```
-    $ sudo python IMU/berryIMU.py
-    ```
+   ```
+   $ sudo python IMU/berryIMU.py
+   ```
 
 Note: If you have the repository in a different directory, please update the path above.
 To save in vim, press the following: ESC-:wq.
