@@ -1047,6 +1047,7 @@ GameObject:
   - component: {fileID: 1441735336}
   - component: {fileID: 1441735337}
   - component: {fileID: 1441735338}
+  - component: {fileID: 1441735339}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1177,7 +1178,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadingMovenetUI: {fileID: 1117050819}
   GameManagerScript: {fileID: 0}
-  connectedToMqtt: 0
+--- !u!114 &1441735339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441735331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c98f7bdea4cb454fb0a7a88fcb4ac22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1448099759
 GameObject:
   m_ObjectHideFlags: 0
