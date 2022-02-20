@@ -28,6 +28,7 @@ public class Authentication : MonoBehaviour
 
         // Save username (in case we authenticate properly)
         PlayerPrefs.SetString("Username", username);
+        PlayerPrefs.SetString("MovenetConnected", "F");
 
         // Prepare JSON body for Post Request
         LoginCredentials credentialsObj = new LoginCredentials();

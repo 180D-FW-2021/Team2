@@ -27,7 +27,8 @@ public class LoadingMovenet : MonoBehaviour
 
     void Update() {
         connectedToMqtt = PlayerPrefs.GetString("MovenetConnected", "F");
-        if (LoadingMovenetUI.activeSelf && connectedToMqtt == "T") {
+        if (connectedToMqtt == "T" && LoadingMovenetUI.activeSelf) {
+            Debug.Log("I am ready to load scene");
             GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
         }
     }

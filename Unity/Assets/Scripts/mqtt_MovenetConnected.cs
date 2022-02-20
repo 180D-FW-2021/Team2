@@ -55,8 +55,14 @@ public class mqtt_MovenetConnected : MonoBehaviour
     void Update()
     {
         if (connectedToMqtt == "T") {
+            Debug.Log("Updating connection status to Mqtt");
             PlayerPrefs.SetString("MovenetConnected", "T");
         }
+    }
+
+    void OnDestroy() {
+        if (client != null && client.IsConnected)
+            client.Disconnect();
     }
 
     // FROM mqtt.cs:
@@ -82,7 +88,10 @@ public class mqtt_MovenetConnected : MonoBehaviour
 
         if (String.Equals(e.Topic, "topic/pose/" + username))
         {
-            connectedToMqtt = "T";
+            if (str == "g" || str == "j" || str == "d" || str == "s") {
+                Debug.Log(str);
+                connectedToMqtt = "T";
+            }
             //Debug.Log(str == "Testing. Does this work?");
         }
     }
