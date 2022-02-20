@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
                 HandleVictory();
                 break;   
             case GameState.Quitting:
-                PlayerPrefs.DeleteKey("MovenetConnected");
+                PlayerPrefs.DeleteAll(); //Key("MovenetConnected");
                 Application.Quit();
                 break;          
             default:
