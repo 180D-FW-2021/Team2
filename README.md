@@ -73,9 +73,9 @@ Ensure your arms are in frame, even when jumping. Best performance is when you a
 
 The Unity and Movenet executables are downloadable [here](https://drive.google.com/drive/folders/1vBoH45YPad5u9VueUC_M-a9Gt_FOG-vU?usp=sharing). Currently supported platforms are MacOS 64-bit and Windows 10 64-bit. If these do not work for you, you can compile the code from source using the "Compilation" instructions in the next section.
 
-Note: when running the executable, you may have to disable some security permissions. For Mac, see [this](https://forum.unity.com/threads/the-application-cannot-be-opened.404388/) for debugging help.
+To start the game, unzip the `Build` file, and double click the game executable in `Build/Unity`. Once you login, the Movenet executable will automatically start booting.
 
-To set up the Rpi controller, follow the raspberry pi instructions.
+Note: when running the executable, you may have to disable some security permissions. For Mac, see [this](https://forum.unity.com/threads/the-application-cannot-be-opened.404388/) for debugging help.
 
 ## Raspberry Pi
 
