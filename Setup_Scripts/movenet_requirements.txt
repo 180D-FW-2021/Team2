@@ -3,3 +3,4 @@ paho-mqtt==1.5.1
 tensorflow==2.6.1
 tensorflow-estimator==2.6.0
 opencv-python==4.4.0.46
+pyinstaller==4.8

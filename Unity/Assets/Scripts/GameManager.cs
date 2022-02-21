@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
                 selectedLevel = level;
                 SceneManager.LoadScene("AreYouReadyScreen");
                 break;
+            case GameState.WaitForMovenet:
+                break;
             case GameState.LoadSelectedLevel:
                 SceneManager.LoadScene("MazeLevel_" + selectedLevel.ToString());
                 Time.timeScale = 1f; // ensure time is moving
@@ -114,6 +116,7 @@ public class GameManager : MonoBehaviour
                 HandleVictory();
                 break;   
             case GameState.Quitting:
+                PlayerPrefs.DeleteAll(); //Key("MovenetConnected");
                 Application.Quit();
                 break;          
             default:
@@ -139,6 +142,7 @@ public enum GameState {
     SelectLevel,
     HelpMenu,
     ConfirmLevelSelection,
+    WaitForMovenet,
     LoadSelectedLevel,
     Playing,
     Paused,

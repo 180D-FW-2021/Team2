@@ -16,26 +16,23 @@ pip install -q git+https://github.com/tensorflow/docs
 pip install --upgrade tensorflow-estimator==2.6.0
 ```
 
-2. Download movenet thunder and/or lightning TFLite model:
+2. Download movenet lightning TFLite model:
 
 - [Lightning](https://tfhub.dev/google/lite-model/movenet/singlepose/lightning/3)
-- [Thunder](https://tfhub.dev/google/lite-model/movenet/singlepose/thunder/3)
 
-Lightning prioritizes latency, while thunder prioritizes model accuracy.
-
-3. Add the model to the Movenet/models directory.
+3. Add the model to the `Movenet/models` directory.
 
 ## Usage
 
 1. Run position tracking for obstacle navigation
 
-`python3 position_tracking.py --no-mqtt -m [thunder|lightning]`
+`python3 position_tracking.py --no-mqtt --unity --latency`
 
-The model (m) argument allows you to select the model (thunder/lightning), and the no-mqtt argument sets up the program so that the player movement data is not sent to Unity with MQTT. By default (no args), the lightning model is used, and player movement is sent to Unity.
+The `no-mqtt` argument runs the script without comms with Unity. The `unity` argument should only be set when running the script from Unity, as it uses relative paths to obtain the Movenet models. The latency argument outputs the average time per frame in seconds.
 
 2. Run data collection
 
-`python3 collect_data.py -m [thunder|lightning] -f file_name.csv`
+`python3 collect_data.py -f file_name.csv`
 
 ## Files
 

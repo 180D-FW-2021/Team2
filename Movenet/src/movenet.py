@@ -18,7 +18,6 @@ References:
   https://github.com/tensorflow/examples/blob/master/lite/examples/pose_estimation/raspberry_pi/ml/movenet.py
 - MoveNet example with drawing keypoint predictions:
   https://github.com/nicknochnack/MoveNetLightning
-
 Modifications to TF code:
 - functions to draw predictions on video frames
 """
@@ -61,22 +60,21 @@ class Movenet(object):
         (14, 16),
     ]
 
-    def __init__(self, model_name: str) -> None:
+    def __init__(self, unity: bool) -> None:
         """Initialize a MoveNet pose estimation model.
         Args:
-          model_name(str): Name of the TFLite MoveNet model.
+          unity(bool): True if movenet is being executed from Unity (editor/build)
+                       False if being executed from Movenet/src
         """
-        if model_name == "lightning":
-            self._interpreter = tf.lite.Interpreter(
-                model_path="../models/lite-model_movenet_singlepose_lightning_3.tflite",
-                num_threads=4,
-            )
+        if unity:
+            model_path = "../Movenet/models/lite-model_movenet_singlepose_lightning_3.tflite"
         else:
-            self._interpreter = tf.lite.Interpreter(
-                "../models/lite-model_movenet_singlepose_thunder_3.tflite",
+            model_path = "../models/lite-model_movenet_singlepose_lightning_3.tflite"
+        
+        self._interpreter = tf.lite.Interpreter(
+                model_path=model_path,
                 num_threads=4,
             )
-
         self._interpreter.allocate_tensors()
 
         self._input_index = self._interpreter.get_input_details()[0]["index"]

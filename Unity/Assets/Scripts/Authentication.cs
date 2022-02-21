@@ -12,6 +12,7 @@ public class Authentication : MonoBehaviour
     public InputField inputUsername;
     public InputField inputPassword;
     public GameObject invalidCredentialsUI;
+    public RunMovenet myrunMovenet;
 
     string username;
     string password;
@@ -27,6 +28,7 @@ public class Authentication : MonoBehaviour
 
         // Save username (in case we authenticate properly)
         PlayerPrefs.SetString("Username", username);
+        PlayerPrefs.SetString("MovenetConnected", "F");
 
         // Prepare JSON body for Post Request
         LoginCredentials credentialsObj = new LoginCredentials();
@@ -55,6 +57,7 @@ public class Authentication : MonoBehaviour
             {
                 // If successful, go to the Main Menu!
                 Debug.Log("success!");
+                myrunMovenet.StartMovenet();
                 GameManagerScript.UpdateGameState(GameState.MainMenu);
             }
         }

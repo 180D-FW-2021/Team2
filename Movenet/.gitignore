@@ -12,3 +12,9 @@ __pycache__
 
 # personal
 subscriber.py
+
+# executable
+position_tracking
+dist/
+build/
+*.spec

@@ -38,3 +38,4 @@ class Position(Enum):
     # transition from out-of-frame to stationary
     # (tell Unity to stop out-of-frame message)
     OUT_FRAME_STATIONARY = 9
+    GAME_START = 10
