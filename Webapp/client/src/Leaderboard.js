@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { secToDate } from "./utils/Utils";
-import { getLeaderboard } from "./utils/FakeBackend";
-// import { getLeaderboard } from "./utils/RealBackend";
+// import { getLeaderboard } from "./utils/FakeBackend";
+import { getLeaderboard } from "./utils/RealBackend";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
@@ -10,6 +10,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
+import "./Leaderboard.css";
 
 const { SearchBar } = Search;
 const elemsPerPage = 10;

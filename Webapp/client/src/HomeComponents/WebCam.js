@@ -1,6 +1,6 @@
 function WebCam() {
   return (
-    <div>
+    <div className="web-cam">
       <h3>Web Cam</h3>
       <p>
         The web cam detects <b>jumping/ducking</b>. Detected movements will be

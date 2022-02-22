@@ -13,7 +13,7 @@ const voice_columns = [
 
 const voice_main_menu = [
   {
-    command: "Back, Logout",
+    command: "Back or Logout",
     description: "Logout and return to start screen",
   },
   {
@@ -70,11 +70,11 @@ const voice_ready = [
 
 const voice_pause_menu = [
   {
-    command: "Stop, Pause",
+    command: "Stop or Pause",
     description: "Open pause menu",
   },
   {
-    command: "Start, Resume",
+    command: "Start or Resume",
     description: "Resume game",
   },
   {

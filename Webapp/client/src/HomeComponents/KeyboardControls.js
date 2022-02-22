@@ -14,7 +14,7 @@ const columns = [
 const data = [
   {
     control: "Player movement",
-    key: "Arrow keys or WASD.",
+    key: "Arrow keys or WASD",
   },
   {
     control: "Rotate camera",

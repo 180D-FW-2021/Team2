@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { secToDate, getLevelText } from "./utils/Utils";
-import { getHistory } from "./utils/FakeBackend";
-// import { getHistory } from "./utils/RealBackend";
+// import { getHistory } from "./utils/FakeBackend";
+import { getHistory } from "./utils/RealBackend";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import "./Leaderboard.css";
 
 const elemsPerPage = 20;
 

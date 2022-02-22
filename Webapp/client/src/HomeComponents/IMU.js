@@ -1,6 +1,6 @@
 function IMU() {
   return (
-    <div>
+    <div className="imu">
       <h3>IMU</h3>
       <p>
         The IMU controls <b>player movement</b>. Players can move forwards and
@@ -8,13 +8,11 @@ function IMU() {
         right.
       </p>
       <p>
-        <table className="instructions-table">
+        <table>
           <thead>
             <tr>
               <th>Neutral</th>
               <th>Forward</th>
-              <th>Left</th>
-              <th>Right</th>
             </tr>
           </thead>
           <tbody>
@@ -25,6 +23,14 @@ function IMU() {
               <td>
                 <img src="/images/2.jpg" alt="imu_forward" width="200" />
               </td>
+            </tr>
+          </tbody>
+          <thead>
+            <th>Left</th>
+            <th>Right</th>
+          </thead>
+          <tbody>
+            <tr>
               <td>
                 <img src="/images/3.jpg" alt="imu_left" width="200" />
               </td>

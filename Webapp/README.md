@@ -1,6 +1,6 @@
 # AMaze Web Application
 
-The web application is located at https://amaze-webapp.herokuapp.com/!
+The web application is located (here)[https://amaze-webapp.herokuapp.com/].
 
 ## Tech Stack
 

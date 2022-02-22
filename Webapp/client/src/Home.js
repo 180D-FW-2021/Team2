@@ -4,11 +4,15 @@ import VoiceCommands from "./HomeComponents/VoiceCommands";
 import KeyboardControls from "./HomeComponents/KeyboardControls";
 import Levels from "./HomeComponents/Levels";
 import Download from "./HomeComponents/Download";
+import "./Home.css";
 
 function Home() {
   return (
-    <div>
+    <div className="home">
       <h1>A-Maze Game</h1>
+      <p>
+        <img src="/images/maze.png" alt="maze" width="500" />
+      </p>
       <p>
         A-maze is an interactive indoor game designed to test a user's memory
         and dexerity. Players navigate through intricate maze environments,

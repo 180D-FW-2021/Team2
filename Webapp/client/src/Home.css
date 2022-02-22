@@ -1,0 +1,40 @@
+.home .react-bootstrap-table table {
+  table-layout: auto !important;
+  max-width: 600px;
+}
+
+.imu table {
+  border-style: solid;
+  border-collapse: collapse;
+}
+
+.imu table,
+th,
+td {
+  border: 1px solid;
+  border-color: #d3d3d3;
+}
+
+.imu td {
+  padding: 20px;
+}
+
+.imu th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+}
+
+.web-cam table {
+  max-width: 1000px;
+}
+
+.web-cam td {
+  padding: 20px;
+}
+
+.web-cam th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+}
