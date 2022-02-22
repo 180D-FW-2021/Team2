@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { secToDate } from "./utils/Utils";
-// import { getLeaderboard } from "./utils/FakeBackend";
-import { getLeaderboard } from "./utils/RealBackend";
+import { getLeaderboard } from "./utils/FakeBackend";
+// import { getLeaderboard } from "./utils/RealBackend";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
@@ -97,10 +97,7 @@ function Leaderboard() {
   }, []);
   return (
     <div>
-      <h1>
-        <span className="amaze-txt">A-Maze</span>
-        <b>Leaderboard</b>
-      </h1>
+      <h1>Leaderboard</h1>
       <ToolkitProvider keyField="username" data={data} columns={columns} search>
         {(props) => {
           return (
