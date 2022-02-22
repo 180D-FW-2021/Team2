@@ -8,9 +8,8 @@ function NavBar() {
           <span className="amaze-txt">A-Maze</span>
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="/#instructions">Instructions</Nav.Link>
-          <Nav.Link href="/#levels">Levels</Nav.Link>
-          <Nav.Link href="/#download">Download</Nav.Link>
+          <Nav.Link href="/instructions">Instructions</Nav.Link>
+          <Nav.Link href="/levels">Levels</Nav.Link>
           <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
         </Nav>
       </Container>

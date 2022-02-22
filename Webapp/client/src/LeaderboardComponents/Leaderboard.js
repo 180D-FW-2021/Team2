@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { secToDate } from "./utils/Utils";
-// import { getLeaderboard } from "./utils/FakeBackend";
-import { getLeaderboard } from "./utils/RealBackend";
+import { secToDate } from "../utils/Utils";
+// import { getLeaderboard } from "../utils/FakeBackend";
+import { getLeaderboard } from "../utils/RealBackend";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
