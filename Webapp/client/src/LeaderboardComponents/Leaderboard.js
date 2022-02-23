@@ -50,6 +50,14 @@ const columns = [
     },
   },
   {
+    dataField: "level0",
+    text: "Level 0",
+    formatter: formatLevelCol,
+    sort: true,
+    sortFunc: sortScores,
+    searchable: false,
+  },
+  {
     dataField: "level1",
     text: "Level 1",
     formatter: formatLevelCol,
@@ -76,14 +84,6 @@ const columns = [
   {
     dataField: "level4",
     text: "Level 4",
-    formatter: formatLevelCol,
-    sort: true,
-    sortFunc: sortScores,
-    searchable: false,
-  },
-  {
-    dataField: "level5",
-    text: "Level 5",
     formatter: formatLevelCol,
     sort: true,
     sortFunc: sortScores,

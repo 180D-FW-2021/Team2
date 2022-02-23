@@ -13,25 +13,25 @@ export function secToDate(seconds) {
 export function getLevelText(text) {
   let level = text;
   switch (text) {
-    case "level1":
+    case "level0":
     case "MazeLevel_0":
+      level = "Level 0";
+      break;
+    case "level1":
+    case "MazeLevel_1":
       level = "Level 1";
       break;
     case "level2":
-    case "MazeLevel_1":
+    case "MazeLevel_2":
       level = "Level 2";
       break;
     case "level3":
-    case "MazeLevel_2":
+    case "MazeLevel_3":
       level = "Level 3";
       break;
     case "level4":
-    case "MazeLevel_3":
-      level = "Level 4";
-      break;
-    case "level5":
     case "MazeLevel_4":
-      level = "Level 5";
+      level = "Level 4";
       break;
     default:
       break;
