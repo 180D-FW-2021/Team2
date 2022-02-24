@@ -15,6 +15,7 @@ public class mqtt : MonoBehaviour
     public bool right;
     public bool jump;
     public bool duck;
+    public bool outofframe;
 
     //create an instance of MqttClient class 
     private MqttClient client;
@@ -63,6 +64,7 @@ public class mqtt : MonoBehaviour
         right = false;
         jump = false;
         duck = false;
+        outofframe = false;
 
     }
 
@@ -133,9 +135,14 @@ public class mqtt : MonoBehaviour
             }
             if (str == "s")
             {
+                outofframe = false;
                 jump = false;
                 duck = false;
             }
+            if (str == "o")
+            {
+                outofframe = true;
+            } 
         }
 
     }
