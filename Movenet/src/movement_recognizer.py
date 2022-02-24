@@ -93,9 +93,19 @@ class MovementRecognizer:
         if self.position == Pos.GAME_START:
             next_pos = Pos.STATIONARY
 
-        if self._player_out_of_frame():
+        if self.position == Pos.OUT_OF_FRAME_START:
             next_pos = Pos.OUT_OF_FRAME
-        elif self.position == Pos.OUT_OF_FRAME:
+
+        is_out_frame = self._player_out_of_frame()
+
+        if (
+            self.position != Pos.OUT_OF_FRAME_START
+            and self.position != Pos.OUT_OF_FRAME
+            and is_out_frame
+        ):
+            next_pos = Pos.OUT_OF_FRAME_START
+
+        if self.position == Pos.OUT_OF_FRAME and not is_out_frame:
             next_pos = Pos.OUT_FRAME_STATIONARY
 
         if self.position == Pos.STATIONARY:

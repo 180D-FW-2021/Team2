@@ -45,10 +45,8 @@ class Publisher(mqtt.Client):
             or player_pos == Position.OUT_FRAME_STATIONARY
         ):
             self.publish(topic, "s", qos=1)
-        ''' do not send out-of-frame for now
-        elif player_pos == Position.OUT_OF_FRAME:
+        elif player_pos == Position.OUT_OF_FRAME_START:
             self.publish(topic, 'o', qos=1)
-        '''
 
     # connect/disconnect functions
 
