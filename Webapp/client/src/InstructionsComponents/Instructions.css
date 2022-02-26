@@ -38,3 +38,14 @@ td {
   padding-bottom: 10px;
   padding-left: 25px;
 }
+
+#key-controls {
+  filter: brightness(0%);
+  /*
+  background-color: #353539;
+  border-radius: 30px;
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  */
+}
