@@ -24,7 +24,7 @@ public class TutorialInstructions : MonoBehaviour
     {
         if (hit.collider.name == "MoveInstrCollider")
         {
-            Show("To move forward, use the arrow keys, WASD, or tilt the cotroller forward");
+            Show("To move forward, use the arrow keys, WASD, or tilt the controller forward");
         }
         else if (hit.collider.name == "DuckInstrCollider")
         {
@@ -32,11 +32,11 @@ public class TutorialInstructions : MonoBehaviour
         }
         else if (hit.collider.name == "TurnInstrCollider")
         {
-            Show("To turn, use 'z' and 'x' or tilt the controller left and right");
+            Show("To turn left and right, use 'z' and 'x' or tilt the controller left and right");
         }
         else if (hit.collider.name == "JumpInstrCollider")
         {
-            Show("To jump, press the space bar or lighly jump while in frame of your webcam");
+            Show("To jump, press the space bar or lightly jump while in frame of your webcam");
         }
         else if (hit.collider.name == "EndInstrCollider")
         {
