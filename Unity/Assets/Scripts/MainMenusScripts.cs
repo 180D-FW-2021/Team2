@@ -54,6 +54,10 @@ public class MainMenusScripts : MonoBehaviour
 
     // Load the level and then set the GameState to 'Playing'
     public void To_PlayMaze() {
+        foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        {
+            p.CloseMainWindow();
+        }
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
     }
 
