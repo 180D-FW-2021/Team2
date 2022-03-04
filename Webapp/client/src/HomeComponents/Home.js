@@ -5,9 +5,9 @@ function Home() {
     <div className="home">
       <h1>A-Maze Game</h1>
       <p>
-        <img src="/images/maze.png" alt="maze" width="500" />
+        <img src="/images/maze.jpg" alt="maze" width="450" />
       </p>
-      <p>
+      <p style={{ marginTop: "25px" }}>
         A-maze is an interactive indoor game designed to test a user's memory
         and dexerity. Players navigate through intricate maze environments,
         while jumping and ducking over obstacles.

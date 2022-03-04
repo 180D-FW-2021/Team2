@@ -7,12 +7,14 @@ function IMU() {
         backwards, as well as change their perspective by turning left and
         right.
       </p>
+      <h4>Directional Movement</h4>
       <p>
         <table>
           <thead>
             <tr>
               <th>Neutral</th>
               <th>Forward</th>
+              <th>Backwards</th>
             </tr>
           </thead>
           <tbody>
@@ -23,8 +25,16 @@ function IMU() {
               <td>
                 <img src="/images/2.jpg" alt="imu_forward" width="200" />
               </td>
+              <td>
+                <img src="/images/5.jpg" alt="imu_back (TODO)" width="200" />
+              </td>
             </tr>
           </tbody>
+        </table>
+      </p>
+      <h4>Turning</h4>
+      <p>
+        <table>
           <thead>
             <th>Left</th>
             <th>Right</th>

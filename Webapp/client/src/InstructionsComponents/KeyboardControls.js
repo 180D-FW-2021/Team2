@@ -1,7 +1,7 @@
 function KeyboardControls() {
   return (
     <div>
-      <h3>Keyboard Controls</h3>
+      <h3 style={{ paddingBottom: "20px" }}>Keyboard Controls</h3>
       <p>
         <img
           id="key-controls"

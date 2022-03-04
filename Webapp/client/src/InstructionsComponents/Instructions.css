@@ -40,12 +40,11 @@ td {
 }
 
 #key-controls {
-  filter: brightness(0%);
-  /*
+  /* filter: brightness(0%); */
   background-color: #353539;
   border-radius: 30px;
   padding-left: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
-  */
+  border-color: black;
 }

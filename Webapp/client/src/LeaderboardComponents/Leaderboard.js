@@ -102,7 +102,7 @@ function Leaderboard() {
       <ToolkitProvider keyField="username" data={data} columns={columns} search>
         {(props) => {
           return (
-            <div>
+            <p>
               <SearchBar
                 srText=""
                 placeholder="Search username"
@@ -119,7 +119,7 @@ function Leaderboard() {
                 hover
                 condensed
               />
-            </div>
+            </p>
           );
         }}
       </ToolkitProvider>

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import NavBar from "./NavBar";
+import NavBar from "./NavbarComponents/Navbar";
 import Leaderboard from "./LeaderboardComponents/Leaderboard";
 import History from "./HistoryComponents/History";
 import Home from "./HomeComponents/Home";

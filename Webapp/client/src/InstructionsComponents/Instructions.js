@@ -7,7 +7,7 @@ import "./Instructions.css";
 function Instructions() {
   return (
     <div className="instructions">
-      <h2>Instructions</h2>
+      <h1>Instructions</h1>
       <p>
         The game uses an IMU controls for player movement, voice commands for
         menu navigation, and the web cam for jump/duck detection. For
