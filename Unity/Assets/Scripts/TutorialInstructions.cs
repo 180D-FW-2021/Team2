@@ -5,18 +5,23 @@ using UnityEngine.UI;
 
 public class TutorialInstructions : MonoBehaviour
 {
-    public GameObject InstrUI;
     public Text instrText;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Hide();
+        }
+    }
 
     public void Show(string instr)
     {
-        InstrUI.SetActive(true); // Set game object to active
         instrText.text = instr;
     }
 
     public void Hide()
     {
-        InstrUI.SetActive(false); // Set game object to not active
         instrText.text = "";
     }
 
