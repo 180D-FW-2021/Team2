@@ -4,32 +4,39 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
 
-public class SettingsScripts : MonoBehaviour
+public class UpdateSettings : MonoBehaviour
 {
+    public AudioSource gameMusic;
+    public GameObject trailObject;
+
     public Slider AudioSlider;
     public Toggle MovenetToggle;
     public Toggle HintsToggle;
 
     public RunMovenet myrunMovenet;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
+        if (PlayerPrefs.HasKey("LevelMusicVolume"))
+        {
+            gameMusic.volume = PlayerPrefs.GetFloat("LevelMusicVolume");
+            AudioSlider.value = PlayerPrefs.GetFloat("LevelMusicVolume");
+        }
         if (PlayerPrefs.HasKey("MovenetConnected") && PlayerPrefs.GetString("MovenetConnected") == "F")
         {
             MovenetToggle.isOn = false;
-        }
-        if (PlayerPrefs.HasKey("LevelMusicVolume"))
-        {
-            AudioSlider.value = PlayerPrefs.GetFloat("LevelMusicVolume");
         }
         if (PlayerPrefs.HasKey("HintsOn"))
         {
             if (PlayerPrefs.GetInt("HintsOn") == 1)
             {
+                trailObject.SetActive(true);
                 HintsToggle.isOn = true;
             }
             else
             {
+                trailObject.SetActive(false);
                 HintsToggle.isOn = false;
             }
 
@@ -40,6 +47,7 @@ public class SettingsScripts : MonoBehaviour
     {
         UnityEngine.Debug.Log("Audio volume changed");
         float LevelMusicVolume = AudioSlider.value;
+        gameMusic.volume = LevelMusicVolume;
         PlayerPrefs.SetFloat("LevelMusicVolume", LevelMusicVolume);
     }
 
@@ -49,6 +57,7 @@ public class SettingsScripts : MonoBehaviour
         {
             // launch Movenet
             myrunMovenet.StartMovenet();
+            PlayerPrefs.SetString("MovenetConnected", "T");
         }
         else
         {
@@ -68,12 +77,14 @@ public class SettingsScripts : MonoBehaviour
         {
             // turn on hints
             PlayerPrefs.SetInt("HintsOn", 1);
+            trailObject.SetActive(true);
             UnityEngine.Debug.Log("Hints on");
         }
         else
         {
             // turn off hints
             PlayerPrefs.SetInt("HintsOn", 0);
+            trailObject.SetActive(false);
             UnityEngine.Debug.Log("Hints off");
         }
     }
