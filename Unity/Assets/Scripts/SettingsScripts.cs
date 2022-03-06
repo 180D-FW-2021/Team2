@@ -49,6 +49,7 @@ public class SettingsScripts : MonoBehaviour
         {
             // launch Movenet
             myrunMovenet.StartMovenet();
+            PlayerPrefs.SetString("MovenetConnected", "N");
         }
         else
         {

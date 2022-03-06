@@ -58,6 +58,7 @@ public class Authentication : MonoBehaviour
                 // If successful, go to the Main Menu!
                 Debug.Log("success!");
                 myrunMovenet.StartMovenet();
+                PlayerPrefs.SetString("MovenetConnected", "N");
                 GameManagerScript.UpdateGameState(GameState.MainMenu);
             }
         }

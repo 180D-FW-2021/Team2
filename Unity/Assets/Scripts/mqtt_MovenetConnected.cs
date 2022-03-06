@@ -21,7 +21,7 @@ public class mqtt_MovenetConnected : MonoBehaviour
     {
         connectedToMqtt = PlayerPrefs.GetString("MovenetConnected", "F");
 
-        if (connectedToMqtt == "F") {
+        if (connectedToMqtt == "F" || connectedToMqtt == "N") {
             // Obtain user information
             username = PlayerPrefs.GetString("Username");
             Debug.Log("mqtt " + username);

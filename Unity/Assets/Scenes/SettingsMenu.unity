@@ -627,7 +627,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &474402693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In game
+  m_text: 'In-game
 
     Hints'
   m_isRightToLeft: 0
@@ -1394,8 +1394,8 @@ MonoBehaviour:
     textComponent: {fileID: 1170439667}
     characterCount: 13
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 2
     pageCount: 1

@@ -57,7 +57,7 @@ public class UpdateSettings : MonoBehaviour
         {
             // launch Movenet
             myrunMovenet.StartMovenet();
-            PlayerPrefs.SetString("MovenetConnected", "T");
+            PlayerPrefs.SetString("MovenetConnected", "N");
         }
         else
         {
