@@ -11,6 +11,9 @@ public class mqtt_MovenetConnected : MonoBehaviour
     // Note whether we are connected to Movenet
     private string connectedToMqtt;
 
+    // Note whether we are signed in
+    private string playingAsGuest; 
+
     // FROM mqtt.cs:
     //create an instance of MqttClient class 
     private MqttClient client;
@@ -19,9 +22,10 @@ public class mqtt_MovenetConnected : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playingAsGuest = PlayerPrefs.GetString("PlayingAsGuest");
         connectedToMqtt = PlayerPrefs.GetString("MovenetConnected", "F");
 
-        if (connectedToMqtt == "F" || connectedToMqtt == "N") {
+        if (playingAsGuest == "F" && (connectedToMqtt == "F" || connectedToMqtt == "N")) {
             // Obtain user information
             username = PlayerPrefs.GetString("Username");
             Debug.Log("mqtt " + username);

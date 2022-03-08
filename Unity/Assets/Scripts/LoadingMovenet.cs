@@ -14,11 +14,13 @@ public class LoadingMovenet : MonoBehaviour
     public GameManager GameManagerScript;
 
     private string connectedToMqtt;
-
+    private string playingAsGuest;
 
     void Awake() {
         GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
         GameManagerScript = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
+
+        playingAsGuest = PlayerPrefs.GetString("PlayingAsGuest");
     }
 
     void OnDestroy() {
@@ -53,8 +55,12 @@ public class LoadingMovenet : MonoBehaviour
 
     public void DisplayPopUp() 
     {
-        LoadingMovenetUI.SetActive(true); // Set game object to active
-        // Time.timeScale = 0f;  // completely stop time
+        if (playingAsGuest == "T") {
+            Debug.Log("Load Scene because not using Movenet");
+            GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
+        } else {
+            LoadingMovenetUI.SetActive(true); // Set game object to active
+        }
     }
 
 }

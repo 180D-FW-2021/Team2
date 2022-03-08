@@ -24,6 +24,18 @@ public class Authentication : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
+    public void ContinueAsGuest() 
+    {
+        // Set to False b/c Movenet will be turned off
+        PlayerPrefs.SetString("MovenetConnected", "F");
+
+        // Note that we are playing as guest
+        PlayerPrefs.SetString("PlayingAsGuest", "T");
+
+        // Load Main Menu
+        GameManagerScript.UpdateGameState(GameState.MainMenu);
+    }
+
     public void Authenticate(string uri) 
     {
         // Organize info to make POST request
@@ -34,6 +46,7 @@ public class Authentication : MonoBehaviour
 
         // Save username (in case we authenticate properly)
         PlayerPrefs.SetString("Username", username);
+        PlayerPrefs.SetString("PlayingAsGuest", "F");
         PlayerPrefs.SetString("MovenetConnected", "F");
 
         // Prepare JSON body for Post Request

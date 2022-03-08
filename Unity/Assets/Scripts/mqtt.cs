@@ -25,47 +25,49 @@ public class mqtt : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string playingAsGuest = PlayerPrefs.GetString("PlayingAsGuest");
+        if (playingAsGuest == "F") 
+        {            
+            // Obtain user information
+            username = PlayerPrefs.GetString("Username");
+            Debug.Log("mqtt " + username);
 
-        // Obtain user information
-        username = PlayerPrefs.GetString("Username");
-        Debug.Log("mqtt " + username);
+            //create MqttClient object
+            // mqtt.eclipseprojects.io ip address
+            // alternate test.mosquitto.org
+            client = new MqttClient("test.mosquitto.org");
 
-        //create MqttClient object
-        // mqtt.eclipseprojects.io ip address
-        // alternate test.mosquitto.org
-        client = new MqttClient("test.mosquitto.org");
+            //When was the message published to the Broker
+            client.MqttMsgPublished += client_MqttMsgPublished;
 
-        //When was the message published to the Broker
-        client.MqttMsgPublished += client_MqttMsgPublished;
-
-        //to be notified about recieved messages published on the subscribed topic
-        client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+            //to be notified about recieved messages published on the subscribed topic
+            client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 
 
-        //call the Connect Method to connect to the broker
-        string clientId = Guid.NewGuid().ToString();
+            //call the Connect Method to connect to the broker
+            string clientId = Guid.NewGuid().ToString();
 
-        //connect
-        client.Connect(clientId);
+            //connect
+            client.Connect(clientId);
 
-        // currently player will move forward/turn if message sent to topic/movement
-        // strings from Raspberry Pi
-        client.Subscribe(new string[] { "topic/movement/" + username },
-            new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+            // currently player will move forward/turn if message sent to topic/movement
+            // strings from Raspberry Pi
+            client.Subscribe(new string[] { "topic/movement/" + username },
+                new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
-        // currently player will jump/duck if message sent to topic/pose
-        // strings from pose detection
-        client.Subscribe(new string[] { "topic/pose/" + username },
-            new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+            // currently player will jump/duck if message sent to topic/pose
+            // strings from pose detection
+            client.Subscribe(new string[] { "topic/pose/" + username },
+                new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
-        // initialize movement variables
-        forward = 0;
-        left = false;
-        right = false;
-        jump = false;
-        duck = false;
-        outofframe = false;
-
+            // initialize movement variables
+            forward = 0;
+            left = false;
+            right = false;
+            jump = false;
+            duck = false;
+            outofframe = false;
+        }
     }
 
     void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
