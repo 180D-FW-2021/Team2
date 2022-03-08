@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
         // player duck
-        if (Input.GetKey(KeyCode.LeftShift) || myMQTT.duck)
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || myMQTT.duck)
         {
             if (!ducked)
             {

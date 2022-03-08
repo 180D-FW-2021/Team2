@@ -24,6 +24,7 @@ public class MainMenusScripts : MonoBehaviour
         {
             p.CloseMainWindow();
         }
+        PlayerPrefs.SetString("MovenetConnected", "F");
         GameManagerScript.UpdateGameState(GameState.StartScreen);
     }
 
@@ -35,6 +36,12 @@ public class MainMenusScripts : MonoBehaviour
     // Set the GameState to HelpMenu and Load Help Screen/Instructions
     public void To_HelpMenu() {
         GameManagerScript.UpdateGameState(GameState.HelpMenu);
+    }
+
+    // Set the GameState to SettingsMenu and Load Settings Menu
+    public void To_SettingsMenu()
+    {
+        GameManagerScript.UpdateGameState(GameState.SettingsMenu);
     }
 
     // Set the GameState to SelectLevel and Load Level Selector Menu
@@ -58,6 +65,7 @@ public class MainMenusScripts : MonoBehaviour
         {
             p.CloseMainWindow();
         }
+        PlayerPrefs.SetString("MovenetConnected", "F");
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
     }
 

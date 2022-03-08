@@ -20,7 +20,8 @@ public class VoiceCommands_MainMenu : MonoBehaviour
 		keywords.Add("level", LevelsCallback);
     	keywords.Add("levels", LevelsCallback);
 		keywords.Add("help", HelpCallback);
-		keywords.Add("quit", QuitCallback);
+        keywords.Add("settings", SettingsCallback);
+        keywords.Add("quit", QuitCallback);
     	keywords.Add("back", BackCallback);
 		keywords.Add("log", BackCallback); // TODO: revisit this
 
@@ -47,7 +48,13 @@ public class VoiceCommands_MainMenu : MonoBehaviour
     	Debug.Log("Help Menu");
     }
 
-	private void QuitCallback() {
+    private void SettingsCallback()
+    {
+        GameManagerScript.UpdateGameState(GameState.SettingsMenu);
+        Debug.Log("Settings Menu");
+    }
+
+    private void QuitCallback() {
     	Debug.Log("Quitting");
 		GameManagerScript.UpdateGameState(GameState.Quitting);
     }

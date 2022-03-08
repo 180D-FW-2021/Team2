@@ -18,6 +18,12 @@ public class Authentication : MonoBehaviour
     string password;
     //bool invalidCredentialsProvided = false;
 
+    private void Start()
+    {
+        // clear player prefs when user starts login page
+        PlayerPrefs.DeleteAll();
+    }
+
     public void Authenticate(string uri) 
     {
         // Organize info to make POST request
@@ -58,6 +64,9 @@ public class Authentication : MonoBehaviour
                 // If successful, go to the Main Menu!
                 Debug.Log("success!");
                 myrunMovenet.StartMovenet();
+                // "N" indicates movenet is starting but hasn't opened yet
+                // "F" used to indicate that player has turned movenet off
+                PlayerPrefs.SetString("MovenetConnected", "N");
                 GameManagerScript.UpdateGameState(GameState.MainMenu);
             }
         }
