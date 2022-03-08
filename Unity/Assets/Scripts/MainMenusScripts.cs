@@ -65,6 +65,7 @@ public class MainMenusScripts : MonoBehaviour
         {
             p.CloseMainWindow();
         }
+        PlayerPrefs.SetString("MovenetConnected", "F");
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
 
+// Used to handle settings funcitonality in pause menu
 public class UpdateSettings : MonoBehaviour
 {
     public AudioSource gameMusic;
@@ -15,9 +16,9 @@ public class UpdateSettings : MonoBehaviour
 
     public RunMovenet myrunMovenet;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // Initialize UI settings elements with current settings states
         if (PlayerPrefs.HasKey("LevelMusicVolume"))
         {
             gameMusic.volume = PlayerPrefs.GetFloat("LevelMusicVolume");

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
 
+
+// Used to set playerprefs in settings menu and handle other settings
 public class SettingsScripts : MonoBehaviour
 {
     public Slider AudioSlider;
@@ -14,6 +16,7 @@ public class SettingsScripts : MonoBehaviour
 
     private void Start()
     {
+        // Initialize UI settings elements with current settings states
         if (PlayerPrefs.HasKey("MovenetConnected") && PlayerPrefs.GetString("MovenetConnected") == "F")
         {
             MovenetToggle.isOn = false;

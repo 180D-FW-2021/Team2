@@ -29,6 +29,7 @@ On Main Menu:
 - "Back", "Log Out": log out and return to Start Screen
 - "Levels": Open Level Selection Screen
 - "Help": Open Help menu (not yet implemented)
+- "Settings": Open Settings menu
 - "Quit": Quit game
 
 On Level Selection Screen:
