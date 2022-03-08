@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44664782, g: 0.49649352, b: 0.57486135, a: 1}
+  m_IndirectSpecularColor: {r: 0.44664735, g: 0.49649262, b: 0.5748604, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8905,6 +8905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warningUI: {fileID: 1081035864}
   objectContainingMqtt: {fileID: 623434513}
+  pauseMenuUI: {fileID: 1539941678}
 --- !u!114 &507878618
 MonoBehaviour:
   m_ObjectHideFlags: 0

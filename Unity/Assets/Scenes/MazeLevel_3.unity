@@ -32498,6 +32498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   warningUI: {fileID: 775718957}
   objectContainingMqtt: {fileID: 45461609}
+  pauseMenuUI: {fileID: 657085493}
 --- !u!114 &2060809257
 MonoBehaviour:
   m_ObjectHideFlags: 0
