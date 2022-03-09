@@ -471,9 +471,9 @@ with open('data.csv', 'w') as csvfile:
         if tiltCompensatedHeading<340 and tiltCompensatedHeading >298:
             if AccYangle> -20:
                 output = "l" 
-            elif AccYangle<-50: 
+            elif AccYangle<-150: 
                 output = "r" 
-        elif AccYangle<0: 
+        elif AccYangle<0: # and  CFangleX<0:
             if CFangleX<0:
                 output = "f" 
             elif CFangleX>0: 
