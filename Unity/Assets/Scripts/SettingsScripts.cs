@@ -14,6 +14,8 @@ public class SettingsScripts : MonoBehaviour
 
     public RunMovenet myrunMovenet;
 
+    private string playingAsGuest;
+
     private void Start()
     {
         // Initialize UI settings elements with current settings states
@@ -37,6 +39,9 @@ public class SettingsScripts : MonoBehaviour
             }
 
         }
+
+        playingAsGuest = PlayerPrefs.GetString("PlayingAsGuest");
+
     }
 
     public void changeAudio()
@@ -48,21 +53,30 @@ public class SettingsScripts : MonoBehaviour
 
     public void toggleMovenet()
     {
-        if (MovenetToggle.isOn)
-        {
-            // launch Movenet
-            myrunMovenet.StartMovenet();
-            PlayerPrefs.SetString("MovenetConnected", "N");
-        }
-        else
-        {
-            // kill Movenet process
-            UnityEngine.Debug.Log("Kill Movenet");
-            foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        if (playingAsGuest == "F")
+        {        
+            if (MovenetToggle.isOn)
             {
-                p.CloseMainWindow();
+                // launch Movenet
+                myrunMovenet.StartMovenet();
+                PlayerPrefs.SetString("MovenetConnected", "N");
             }
-            PlayerPrefs.SetString("MovenetConnected", "F");
+            else
+            {
+                // kill Movenet process
+                UnityEngine.Debug.Log("Kill Movenet");
+                foreach (Process p in Process.GetProcessesByName("position_tracking"))
+                {
+                    p.CloseMainWindow();
+                }
+                PlayerPrefs.SetString("MovenetConnected", "F");
+            }
+        } else {
+            if (MovenetToggle.isOn)
+            {
+                // can't toggle Movenet on. Turn it off
+                MovenetToggle.isOn = false;
+            }
         }
     }
 

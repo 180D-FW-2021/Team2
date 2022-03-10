@@ -13,12 +13,17 @@ public class SubmitScoreScript : MonoBehaviour
 
     void Start()
     {
-        // get player username/level/score
-        username = PlayerPrefs.GetString("Username");
-        level = PlayerPrefs.GetString("PrevScene");
-        score = PlayerPrefs.GetFloat("finalTime");
+        // Check whether playing as guest or signed in
+        string playingAsGuest = PlayerPrefs.GetString("PlayingAsGuest");
 
-        SubmitScore();
+        if (playingAsGuest == "F") {
+            // Signed in, so get player username/level/score
+            username = PlayerPrefs.GetString("Username");
+            level = PlayerPrefs.GetString("PrevScene");
+            score = PlayerPrefs.GetFloat("finalTime");
+
+            SubmitScore();
+        }
     }
 
     // ref: https://www.mongodb.com/developer/how-to/sending-requesting-data-mongodb-unity-game/
