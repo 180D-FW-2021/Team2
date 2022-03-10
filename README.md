@@ -20,7 +20,7 @@ The web application is located [here](https://amaze-webapp.herokuapp.com/). The 
 
 |                          Neutral                          |                          Forward                          |                          Left                          |                          Right                          |                          Back                          |   
 | :-------------------------------------------------------: | :-------------------------------------------------------: | :----------------------------------------------------: | :-----------------------------------------------------: | :-----------------------------------------------------: |
-| <img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/> | <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> | <img src="./images/4.jpg" alt="imu_back" width="200"/> |
+| <img src="./images/1.jpg" alt="imu_neutral" width="200"/> | <img src="./images/2.jpg" alt="imu_forward" width="200"/> | <img src="./images/3.jpg" alt="imu_left" width="200"/> | <img src="./images/4.jpg" alt="imu_right" width="200"/> | <img src="./images/5.jpg" alt="imu_back" width="200"/> |
 
 ### Voice Commands
 
