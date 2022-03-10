@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { secToDate } from "./utils/Utils";
-// import { getLeaderboard } from "./utils/FakeBackend";
-import { getLeaderboard } from "./utils/RealBackend";
+import { secToDate } from "../utils/Utils";
+// import { getLeaderboard } from "../utils/FakeBackend";
+import { getLeaderboard } from "../utils/RealBackend";
 import ToolkitProvider, {
   Search,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min";
@@ -10,6 +10,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
+import "./Leaderboard.css";
 
 const { SearchBar } = Search;
 const elemsPerPage = 10;
@@ -49,6 +50,14 @@ const columns = [
     },
   },
   {
+    dataField: "level0",
+    text: "Level 0",
+    formatter: formatLevelCol,
+    sort: true,
+    sortFunc: sortScores,
+    searchable: false,
+  },
+  {
     dataField: "level1",
     text: "Level 1",
     formatter: formatLevelCol,
@@ -80,14 +89,6 @@ const columns = [
     sortFunc: sortScores,
     searchable: false,
   },
-  {
-    dataField: "level5",
-    text: "Level 5",
-    formatter: formatLevelCol,
-    sort: true,
-    sortFunc: sortScores,
-    searchable: false,
-  },
 ];
 
 function Leaderboard() {
@@ -97,14 +98,11 @@ function Leaderboard() {
   }, []);
   return (
     <div>
-      <h1>
-        <span className="amaze-txt">A-Maze</span>
-        <b>Leaderboard</b>
-      </h1>
+      <h1>Leaderboard</h1>
       <ToolkitProvider keyField="username" data={data} columns={columns} search>
         {(props) => {
           return (
-            <div>
+            <p>
               <SearchBar
                 srText=""
                 placeholder="Search username"
@@ -121,7 +119,7 @@ function Leaderboard() {
                 hover
                 condensed
               />
-            </div>
+            </p>
           );
         }}
       </ToolkitProvider>
