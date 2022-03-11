@@ -179,7 +179,8 @@ By level, the following audio sources were used:
 
 - Maze Level 0: "Riviera" by Maarten Schellekens
 - Maze Level 1: "04 Night-Shadows" by Ketsa
-- Maze Level 2 and 4: "Flowers Don't Say Anything, They Just Think" by One Man Book
+- Maze Lavel 2: "16-Claivoyant" by Thomas Bergersen
 - Maze Level 3: "Nocturn" by M33 Project
+- Maze Level 4: "Flowers Don't Say Anything, They Just Think" by One Man Book
 
 The background used in the Unity in-game menus are credited to user3802032 on freepik.com
