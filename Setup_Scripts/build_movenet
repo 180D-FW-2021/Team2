@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Build movenet executable to execute from Unity
+# Ensure to activate conda env before running
+# This may take a few mins...
+MOVENET_DIR=../Movenet/src
+cd $MOVENET_DIR
+
+# build executable
+pyinstaller -D position_tracking.py
+
+# remove previous build
+rm -r ../../Build/Movenet/build
+rm -r ../../Build/Movenet/dist
+# move to Build subdir for packaging
+mv build ../../Build/Movenet
+mv dist ../../Build/Movenet
+# Note: ensure Unity executable is in Build/Unity
+# this is important for proper relative paths

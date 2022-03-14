@@ -31,10 +31,12 @@ class Position(Enum):
     JUMPING = 2
     DUCK_START = 4
     DUCKING = 5
-    OUT_OF_FRAME = 6
-    STATIONARY = 7
+    OUT_OF_FRAME_START=6
+    OUT_OF_FRAME = 7
+    STATIONARY = 8
     # transition from duck to stationary (tell Unity to stop ducking)
-    DUCK_STATIONARY = 8
+    DUCK_STATIONARY = 9
     # transition from out-of-frame to stationary
     # (tell Unity to stop out-of-frame message)
-    OUT_FRAME_STATIONARY = 9
+    OUT_FRAME_STATIONARY = 10
+    GAME_START = 11

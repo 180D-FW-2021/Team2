@@ -44,7 +44,7 @@ class MovementRecognizer:
         """
         self.max_keypoints = max_keypoints
         self.keypoints_data = list()
-        self.position = Pos.STATIONARY
+        self.position = None
         self.last_pos_update = time.time()
         self.prev_coords = None
 
@@ -86,9 +86,26 @@ class MovementRecognizer:
         """
         next_pos = self.position
 
-        if self._player_out_of_frame():
+        if self.position is None:
+            self.position = Pos.GAME_START
+            return Pos.GAME_START
+
+        if self.position == Pos.GAME_START:
+            next_pos = Pos.STATIONARY
+
+        if self.position == Pos.OUT_OF_FRAME_START:
             next_pos = Pos.OUT_OF_FRAME
-        elif self.position == Pos.OUT_OF_FRAME:
+
+        is_out_frame = self._player_out_of_frame()
+
+        if (
+            self.position != Pos.OUT_OF_FRAME_START
+            and self.position != Pos.OUT_OF_FRAME
+            and is_out_frame
+        ):
+            next_pos = Pos.OUT_OF_FRAME_START
+
+        if self.position == Pos.OUT_OF_FRAME and not is_out_frame:
             next_pos = Pos.OUT_FRAME_STATIONARY
 
         if self.position == Pos.STATIONARY:

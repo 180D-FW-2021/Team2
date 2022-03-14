@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
+using System;
 
 // Attach this Script to any Menus to change Game State and Load a relevant menu
 
@@ -17,7 +19,12 @@ public class MainMenusScripts : MonoBehaviour
     public void To_StartScreen() {
         // Clear stored username
         PlayerPrefs.SetString("Username", "");
-        Debug.Log(PlayerPrefs.GetString("Username"));
+        UnityEngine.Debug.Log(PlayerPrefs.GetString("Username"));
+        foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        {
+            p.CloseMainWindow();
+        }
+        PlayerPrefs.SetString("MovenetConnected", "F");
         GameManagerScript.UpdateGameState(GameState.StartScreen);
     }
 
@@ -31,6 +38,12 @@ public class MainMenusScripts : MonoBehaviour
         GameManagerScript.UpdateGameState(GameState.HelpMenu);
     }
 
+    // Set the GameState to SettingsMenu and Load Settings Menu
+    public void To_SettingsMenu()
+    {
+        GameManagerScript.UpdateGameState(GameState.SettingsMenu);
+    }
+
     // Set the GameState to SelectLevel and Load Level Selector Menu
     public void To_LevelSelector() {
         GameManagerScript.UpdateGameState(GameState.SelectLevel);
@@ -42,13 +55,27 @@ public class MainMenusScripts : MonoBehaviour
     }
 
     // Load the level and then set the GameState to 'Playing'
+    public void To_WaitForMovenet() {
+        GameManagerScript.UpdateGameState(GameState.WaitForMovenet);
+    }
+
+    // Load the level and then set the GameState to 'Playing'
     public void To_PlayMaze() {
+        foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        {
+            p.CloseMainWindow();
+        }
+        PlayerPrefs.SetString("MovenetConnected", "F");
         GameManagerScript.UpdateGameState(GameState.LoadSelectedLevel);
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game");
+        foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        {
+            p.CloseMainWindow();
+        }
+        UnityEngine.Debug.Log("Quitting Game");
         Application.Quit();
     }
 

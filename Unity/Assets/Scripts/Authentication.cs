@@ -12,10 +12,29 @@ public class Authentication : MonoBehaviour
     public InputField inputUsername;
     public InputField inputPassword;
     public GameObject invalidCredentialsUI;
+    public RunMovenet myrunMovenet;
 
     string username;
     string password;
     //bool invalidCredentialsProvided = false;
+
+    private void Start()
+    {
+        // clear player prefs when user starts login page
+        PlayerPrefs.DeleteAll();
+    }
+
+    public void ContinueAsGuest() 
+    {
+        // Set to False b/c Movenet will be turned off
+        PlayerPrefs.SetString("MovenetConnected", "F");
+
+        // Note that we are playing as guest
+        PlayerPrefs.SetString("PlayingAsGuest", "T");
+
+        // Load Main Menu
+        GameManagerScript.UpdateGameState(GameState.MainMenu);
+    }
 
     public void Authenticate(string uri) 
     {
@@ -27,6 +46,8 @@ public class Authentication : MonoBehaviour
 
         // Save username (in case we authenticate properly)
         PlayerPrefs.SetString("Username", username);
+        PlayerPrefs.SetString("PlayingAsGuest", "F");
+        PlayerPrefs.SetString("MovenetConnected", "F");
 
         // Prepare JSON body for Post Request
         LoginCredentials credentialsObj = new LoginCredentials();
@@ -55,6 +76,10 @@ public class Authentication : MonoBehaviour
             {
                 // If successful, go to the Main Menu!
                 Debug.Log("success!");
+                myrunMovenet.StartMovenet();
+                // "N" indicates movenet is starting but hasn't opened yet
+                // "F" used to indicate that player has turned movenet off
+                PlayerPrefs.SetString("MovenetConnected", "N");
                 GameManagerScript.UpdateGameState(GameState.MainMenu);
             }
         }

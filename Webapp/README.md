@@ -1,6 +1,6 @@
 # AMaze Web Application
 
-The web application is located at https://amaze-webapp.herokuapp.com/!
+The web application is located (here)[https://amaze-webapp.herokuapp.com/].
 
 ## Tech Stack
 
@@ -18,7 +18,8 @@ The web application is located at https://amaze-webapp.herokuapp.com/!
 
 |        URI         |       Description        |
 | :----------------: | :----------------------: |
-|         /          |       Leaderboard        |
+|         /          |        Home Page         |
+|    /leaderboard    |       Leaderboard        |
 | /history/:username | $username player history |
 
 ## Backend

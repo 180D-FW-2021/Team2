@@ -1038,7 +1038,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0    Tutorial
+  m_Text: 0    Tutorial                               Easy
 --- !u!222 &519552169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,7 @@ RectTransform:
   m_Children:
   - {fileID: 519552167}
   m_Father: {fileID: 1032566827}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1502,7 +1502,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3    Snowy Mountain
+  m_Text: 3    Snowy Mountain                 Hard
 --- !u!222 &657976163
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1914,8 +1914,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1065433018}
   - {fileID: 574315362}
+  - {fileID: 1065433018}
   - {fileID: 193470206}
   - {fileID: 1193328926}
   - {fileID: 1602064415}
@@ -1959,7 +1959,7 @@ RectTransform:
   m_Children:
   - {fileID: 1916833389}
   m_Father: {fileID: 1032566827}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2301,6 +2301,7 @@ GameObject:
   - component: {fileID: 1441735332}
   - component: {fileID: 1441735337}
   - component: {fileID: 1441735336}
+  - component: {fileID: 1441735338}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2417,6 +2418,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManagerScript: {fileID: 1238596421}
+--- !u!114 &1441735338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441735331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c98f7bdea4cb454fb0a7a88fcb4ac22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1448099759
 GameObject:
   m_ObjectHideFlags: 0
@@ -2822,7 +2835,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2    Forest
+  m_Text: 2    Forest                                Medium
 --- !u!222 &1768107302
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3024,7 +3037,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1    Simple Level
+  m_Text: 1    Simple Level                       Hard
 --- !u!222 &1916833391
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3219,7 +3232,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4    Simple Forest
+  m_Text: 4    Simple Forest                     Easy
 --- !u!222 &2003336629
 CanvasRenderer:
   m_ObjectHideFlags: 0

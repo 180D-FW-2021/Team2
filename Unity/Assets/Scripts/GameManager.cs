@@ -92,12 +92,17 @@ public class GameManager : MonoBehaviour
             case GameState.HelpMenu:
                 SceneManager.LoadScene("HelpMenu");
                 break;
+            case GameState.SettingsMenu:
+                SceneManager.LoadScene("SettingsMenu");
+                break;
             case GameState.SelectLevel:
                 SceneManager.LoadScene("LevelSelector");
                 break;
             case GameState.ConfirmLevelSelection:
                 selectedLevel = level;
                 SceneManager.LoadScene("AreYouReadyScreen");
+                break;
+            case GameState.WaitForMovenet:
                 break;
             case GameState.LoadSelectedLevel:
                 SceneManager.LoadScene("MazeLevel_" + selectedLevel.ToString());
@@ -114,6 +119,7 @@ public class GameManager : MonoBehaviour
                 HandleVictory();
                 break;   
             case GameState.Quitting:
+                PlayerPrefs.DeleteAll(); //Key("MovenetConnected");
                 Application.Quit();
                 break;          
             default:
@@ -138,7 +144,9 @@ public enum GameState {
     MainMenu,
     SelectLevel,
     HelpMenu,
+    SettingsMenu,
     ConfirmLevelSelection,
+    WaitForMovenet,
     LoadSelectedLevel,
     Playing,
     Paused,

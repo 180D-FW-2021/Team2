@@ -14,7 +14,8 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Server myServer;
+    //create an instance of MqttClient class 
+    //private MqttClient client;
     public mqtt myMQTT;
 
     public CharacterController controller;
@@ -37,11 +38,6 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
-
-    private void Awake()
-    {
-        myServer = Server.serverObj;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // player jump
-        if ((Input.GetButtonDown("Jump") || myServer.jump) && isGrounded)
+        if ((Input.GetButtonDown("Jump") || myMQTT.jump) && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
@@ -84,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        myServer.resetJumpVar();
+        myMQTT.resetJumpVar();
 
         // inputs from arrow keys or "WASD"
         float x = -Input.GetAxis("Horizontal");
@@ -96,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
 
         // player duck
-        if (Input.GetKey(KeyCode.LeftShift) || myServer.duck)
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || myMQTT.duck)
         {
             if (!ducked)
             {

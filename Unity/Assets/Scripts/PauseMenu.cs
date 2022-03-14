@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -63,14 +64,18 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu() 
     {
-        Debug.Log("Loading Menu");
+        UnityEngine.Debug.Log("Loading Menu");
         Time.timeScale = 1f;
         // SceneManager.LoadScene("Menu"); // TODO create variable for Menu name rather than hardcoding it
     }
 
     public void QuitGame() 
     {
-        Debug.Log("Quitting Game");
+        foreach (Process p in Process.GetProcessesByName("position_tracking"))
+        {
+            p.CloseMainWindow();
+        }
+        UnityEngine.Debug.Log("Quitting Game");
         GameManager.Instance.UpdateGameState(GameState.Quitting);
         // Application.Quit();
     }
